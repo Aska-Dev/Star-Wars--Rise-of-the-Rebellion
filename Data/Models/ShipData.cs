@@ -14,5 +14,6 @@ public partial class ShipData : Resource
     [ExportCategory("Combat")]
     [Export] public required int Health { get; set; }
     [Export] public required double FireRate { get; set; } = 1;
+    [Export] public SoundEffect ShootSound { get; set;  }
     [Export] public required PackedScene ProjectileScene { get; set; }
 }
