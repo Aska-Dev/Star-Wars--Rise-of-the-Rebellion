@@ -4,7 +4,7 @@ using System.Runtime.Intrinsics;
 
 public abstract partial class EnemyShipController : ShipController
 {
-    [Export] SoundEffect FlyInSound { get; set; }
+    [Export] SoundEffects FlyInSound { get; set; }
 
     private const float flyInSpeed = 600f;
     private const float flyInActionDelay = 1f;

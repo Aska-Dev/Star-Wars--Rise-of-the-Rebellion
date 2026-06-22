@@ -11,7 +11,7 @@ public partial class EnemyWeaponComponent : Component
     private PackedScene _projectilScene = null!;
     private readonly List<ModelGun> _guns = [];
 
-    private SoundEffect _shootSound;
+    private SoundEffects _shootSound;
 
     public void ShootSalve()
     {

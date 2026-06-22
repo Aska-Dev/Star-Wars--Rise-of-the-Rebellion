@@ -9,5 +9,6 @@ Name = "Tie/Bomber"
 XSpeed = 200
 YSpeed = 200
 Health = 10
+ShootSound = 4
 ProjectileScene = ExtResource("1_3im6v")
 metadata/_custom_type_script = "uid://c22qwjskxa2ah"

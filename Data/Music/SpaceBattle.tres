@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="MusicTheme" format=3 uid="uid://j8ii7m180vum"]
+
+[ext_resource type="AudioStream" uid="uid://dib4xp7dyfilo" path="res://Resources/music/battle1.mp3" id="1_0rnsb"]
+[ext_resource type="Script" uid="uid://dubcuyuly0id7" path="res://Types/MusicTheme.cs" id="1_sg28e"]
+[ext_resource type="AudioStream" uid="uid://cnq8t5laxxiwo" path="res://Resources/music/battle2.mp3" id="2_7fqi8"]
+[ext_resource type="AudioStream" uid="uid://dp5dhqqld3vif" path="res://Resources/music/battle3.mp3" id="3_vlo4c"]
+[ext_resource type="AudioStream" uid="uid://d2m6qrtggi2ri" path="res://Resources/music/battle4.mp3" id="4_rddgr"]
+
+[resource]
+script = ExtResource("1_sg28e")
+Tracks = Array[AudioStream]([ExtResource("1_0rnsb"), ExtResource("2_7fqi8"), ExtResource("3_vlo4c"), ExtResource("4_rddgr")])
+metadata/_custom_type_script = "uid://dubcuyuly0id7"
