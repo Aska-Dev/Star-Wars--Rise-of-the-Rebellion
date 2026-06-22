@@ -1,0 +1,103 @@
+[gd_scene format=3 uid="uid://bnlfx5a3qggya"]
+
+[ext_resource type="Script" uid="uid://b0ir8igvnxgjx" path="res://Controller/MissileController.cs" id="1_dmjcb"]
+[ext_resource type="Texture2D" uid="uid://ciiqatt1xotwv" path="res://Resources/explosions/small/boom1.png" id="2_dmjcb"]
+[ext_resource type="Texture2D" uid="uid://css5yvvogvmh4" path="res://Resources/explosions/small/boom2.png" id="3_j8c12"]
+[ext_resource type="Texture2D" uid="uid://1djnmaw6u6w1" path="res://Resources/explosions/small/boom3.png" id="4_vqw4o"]
+[ext_resource type="Texture2D" uid="uid://v4b8rvkbjhog" path="res://Resources/explosions/small/boom4.png" id="5_10m3v"]
+[ext_resource type="Texture2D" uid="uid://ck0ynjqdvuj37" path="res://Resources/projectiles/missile.png" id="6_28xg8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yoyvh"]
+radius = 7.0
+height = 42.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_18wbn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_dmjcb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_j8c12")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_vqw4o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_10m3v")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n8t87"]
+atlas = ExtResource("6_28xg8")
+region = Rect2(0, 0, 32, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yn4bu"]
+atlas = ExtResource("6_28xg8")
+region = Rect2(32, 0, 32, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ttxfu"]
+atlas = ExtResource("6_28xg8")
+region = Rect2(64, 0, 32, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f4xgw"]
+atlas = ExtResource("6_28xg8")
+region = Rect2(96, 0, 32, 11)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qe21l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n8t87")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yn4bu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ttxfu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f4xgw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="ProjectileMissile" type="CharacterBody2D" unique_id=669004999]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_dmjcb")
+Damage = 3
+Speed = 500
+metadata/_custom_type_script = "uid://b0ir8igvnxgjx"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=591040804]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_yoyvh")
+
+[node name="HitAnimation" type="AnimatedSprite2D" parent="." unique_id=928112687]
+position = Vector2(18, 0)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_18wbn")
+frame = 5
+frame_progress = 1.0
+speed_scale = 2.0
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1260204420]
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_qe21l")
+frame_progress = 0.9848589
+
+[node name="FuseTimer" type="Timer" parent="." unique_id=789783604]
+one_shot = true
+ignore_time_scale = true

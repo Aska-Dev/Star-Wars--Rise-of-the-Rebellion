@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ShipData" format=3 uid="uid://btfb38aqn61ji"]
+
+[ext_resource type="PackedScene" uid="uid://b4i4bbsiqdfg0" path="res://Controller/Projectiles/Projectile_GreenLaser.tscn" id="1_0lyt7"]
+[ext_resource type="Script" uid="uid://c22qwjskxa2ah" path="res://Data/Models/ShipData.cs" id="2_ybp0n"]
+
+[resource]
+script = ExtResource("2_ybp0n")
+Name = "TIE/ln"
+XSpeed = 700
+YSpeed = 700
+Health = 4
+FireRate = 0.2
+ProjectileScene = ExtResource("1_0lyt7")
+metadata/_custom_type_script = "uid://c22qwjskxa2ah"

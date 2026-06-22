@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ShipData" format=3 uid="uid://bctmy4l1n1ed3"]
+
+[ext_resource type="PackedScene" uid="uid://bnlfx5a3qggya" path="res://Controller/Projectiles/Projectile_Missile.tscn" id="1_3im6v"]
+[ext_resource type="Script" uid="uid://c22qwjskxa2ah" path="res://Data/Models/ShipData.cs" id="1_w0bbt"]
+
+[resource]
+script = ExtResource("1_w0bbt")
+Name = "Tie/Bomber"
+XSpeed = 200
+YSpeed = 200
+Health = 10
+ProjectileScene = ExtResource("1_3im6v")
+metadata/_custom_type_script = "uid://c22qwjskxa2ah"

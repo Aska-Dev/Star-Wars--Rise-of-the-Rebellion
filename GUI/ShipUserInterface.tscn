@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://by0eathf1rmme"]
+
+[ext_resource type="Texture2D" uid="uid://yc7xplrt3obj" path="res://Resources/ui/ui-control-background.png" id="1_wtnhl"]
+[ext_resource type="PackedScene" uid="uid://cc3hoe68efghy" path="res://GUI/HealthInterface/HealthInterface.tscn" id="2_ehml2"]
+
+[node name="ShipUserInterface" type="Control" unique_id=333815866]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -980.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1096079505]
+layout_mode = 0
+offset_top = -2.0
+offset_right = 1920.0
+offset_bottom = 98.0
+texture = ExtResource("1_wtnhl")
+
+[node name="HealthInterface" parent="." unique_id=298973331 instance=ExtResource("2_ehml2")]
+layout_mode = 1
+offset_left = 98.0
+offset_top = 16.0
+offset_right = 98.0
+offset_bottom = 16.0

@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://bbwjtn87vunwd"]
+
+[ext_resource type="Script" uid="uid://3qxgcnlodpc2" path="res://VisualModels/Explosion/ShipExplosion.cs" id="1_fte2n"]
+[ext_resource type="Texture2D" uid="uid://p07y74e4aiiu" path="res://Resources/explosions/big/Sprites.png" id="2_j8rmw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_25b6d"]
+atlas = ExtResource("2_j8rmw")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uaioa"]
+atlas = ExtResource("2_j8rmw")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ey8fi"]
+atlas = ExtResource("2_j8rmw")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4p8o"]
+atlas = ExtResource("2_j8rmw")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qldrd"]
+atlas = ExtResource("2_j8rmw")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gvcl7"]
+atlas = ExtResource("2_j8rmw")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1bcxc"]
+atlas = ExtResource("2_j8rmw")
+region = Rect2(288, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qe4k2"]
+atlas = ExtResource("2_j8rmw")
+region = Rect2(336, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xuw2d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_25b6d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uaioa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ey8fi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t4p8o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qldrd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gvcl7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1bcxc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qe4k2")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="ShipExplosion" type="Node2D" unique_id=667584316]
+script = ExtResource("1_fte2n")
+
+[node name="Explosion" type="AnimatedSprite2D" parent="." unique_id=1484321091]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_xuw2d")
+frame = 7
+frame_progress = 1.0

@@ -1,0 +1,228 @@
+[gd_scene format=3 uid="uid://c2ac8th154xjp"]
+
+[ext_resource type="Script" uid="uid://bd4s1hflwc8mv" path="res://VisualModels/ShipModel.cs" id="1_re7c0"]
+[ext_resource type="Script" uid="uid://drdwp5ca4dwn0" path="res://Types/ModelOrientation.cs" id="2_re7c0"]
+[ext_resource type="PackedScene" uid="uid://bbwjtn87vunwd" path="res://VisualModels/Explosion/ShipExplosion.tscn" id="3_xuvrh"]
+[ext_resource type="Texture2D" uid="uid://d0d75tbl82db3" path="res://Resources/ships/TIE-Bomber/sideways.png" id="4_re7c0"]
+[ext_resource type="Script" uid="uid://fpfpugeio6k5" path="res://Types/ModelGun.cs" id="5_qqh6w"]
+[ext_resource type="Texture2D" uid="uid://evmp4un5rivi" path="res://Resources/ships/TIE-Bomber/downwards.png" id="6_26bps"]
+
+[sub_resource type="Animation" id="Animation_25b6d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sideways:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_l5veh"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sideways:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 2), Vector2(0, -2), Vector2(0, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_d5m2v"]
+resource_name = "moving"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7qhqr"]
+_data = {
+&"RESET": SubResource("Animation_25b6d"),
+&"idle": SubResource("Animation_l5veh"),
+&"moving": SubResource("Animation_d5m2v")
+}
+
+[sub_resource type="Animation" id="Animation_26bps"]
+resource_name = "idle"
+length = 0.25
+loop_mode = 1
+
+[sub_resource type="Animation" id="Animation_82j1x"]
+resource_name = "moving"
+length = 0.25
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u580k"]
+_data = {
+&"idle": SubResource("Animation_26bps"),
+&"moving": SubResource("Animation_82j1x")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fq32m"]
+animation = &"sidewaysLeft"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xb36n"]
+animation = &"sidewaysRight"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_660ta"]
+animation = &"upwards"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_k05n8"]
+animation = &"upwardsAngledLeft"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8m64o"]
+animation = &"upwardsAngledRight"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_26bps"]
+animation = &"downwards"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_4oq8q"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_fq32m")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_xb36n")
+blend_point_1/pos = Vector2(1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_660ta")
+blend_point_2/pos = Vector2(0, 1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_k05n8")
+blend_point_3/pos = Vector2(-1, 1)
+blend_point_4/node = SubResource("AnimationNodeAnimation_8m64o")
+blend_point_4/pos = Vector2(1, 1)
+blend_point_5/node = SubResource("AnimationNodeAnimation_26bps")
+blend_point_5/pos = Vector2(0, -1)
+snap = Vector2(1, 1)
+blend_mode = 1
+
+[sub_resource type="Animation" id="Animation_01xy2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Downwards:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_u580k"]
+resource_name = "downwards"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sideways:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Downwards:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_k3kxx"]
+resource_name = "sidewaysLeft"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sideways:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Downwards:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k3kxx"]
+_data = {
+&"RESET": SubResource("Animation_01xy2"),
+&"downwards": SubResource("Animation_u580k"),
+&"sidewaysLeft": SubResource("Animation_k3kxx")
+}
+
+[node name="TieBomberModel" type="Node2D" unique_id=483490835]
+script = ExtResource("1_re7c0")
+metadata/_custom_type_script = "uid://bd4s1hflwc8mv"
+
+[node name="Sideways" type="Node2D" parent="." unique_id=501502118]
+visible = false
+script = ExtResource("2_re7c0")
+ExplosionScene = ExtResource("3_xuvrh")
+metadata/_custom_type_script = "uid://drdwp5ca4dwn0"
+
+[node name="Sprite" type="Sprite2D" parent="Sideways" unique_id=691103558]
+texture = ExtResource("4_re7c0")
+
+[node name="ModelGun" type="Marker2D" parent="Sideways" unique_id=885170951]
+position = Vector2(-28, 0)
+script = ExtResource("5_qqh6w")
+metadata/_custom_type_script = "uid://fpfpugeio6k5"
+
+[node name="Collision" type="CollisionPolygon2D" parent="Sideways" unique_id=275624798]
+scale = Vector2(0.8, 0.8)
+polygon = PackedVector2Array(-39.999996, -26.249998, -39.999996, -8.749999, -34.999996, 0, -39.999996, 9.999999, -39.999996, 28.749998, -29.999996, 38.749996, 29.999996, 38.749996, 39.999996, 28.749998, 39.999996, 11.249999, 34.999996, 1.2499999, 34.999996, -2.4999998, 39.999996, -9.999999, 39.999996, -26.249998, 28.749998, -37.499996, -29.999996, -37.499996)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sideways" unique_id=68187995]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_7qhqr")
+
+[node name="Downwards" type="Node2D" parent="." unique_id=1361462688]
+visible = false
+script = ExtResource("2_re7c0")
+ExplosionScene = ExtResource("3_xuvrh")
+metadata/_custom_type_script = "uid://drdwp5ca4dwn0"
+
+[node name="Sprite" type="Sprite2D" parent="Downwards" unique_id=725922332]
+texture = ExtResource("6_26bps")
+
+[node name="ModelGun" type="Marker2D" parent="Downwards" unique_id=1139791392]
+position = Vector2(4, 20)
+script = ExtResource("5_qqh6w")
+metadata/_custom_type_script = "uid://fpfpugeio6k5"
+
+[node name="Collision" type="CollisionPolygon2D" parent="Downwards" unique_id=313146608]
+scale = Vector2(0.8, 0.8)
+polygon = PackedVector2Array(-41.249996, 1.2499999, -41.249996, 13.749999, -38.749996, 17.499998, -38.749996, 28.749998, -27.499998, 38.749996, -26.249998, 38.749996, -26.249998, 13.749999, -24.999998, 13.749999, -22.499998, 16.249998, -18.749998, 19.999998, -14.999998, 22.499998, -9.999999, 22.499998, -6.2499995, 19.999998, -3.7499995, 18.749998, 3.7499995, 18.749998, 3.7499995, 19.999998, 0, 21.249998, 0, 26.249998, 1.2499999, 27.499998, 1.2499999, 28.749998, 7.499999, 28.749998, 8.749999, 27.499998, 8.749999, 22.499998, 9.999999, 19.999998, 12.499999, 21.249998, 19.999998, 21.249998, 23.749998, 18.749998, 23.749998, 14.999998, 27.499998, 14.999998, 27.499998, 38.749996, 29.999996, 38.749996, 39.999996, 28.749998, 41.249996, 24.999998, 41.249996, 16.249998, 42.499996, 16.249998, 42.499996, 0, 41.249996, 0, 41.249996, -11.249999, 39.999996, -12.499999, 39.999996, -27.499998, 29.999996, -37.499996, 27.499998, -37.499996, 27.499998, -9.999999, 32.499996, 0, 32.499996, 1.2499999, 29.999996, 3.7499995, 26.249998, 1.2499999, 26.249998, -9.999999, 21.249998, -14.999998, 9.999999, -14.999998, 4.9999995, -9.999999, 3.7499995, -8.749999, 3.7499995, -3.7499995, -2.4999998, -3.7499995, -2.4999998, -9.999999, -6.2499995, -14.999998, -18.749998, -14.999998, -21.249998, -12.499999, -22.499998, -8.749999, -22.499998, 1.2499999, -24.999998, 2.4999998, -28.749998, 3.7499995, -29.999996, 2.4999998, -29.999996, -1.2499999, -26.249998, -6.2499995, -26.249998, -37.499996, -27.499998, -37.499996, -38.749996, -27.499998, -38.749996, -2.4999998)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Downwards" unique_id=645726866]
+libraries/ = SubResource("AnimationLibrary_u580k")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=893951004]
+tree_root = SubResource("AnimationNodeBlendSpace2D_4oq8q")
+anim_player = NodePath("../AnimationPlayer")
+parameters/blend_position = Vector2(-0.18379688, -0.35280895)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1778101549]
+libraries/ = SubResource("AnimationLibrary_k3kxx")

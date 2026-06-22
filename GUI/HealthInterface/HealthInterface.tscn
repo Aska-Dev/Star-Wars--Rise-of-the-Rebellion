@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cc3hoe68efghy"]
+
+[ext_resource type="PackedScene" uid="uid://d2bnf1i3ghak" path="res://GUI/HealthInterface/HealthIndicator.tscn" id="1_bcqjw"]
+[ext_resource type="Script" uid="uid://deq140kh1b3ue" path="res://GUI/HealthInterface/HealthInterface.cs" id="1_fn1rg"]
+
+[node name="HealthInterface" type="Control" unique_id=298973331]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_fn1rg")
+HealthIndicatorScene = ExtResource("1_bcqjw")
+
+[node name="GridContainer" type="GridContainer" parent="." unique_id=1234547554]
+layout_mode = 0
+offset_right = 1000.0
+offset_bottom = 60.0
+theme_override_constants/h_separation = 12
+columns = 8

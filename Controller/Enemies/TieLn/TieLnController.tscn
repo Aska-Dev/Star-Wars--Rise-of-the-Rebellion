@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://de67weiw878bd"]
+
+[ext_resource type="Script" uid="uid://dghj0etlr47cc" path="res://Controller/Enemies/TieLn/TieLnController.cs" id="1_d4dxq"]
+[ext_resource type="Resource" uid="uid://btfb38aqn61ji" path="res://Data/Spaceships/TIE-ln.tres" id="2_ep05x"]
+[ext_resource type="PackedScene" uid="uid://c10qf0x8f6hj7" path="res://VisualModels/Ships/TieLnModel.tscn" id="3_hkl78"]
+[ext_resource type="Script" uid="uid://kfhu85y4kovo" path="res://Components/AnimationComponent.cs" id="5_hkl78"]
+[ext_resource type="Script" uid="uid://cay45cqsdn2" path="res://Components/EnemyWeaponComponent.cs" id="5_xttx3"]
+[ext_resource type="Script" uid="uid://cdty6vion1kvg" path="res://Components/HealthComponent.cs" id="6_euspk"]
+
+[node name="TieLnController" type="CharacterBody2D" unique_id=156822515]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_d4dxq")
+InitShipData = ExtResource("2_ep05x")
+InitShipModelScene = ExtResource("3_hkl78")
+metadata/_custom_type_script = "uid://dghj0etlr47cc"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=111837995]
+
+[node name="AnimationComponent" type="Node" parent="." unique_id=705080465]
+script = ExtResource("5_hkl78")
+metadata/_custom_type_script = "uid://kfhu85y4kovo"
+
+[node name="EnemyWeaponComponent" type="Node" parent="." unique_id=1899760085]
+script = ExtResource("5_xttx3")
+metadata/_custom_type_script = "uid://cay45cqsdn2"
+
+[node name="ActionTimer" type="Timer" parent="." unique_id=1883677008]
+wait_time = 4.0
+
+[node name="HealthComponent" type="Node" parent="." unique_id=168297489]
+script = ExtResource("6_euspk")
+metadata/_custom_type_script = "uid://cdty6vion1kvg"
+
+[connection signal="OnDeath" from="HealthComponent" to="." method="Destroy"]

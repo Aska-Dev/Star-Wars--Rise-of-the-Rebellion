@@ -1,0 +1,3 @@
+# Credits
+
+https://ansimuz.itch.io/explosion-animations-pack

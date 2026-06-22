@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://ca861xsj2qjw7"]
+
+[ext_resource type="Script" uid="uid://bn0ggnjsbywdk" path="res://Controller/Player/PlayerController.cs" id="1_ww0jn"]
+[ext_resource type="Resource" uid="uid://dmcm3ag1cbac5" path="res://Data/Spaceships/X-Wing.tres" id="2_vweq0"]
+[ext_resource type="PackedScene" uid="uid://ba3q7tby5dhnk" path="res://VisualModels/Ships/XWingModel.tscn" id="3_yfxbq"]
+[ext_resource type="Script" uid="uid://cvj03il640f1j" path="res://Components/WeaponsComponent.cs" id="4_1des2"]
+[ext_resource type="Script" uid="uid://c7w4kykokvq6d" path="res://Components/PlayerMovementComponent.cs" id="4_vhydf"]
+[ext_resource type="Script" uid="uid://kfhu85y4kovo" path="res://Components/AnimationComponent.cs" id="5_lm66c"]
+[ext_resource type="Script" uid="uid://cdty6vion1kvg" path="res://Components/HealthComponent.cs" id="7_3f1wm"]
+[ext_resource type="Script" uid="uid://jnjhwdktgqbj" path="res://Components/RollComponent.cs" id="8_nq0y6"]
+
+[node name="Player" type="CharacterBody2D" unique_id=1514296273]
+collision_mask = 8
+script = ExtResource("1_ww0jn")
+InitShipData = ExtResource("2_vweq0")
+InitShipModelScene = ExtResource("3_yfxbq")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=2000657609]
+
+[node name="PlayerMovementComponent" type="Node" parent="." unique_id=249721029]
+script = ExtResource("4_vhydf")
+metadata/_custom_type_script = "uid://c7w4kykokvq6d"
+
+[node name="AnimationComponent" type="Node" parent="." unique_id=116946424]
+script = ExtResource("5_lm66c")
+metadata/_custom_type_script = "uid://kfhu85y4kovo"
+
+[node name="WeaponsComponent" type="Node" parent="." unique_id=1102843526]
+script = ExtResource("4_1des2")
+metadata/_custom_type_script = "uid://cvj03il640f1j"
+
+[node name="WeaponCooldown" type="Timer" parent="WeaponsComponent" unique_id=1249993821]
+one_shot = true
+
+[node name="HealthComponent" type="Node" parent="." unique_id=1379795889]
+script = ExtResource("7_3f1wm")
+HasIFramesAfterHit = true
+metadata/_custom_type_script = "uid://cdty6vion1kvg"
+
+[node name="IFrameTimer" type="Timer" parent="HealthComponent" unique_id=1091984139]
+wait_time = 0.5
+one_shot = true
+
+[node name="RollComponent" type="Node" parent="." unique_id=656194709]
+script = ExtResource("8_nq0y6")
+metadata/_custom_type_script = "uid://jnjhwdktgqbj"
+
+[node name="RollCooldownTimer" type="Timer" parent="RollComponent" unique_id=1607126730]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="OnDeath" from="HealthComponent" to="." method="Destroy"]

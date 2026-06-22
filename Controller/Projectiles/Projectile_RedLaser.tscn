@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://mfgemblg0tll"]
+
+[ext_resource type="Texture2D" uid="uid://dl1ronoe7d2ud" path="res://Resources/projectiles/red-laser.png" id="2_f0yur"]
+[ext_resource type="Texture2D" uid="uid://ciiqatt1xotwv" path="res://Resources/explosions/small/boom1.png" id="3_7h2lb"]
+[ext_resource type="Texture2D" uid="uid://css5yvvogvmh4" path="res://Resources/explosions/small/boom2.png" id="4_stliu"]
+[ext_resource type="Texture2D" uid="uid://1djnmaw6u6w1" path="res://Resources/explosions/small/boom3.png" id="5_7i275"]
+[ext_resource type="Script" uid="uid://bqh4w6yohppsa" path="res://Controller/BlasterController.cs" id="6_n53so"]
+[ext_resource type="Texture2D" uid="uid://v4b8rvkbjhog" path="res://Resources/explosions/small/boom4.png" id="6_q0je4"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jcdb7"]
+radius = 2.0
+height = 36.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7i275"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_7h2lb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_stliu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_7i275")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_q0je4")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="ProjectileRedLaser" type="CharacterBody2D" unique_id=781044993]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("6_n53so")
+Damage = 1
+Speed = 1000
+metadata/_custom_type_script = "uid://bqh4w6yohppsa"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1189412576]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_jcdb7")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1372707899]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_f0yur")
+
+[node name="HitAnimation" type="AnimatedSprite2D" parent="." unique_id=419617572]
+position = Vector2(18, 0)
+sprite_frames = SubResource("SpriteFrames_7i275")
+frame = 5
+frame_progress = 1.0
+speed_scale = 2.0

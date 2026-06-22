@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://d2bnf1i3ghak"]
+
+[ext_resource type="Texture2D" uid="uid://b0irvacgedion" path="res://Resources/ui/health-off.png" id="1_nc7pk"]
+[ext_resource type="Script" uid="uid://c6xyh5328fkn8" path="res://GUI/HealthInterface/HealthIndicator.cs" id="1_vqk6g"]
+[ext_resource type="Texture2D" uid="uid://1g61h1x4inix" path="res://Resources/ui/health-on.png" id="2_vqk6g"]
+
+[node name="HealthIndicator" type="Control" unique_id=295532174]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_vqk6g")
+
+[node name="Off" type="TextureRect" parent="." unique_id=854599873]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_nc7pk")
+
+[node name="On" type="TextureRect" parent="." unique_id=1228460724]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_vqk6g")

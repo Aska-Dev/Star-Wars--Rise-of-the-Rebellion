@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ShipData" format=3 uid="uid://dmcm3ag1cbac5"]
+
+[ext_resource type="PackedScene" uid="uid://mfgemblg0tll" path="res://Controller/Projectiles/Projectile_RedLaser.tscn" id="1_x3eue"]
+[ext_resource type="Script" uid="uid://c22qwjskxa2ah" path="res://Data/Models/ShipData.cs" id="2_x3eue"]
+
+[resource]
+script = ExtResource("2_x3eue")
+Name = "X-Wing"
+XSpeed = 500
+YSpeed = 500
+Health = 3
+FireRate = 0.5
+ProjectileScene = ExtResource("1_x3eue")
+metadata/_custom_type_script = "uid://c22qwjskxa2ah"
