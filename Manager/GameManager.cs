@@ -12,6 +12,7 @@ public class GameManager(LevelManager levelManager, EndlessModeManager endlessMo
     
     public void Test()
     {
+        AudioEngine.Instance.PlayTheme(MusicThemes.SpaceBattle);
         EndlessModeManager.NextWave();
     }
     

@@ -10,5 +10,6 @@ XSpeed = 700
 YSpeed = 700
 Health = 4
 FireRate = 0.2
+ShootSound = 1
 ProjectileScene = ExtResource("1_0lyt7")
 metadata/_custom_type_script = "uid://c22qwjskxa2ah"

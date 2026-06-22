@@ -11,6 +11,8 @@ public partial class EnemyWeaponComponent : Component
     private PackedScene _projectilScene = null!;
     private readonly List<ModelGun> _guns = [];
 
+    private SoundEffects _shootSound;
+
     public void ShootSalve()
     {
         var interval = 0.0;
@@ -37,6 +39,8 @@ public partial class EnemyWeaponComponent : Component
             projectile.GlobalPosition = gun.GlobalPosition;
             projectile.Launch(fireDirection, 1);
         }
+
+        AudioEngine.Instance.PlaySound(_shootSound, true);
     }
 
     protected override void Initialize(ShipData shipData, ShipModel shipModel)
@@ -45,5 +49,7 @@ public partial class EnemyWeaponComponent : Component
         
         _guns.Clear();
         _guns.AddRange(shipModel.ActiveOrientation.Guns);
+
+        _shootSound = shipData.ShootSound;
     }
 }

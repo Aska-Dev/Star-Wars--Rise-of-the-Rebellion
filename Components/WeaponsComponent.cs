@@ -9,7 +9,7 @@ public partial class WeaponsComponent : Component
     private ShipModel _shipModel = null!;
 
     private Timer _weaponCooldownTimer = null!;
-    private SoundEffect _shootSound;
+    private SoundEffects _shootSound;
 
     public override void _Ready()
     {
@@ -37,7 +37,7 @@ public partial class WeaponsComponent : Component
             projectile.Launch(fireDirection.Rotated(gun.Rotation), 2);
         }
 
-        AudioEngine.Instance.PlaySound(_shootSound);
+        AudioEngine.Instance.PlaySound(_shootSound, true);
 
         _weaponCooldownTimer.Start();
     }

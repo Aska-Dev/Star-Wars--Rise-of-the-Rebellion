@@ -4,6 +4,8 @@ using System.Runtime.Intrinsics;
 
 public abstract partial class EnemyShipController : ShipController
 {
+    [Export] SoundEffects FlyInSound { get; set; }
+
     private const float flyInSpeed = 600f;
     private const float flyInActionDelay = 1f;
 
@@ -25,6 +27,8 @@ public abstract partial class EnemyShipController : ShipController
 
         _targetPosition = position;
         _isFlying = true;
+
+        AudioEngine.Instance.PlaySound(FlyInSound, true);
     }
 
     public abstract void PerformAction();

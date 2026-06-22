@@ -77,7 +77,7 @@ animations = [{
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_dmjcb")
-Damage = 3
+Damage = 2
 Speed = 500
 metadata/_custom_type_script = "uid://b0ir8igvnxgjx"
 
