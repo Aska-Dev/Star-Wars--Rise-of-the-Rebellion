@@ -5,40 +5,39 @@ using System.Collections.Generic;
 public enum SoundEffect
 {
     XWingShoot,
-    TieShoot
+    TieShoot,
+    TieFlyIn
 }
 
 public partial class AudioEngine : Node
 {
     public static AudioEngine Instance { get; private set; } = null!;
 
+    public float SoundEffectsVolume { get; set; } = 0.4f;
+
+    private const string ConfigFolderPath = "res://Data/Sounds/";
+    private const int MinDelayMsec = 100;
+
     private List<AudioStreamPlayer> _players = new();
     private Dictionary<SoundEffect, ulong> _lastPlayedMsec = new();
+    private readonly Dictionary<SoundEffect, Sound> _sounds = new();
 
-    private Dictionary<SoundEffect, AudioStream> _streamCache = new();
-
-    private readonly Dictionary<SoundEffect, string> _soundPaths = new()
-    {
-        { SoundEffect.XWingShoot, "res://Resources/sounds/guns/xwing-fire.mp3" },
-        { SoundEffect.TieShoot, "res://Audio/SFX/player_laser.mp3" },
-    };
-
-    private const int MinDelayMsec = 50;
-
-    public AudioEngine()
+    public override void _Ready()
     {
         Instance = this;
 
+        LoadConfigsFromFolder();
+
         for (int i = 0; i < 10; i++)
         {
-            var player = new AudioStreamPlayer();
-            AddChild(player);
-            _players.Add(player);
+            CreateNewPlayer();
         }
     }
 
     public void PlaySound(SoundEffect effect, bool randomizePitch = false)
     {
+        if (!_sounds.TryGetValue(effect, out Sound? config)) return;
+
         ulong now = Time.GetTicksMsec();
 
         if (_lastPlayedMsec.TryGetValue(effect, out ulong lastPlayedTime))
@@ -49,44 +48,76 @@ public partial class AudioEngine : Node
             }
         }
 
-        // 2. Stream laden oder aus Cache holen
-        var stream = GetOrLoadStream(effect);
-        if (stream == null) return;
+        AudioStream streamToPlay = config.PrimaryStream;
 
-        _lastPlayedMsec[effect] = now;
+        if (config.AlternateStream != null && GD.Randf() >= 0.5f)
+        {
+            streamToPlay = config.AlternateStream;
+        }
 
+        if (streamToPlay != null)
+        {
+            PlayInternal(streamToPlay, randomizePitch);
+            _lastPlayedMsec[effect] = now;
+        }
+    }
+
+    private void PlayInternal(AudioStream stream, bool randomizePitch)
+    {
         foreach (var player in _players)
         {
             if (!player.Playing)
             {
-                player.Stream = stream;
-                
-                if(randomizePitch)
-                {
-                    player.PitchScale = (float)GD.RandRange(0.9f, 1.1f);
-                }
-
-                player.Play();
+                StartPlaying(player, stream, randomizePitch);
                 return;
             }
         }
+
+        var newPlayer = CreateNewPlayer();
+        StartPlaying(newPlayer, stream, randomizePitch);
     }
 
-    private AudioStream? GetOrLoadStream(SoundEffect effect)
+    private AudioStreamPlayer CreateNewPlayer()
     {
-        if (_streamCache.TryGetValue(effect, out var cachedStream))
+        var player = new AudioStreamPlayer();
+        AddChild(player);
+        _players.Add(player);
+        return player;
+    }
+
+    private void StartPlaying(AudioStreamPlayer player, AudioStream stream, bool randomizePitch)
+    {
+        player.Stream = stream;
+        player.VolumeLinear = SoundEffectsVolume;
+        player.PitchScale = randomizePitch ? (float)GD.RandRange(0.9f, 1.1f) : 1;
+        player.Play();
+    }
+
+    private void LoadConfigsFromFolder()
+    {
+        using var dir = DirAccess.Open(ConfigFolderPath);
+        if (dir == null)
         {
-            return cachedStream;
+            GD.PrintErr($"AudioEngine: Ordner {ConfigFolderPath} nicht gefunden!");
+            return;
         }
 
-        if (_soundPaths.TryGetValue(effect, out string path))
-        {
-            var stream = GD.Load<AudioStream>(path);
-            _streamCache[effect] = stream;
-            return stream;
-        }
+        dir.ListDirBegin();
+        string fileName = dir.GetNext();
 
-        GD.PrintErr($"AudioEngine: Pfad für SoundEffect '{effect}' nicht gefunden!");
-        return null;
+        while (fileName != "")
+        {
+            if (!dir.CurrentIsDir() && fileName.EndsWith(".tres"))
+            {
+                string cleanPath = ConfigFolderPath + fileName.Replace(".remap", "");
+                var config = GD.Load<Sound>(cleanPath);
+
+                if (config != null && config.PrimaryStream != null)
+                {
+                    _sounds[config.EffectName] = config;
+                }
+            }
+            fileName = dir.GetNext();
+        }
     }
 }

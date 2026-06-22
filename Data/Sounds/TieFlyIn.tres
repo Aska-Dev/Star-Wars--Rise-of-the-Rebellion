@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Sound" format=3 uid="uid://cffndv6td2gxr"]
+
+[ext_resource type="Script" uid="uid://dykobp76jrm5t" path="res://Types/Sound.cs" id="1_2navf"]
+[ext_resource type="AudioStream" uid="uid://d1rxo6r7eobwc" path="res://Resources/sounds/ships/tie-fighter-flyin2.mp3" id="1_4841m"]
+[ext_resource type="AudioStream" uid="uid://drsrqgsxriupa" path="res://Resources/sounds/ships/tie-fighter-flyin.mp3" id="3_4esnm"]
+
+[resource]
+script = ExtResource("1_2navf")
+EffectName = 2
+PrimaryStream = ExtResource("3_4esnm")
+AlternateStream = ExtResource("1_4841m")
+metadata/_custom_type_script = "uid://dykobp76jrm5t"

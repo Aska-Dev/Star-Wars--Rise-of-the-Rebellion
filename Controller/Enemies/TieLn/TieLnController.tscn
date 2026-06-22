@@ -11,6 +11,7 @@
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_d4dxq")
+FlyInSound = 2
 InitShipData = ExtResource("2_ep05x")
 InitShipModelScene = ExtResource("3_hkl78")
 metadata/_custom_type_script = "uid://dghj0etlr47cc"
