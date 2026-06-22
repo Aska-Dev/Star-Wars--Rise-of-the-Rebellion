@@ -45,6 +45,7 @@ public abstract partial class ShipController : CharacterBody2D, IController
         _isDestroyed = true;
 
         shipModel.ActiveOrientation.Explode();
+        AudioEngine.Instance.PlaySound(SoundEffects.ShipExplosion, true);
         QueueFree();
     }
 

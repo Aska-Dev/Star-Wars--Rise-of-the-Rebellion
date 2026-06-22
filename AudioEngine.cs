@@ -8,7 +8,8 @@ public enum SoundEffects
     TieShoot,
     TieFlyIn,
     TieBomberFly,
-    MissileLaunch
+    MissileLaunch,
+    ShipExplosion
 }
 
 public enum MusicThemes

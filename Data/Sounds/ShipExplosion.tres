@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Sound" format=3 uid="uid://b1maqkw5s6hnr"]
+
+[ext_resource type="AudioStream" uid="uid://de34w07eo6184" path="res://Resources/sounds/ships/ship-explosion-2.mp3" id="1_sjwcm"]
+[ext_resource type="AudioStream" uid="uid://cjuqfhq0wnxqj" path="res://Resources/sounds/ships/ship-explosion.mp3" id="1_t6bte"]
+[ext_resource type="Script" uid="uid://dykobp76jrm5t" path="res://Types/Sound.cs" id="2_sjwcm"]
+
+[resource]
+script = ExtResource("2_sjwcm")
+EffectName = 5
+PrimaryStream = ExtResource("1_t6bte")
+AlternateStream = ExtResource("1_sjwcm")
+metadata/_custom_type_script = "uid://dykobp76jrm5t"

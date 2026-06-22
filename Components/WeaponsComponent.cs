@@ -37,7 +37,7 @@ public partial class WeaponsComponent : Component
             projectile.Launch(fireDirection.Rotated(gun.Rotation), 2);
         }
 
-        AudioEngine.Instance.PlaySound(_shootSound);
+        AudioEngine.Instance.PlaySound(_shootSound, true);
 
         _weaponCooldownTimer.Start();
     }
