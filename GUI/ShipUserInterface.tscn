@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://yc7xplrt3obj" path="res://Resources/ui/ui-control-background.png" id="1_wtnhl"]
 [ext_resource type="PackedScene" uid="uid://cc3hoe68efghy" path="res://GUI/HealthInterface/HealthInterface.tscn" id="2_ehml2"]
+[ext_resource type="PackedScene" uid="uid://c08j7ri0811b0" path="res://GUI/ActionsInterface/ActionsInterface.tscn" id="3_meoqa"]
 
 [node name="ShipUserInterface" type="Control" unique_id=333815866]
 layout_mode = 3
@@ -25,3 +26,11 @@ offset_left = 98.0
 offset_top = 16.0
 offset_right = 98.0
 offset_bottom = 16.0
+
+[node name="ActionsInterface" parent="." unique_id=1406371729 instance=ExtResource("3_meoqa")]
+layout_mode = 0
+offset_left = 641.0
+offset_top = 49.0
+offset_right = 641.0
+offset_bottom = 49.0
+scale = Vector2(1.5, 1.5)

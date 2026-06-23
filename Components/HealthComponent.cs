@@ -45,6 +45,11 @@ public partial class HealthComponent : Component
         }
     }
 
+    public void Heal(int amount)
+    {
+        Health = Math.Min(MaxHealth, Health + amount);
+    }
+
     private Timer? _iframeTimer;
     private bool _onIFrames = false;
 

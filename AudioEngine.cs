@@ -9,7 +9,9 @@ public enum SoundEffects
     TieFlyIn,
     TieBomberFly,
     MissileLaunch,
-    ShipExplosion
+    ShipExplosion,
+    AstromechActivation,
+    AstromechReady
 }
 
 public enum MusicThemes

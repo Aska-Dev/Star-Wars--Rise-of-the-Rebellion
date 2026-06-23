@@ -31,6 +31,12 @@ public partial class PlayerController : ShipController
         {
             Components.GetComponent<WeaponsComponent>().Shoot();
         }
+
+        // --- ACTIONS ---
+        if(Input.IsActionPressed("action1"))
+        {
+            Components.GetComponent<ActionComponent>().TryExecuteAction(0, this);
+        }
     }
 
     // --- MOVEMENT ---

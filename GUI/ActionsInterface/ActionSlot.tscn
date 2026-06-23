@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://be5j27gnvlw5i"]
+
+[ext_resource type="Script" uid="uid://iqqk6f0ljnux" path="res://GUI/ActionsInterface/ActionSlot.cs" id="1_71f3u"]
+[ext_resource type="Texture2D" uid="uid://dd5n48sqpy04t" path="res://Resources/ui/input/keyboard-filled-1-16px.png" id="2_bj7ty"]
+[ext_resource type="Texture2D" uid="uid://cc61dkbbjn31s" path="res://Resources/ui/input/keyboard-filled-2-16px.png" id="3_uwsv3"]
+[ext_resource type="Texture2D" uid="uid://7e4onyk2arfv" path="res://Resources/ui/input/keyboard-filled-3-16px.png" id="4_syehr"]
+
+[node name="ActionSlot" type="Control" unique_id=721329877]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_71f3u")
+
+[node name="Keys" type="Control" parent="." unique_id=475340967]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Key1" type="TextureRect" parent="Keys" unique_id=353541736]
+layout_mode = 0
+offset_left = -46.0
+offset_top = -9.0
+offset_right = -30.0
+offset_bottom = 7.0
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("2_bj7ty")
+
+[node name="Key2" type="TextureRect" parent="Keys" unique_id=918560300]
+visible = false
+layout_mode = 0
+offset_left = -46.0
+offset_top = -9.0
+offset_right = -30.0
+offset_bottom = 7.0
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("3_uwsv3")
+
+[node name="Key3" type="TextureRect" parent="Keys" unique_id=1344111569]
+visible = false
+layout_mode = 0
+offset_left = -46.0
+offset_top = -9.0
+offset_right = -30.0
+offset_bottom = 7.0
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("4_syehr")

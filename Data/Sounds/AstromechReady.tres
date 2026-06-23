@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Sound" format=3 uid="uid://cr1g47q252qsi"]
+
+[ext_resource type="AudioStream" uid="uid://d2rpeknbxxakf" path="res://Resources/sounds/actions/astromech-ready.mp3" id="1_yotyc"]
+[ext_resource type="Script" uid="uid://dykobp76jrm5t" path="res://Types/Sound.cs" id="2_kcbk3"]
+
+[resource]
+script = ExtResource("2_kcbk3")
+EffectName = 7
+PrimaryStream = ExtResource("1_yotyc")
+metadata/_custom_type_script = "uid://dykobp76jrm5t"
