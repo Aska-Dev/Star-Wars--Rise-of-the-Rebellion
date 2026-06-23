@@ -8,3 +8,5 @@ https://www.101soundboards.com/sounds/641712-flying-tie-fighter
 https://www.101soundboards.com/sounds/41933534-tie-fighter-fly-by-4
 https://www.101soundboards.com/sounds/1453306-missile-launch
 https://niiiemand.itch.io/niiiemands-explosion-sfx
+"Controller/Keyboard/Mouse Pixelart Icon Pack - David Grueneis
+Licensed under CC-BY-4.0 - https://solobytegames.itch.io"

@@ -8,6 +8,9 @@
 [ext_resource type="Script" uid="uid://kfhu85y4kovo" path="res://Components/AnimationComponent.cs" id="5_lm66c"]
 [ext_resource type="Script" uid="uid://cdty6vion1kvg" path="res://Components/HealthComponent.cs" id="7_3f1wm"]
 [ext_resource type="Script" uid="uid://jnjhwdktgqbj" path="res://Components/RollComponent.cs" id="8_nq0y6"]
+[ext_resource type="Script" uid="uid://0g6vyolf2kqn" path="res://Components/ActionComponent.cs" id="9_hhrnp"]
+[ext_resource type="Script" uid="uid://blkohrotphgr5" path="res://Data/Models/PlayerAction.cs" id="10_6pdt1"]
+[ext_resource type="Resource" uid="uid://cf5frw37u4e5a" path="res://Data/Actions/AstromechRepairAction/AstromechRepairAction.tres" id="11_6pdt1"]
 
 [node name="Player" type="CharacterBody2D" unique_id=1514296273]
 collision_mask = 8
@@ -48,5 +51,10 @@ metadata/_custom_type_script = "uid://jnjhwdktgqbj"
 [node name="RollCooldownTimer" type="Timer" parent="RollComponent" unique_id=1607126730]
 wait_time = 0.5
 one_shot = true
+
+[node name="ActionComponent" type="Node" parent="." unique_id=1049946560]
+script = ExtResource("9_hhrnp")
+EquippedActions = Array[ExtResource("10_6pdt1")]([ExtResource("11_6pdt1")])
+metadata/_custom_type_script = "uid://0g6vyolf2kqn"
 
 [connection signal="OnDeath" from="HealthComponent" to="." method="Destroy"]

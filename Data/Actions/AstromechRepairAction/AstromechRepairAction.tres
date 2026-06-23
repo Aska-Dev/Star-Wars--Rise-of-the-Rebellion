@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AstromechRepairAction" format=3 uid="uid://cf5frw37u4e5a"]
+
+[ext_resource type="Script" uid="uid://cl1pnpfe711br" path="res://Data/Actions/AstromechRepairAction/AstromechRepairAction.cs" id="1_as8ni"]
+[ext_resource type="PackedScene" uid="uid://qqdifvsj2qmq" path="res://GUI/ActionsInterface/AstromechAction/AstromechActionIndicator.tscn" id="1_jbguf"]
+
+[resource]
+script = ExtResource("1_as8ni")
+HealAmount = 2
+IconScene = ExtResource("1_jbguf")
+CooldownDuration = 60.0
+ExecutionSound = 6
+RechargeCompletedSound = 7
+metadata/_custom_type_script = "uid://cl1pnpfe711br"

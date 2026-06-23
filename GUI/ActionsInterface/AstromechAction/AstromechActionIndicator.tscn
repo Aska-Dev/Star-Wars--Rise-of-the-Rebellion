@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://qqdifvsj2qmq"]
+
+[ext_resource type="Script" uid="uid://ch54i5q1r6qr1" path="res://GUI/ActionsInterface/ActionIcon.cs" id="1_ghgkx"]
+[ext_resource type="Texture2D" uid="uid://cyj86endn05w1" path="res://Resources/icons/astromech.png" id="1_wapsh"]
+
+[sub_resource type="Animation" id="Animation_wapsh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Icon:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ghgkx"]
+resource_name = "impulse"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Icon:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.3, 1.3), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vfjtl"]
+_data = {
+&"RESET": SubResource("Animation_wapsh"),
+&"impulse": SubResource("Animation_ghgkx")
+}
+
+[node name="AstromechActionIndicator" type="Control" unique_id=640751564]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ghgkx")
+
+[node name="Icon" type="TextureProgressBar" parent="." unique_id=90749775]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(16, 16)
+value = 100.0
+fill_mode = 3
+texture_under = ExtResource("1_wapsh")
+texture_progress = ExtResource("1_wapsh")
+tint_under = Color(0.21950102, 0.21950102, 0.21950102, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2118889178]
+libraries/ = SubResource("AnimationLibrary_vfjtl")
