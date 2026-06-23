@@ -4,7 +4,8 @@ using System.Runtime.Intrinsics;
 
 public abstract partial class EnemyShipController : ShipController
 {
-    [Export] SoundEffects FlyInSound { get; set; }
+    [Export] public SoundEffects FlyInSound { get; set; }
+    [Export] public int Score { get; set; } = 10;
 
     private const float flyInSpeed = 600f;
     private const float flyInActionDelay = 1f;
@@ -39,6 +40,17 @@ public abstract partial class EnemyShipController : ShipController
         {
             HandleFlying(delta);
         }
+    }
+
+    public override void Destroy()
+    {
+        if (_isDestroyed)
+        {
+            return;
+        }
+
+        GameCore.Instance.EndlessModeManager.IncreaseScore(Score);
+        base.Destroy();
     }
 
     private void HandleFlying(double delta)

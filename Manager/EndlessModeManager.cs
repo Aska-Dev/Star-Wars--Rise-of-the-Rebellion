@@ -8,6 +8,9 @@ using System.Reflection.Metadata;
 
 public class EndlessModeManager
 {
+    public event Action<int> ScoreIncreased = null!;
+
+    public int Score { get; set; } = 0;
     public int BeatenWaves { get; private set;  } = 0;
 
     private WaveManager _waveManager = null!;
@@ -43,6 +46,12 @@ public class EndlessModeManager
         RecordWave(nextWave);
 
         _waveManager.PlayWave(nextWave);
+    }
+
+    public void IncreaseScore(int score)
+    {
+        Score += score;
+        ScoreIncreased?.Invoke(Score);
     }
 
     private void OnWaveComplete()
