@@ -17,7 +17,7 @@ public abstract partial class ShipController : CharacterBody2D, IController
     // Instantiated ShipModelScene
     protected ShipModel shipModel = null!;
 
-    private bool _isDestroyed = false;
+    protected bool _isDestroyed = false;
 
     public override void _Ready()
     {
@@ -33,7 +33,7 @@ public abstract partial class ShipController : CharacterBody2D, IController
         Components.GetComponent<HealthComponent>().TakeDamage(damage);
     }
 
-    public void Destroy()
+    public virtual void Destroy()
     {
         if(_isDestroyed)
         {

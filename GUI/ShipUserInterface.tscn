@@ -2,7 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://yc7xplrt3obj" path="res://Resources/ui/ui-control-background.png" id="1_wtnhl"]
 [ext_resource type="PackedScene" uid="uid://cc3hoe68efghy" path="res://GUI/HealthInterface/HealthInterface.tscn" id="2_ehml2"]
+[ext_resource type="Texture2D" uid="uid://0q2mk78crnpj" path="res://Resources/ui/score-base.png" id="2_hx01y"]
 [ext_resource type="PackedScene" uid="uid://c08j7ri0811b0" path="res://GUI/ActionsInterface/ActionsInterface.tscn" id="3_meoqa"]
+[ext_resource type="PackedScene" uid="uid://b84f4bk7i5f1j" path="res://GUI/ScoreDisplay/EndlessModeScoreDisplay.tscn" id="4_o72l3"]
 
 [node name="ShipUserInterface" type="Control" unique_id=333815866]
 layout_mode = 3
@@ -34,3 +36,18 @@ offset_top = 49.0
 offset_right = 641.0
 offset_bottom = 49.0
 scale = Vector2(1.5, 1.5)
+
+[node name="EndlessModeScoreDisplay" parent="." unique_id=152565833 instance=ExtResource("4_o72l3")]
+layout_mode = 1
+offset_left = 1638.0
+offset_top = 10.0
+offset_right = 1638.0
+offset_bottom = 10.0
+
+[node name="TargetingSensorScreen" type="TextureRect" parent="." unique_id=973683037]
+layout_mode = 0
+offset_left = 1483.0
+offset_top = 10.0
+offset_right = 1623.0
+offset_bottom = 88.0
+texture = ExtResource("2_hx01y")
