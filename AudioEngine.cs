@@ -16,7 +16,8 @@ public enum SoundEffects
 
 public enum MusicThemes
 {
-    SpaceBattle
+    SpaceBattle,
+    Menu
 }
 
 public partial class AudioEngine : Node

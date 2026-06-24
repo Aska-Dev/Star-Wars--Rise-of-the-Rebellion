@@ -51,7 +51,6 @@ public partial class MasterScene : Node
         if(transition)
         {
             AnimationPlayer.Play("fadeIn");
-            AnimationPlayer.AnimationFinished -= LoadNewScene;
             AnimationPlayer.AnimationFinished += LoadNewScene;
         }
         else

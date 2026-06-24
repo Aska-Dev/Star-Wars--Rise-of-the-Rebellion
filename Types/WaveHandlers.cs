@@ -77,9 +77,12 @@ public class CombatFormationWaveHandler : WaveHandler
 
 public class OrientationChangeWaveHandler : WaveHandler
 {
-    public OrientationChangeWaveHandler(PlayerEventBus playerEventBus)
+    private PlayerController _player;
+
+    public OrientationChangeWaveHandler(PlayerEventBus playerEventBus, PlayerController player)
     {
         playerEventBus.OnPlayerOrientationChanged += CompleteWave;
+        _player = player;
     }
 
     public override void Handle(Wave wave)
@@ -90,7 +93,7 @@ public class OrientationChangeWaveHandler : WaveHandler
             return;
         }
 
-        GameCore.Instance.Player.ChangeOrientation(orientationChangeWave.EnemyOrientation);
+        _player.ChangeOrientation(orientationChangeWave.EnemyOrientation);
     }
 }
 

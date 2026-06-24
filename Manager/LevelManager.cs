@@ -1,11 +1,16 @@
+using Godot;
 using System;
 
-public class LevelManager(WaveManager waveManager)
+[GlobalClass]
+public partial class LevelManager : Node
 {
+    // --- EVENTS ---
     public event Action OnLevelComplete = null!;
 
-    private WaveManager _waveManager = waveManager;
+    // --- EXPORTS ---
+    [Export] public WaveManager WaveManager { get; set; } = null!;
 
+    // --- FIELDS ---
     private Level _currentLevel = null!;
     private int _currentWaveIndex = 0;
 
@@ -14,8 +19,8 @@ public class LevelManager(WaveManager waveManager)
         _currentLevel = level;
         _currentWaveIndex = 0;
 
-        _waveManager.WaveCompleted += OnWaveCompleted;
-        _waveManager.PlayWave(_currentLevel.Waves[_currentWaveIndex]);
+        WaveManager.WaveCompleted += OnWaveCompleted;
+        WaveManager.PlayWave(_currentLevel.Waves[_currentWaveIndex]);
     }
 
     private void OnWaveCompleted()
@@ -28,6 +33,6 @@ public class LevelManager(WaveManager waveManager)
             return;
         }
 
-        _waveManager.PlayWave(_currentLevel.Waves[_currentWaveIndex]);
+        WaveManager.PlayWave(_currentLevel.Waves[_currentWaveIndex]);
     }
 }

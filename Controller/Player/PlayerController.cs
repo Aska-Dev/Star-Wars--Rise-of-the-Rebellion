@@ -10,14 +10,16 @@ public partial class PlayerController : ShipController
     public AnimationComponent AnimationComponent => Components.GetComponent<AnimationComponent>();
 
     private bool _actionsLocked = false;
+    private const string GroupName = nameof(PlayerController);
 
     public override void _Ready()
     {
+        GameManager.CurrentOrientation = GameOrientation.Left;
+
         base._Ready();
+        AddToGroup(GroupName);
 
-        GameCore.Instance.Player = this;
-
-        Components.GetComponent<HealthComponent>().OnHealthChanged += GameCore.Instance.UiEventBus.InvokePlayerHealthChanged;
+        Components.GetComponent<HealthComponent>().OnHealthChanged += EventHub.Instance.UiEventBus.InvokePlayerHealthChanged;
         Components.GetComponent<RollComponent>().OnRollFinished += () => { _actionsLocked = false; CollisionLayer = 1; };
         shipModel.OrientationChanged += OnShipModelOrienationChanged;
 
@@ -66,6 +68,19 @@ public partial class PlayerController : ShipController
         MoveAndSlide();
     }
 
+    public override void _ExitTree()
+    {
+        if (IsInGroup(GroupName))
+        {
+            RemoveFromGroup(GroupName);
+        }
+    }
+
+    public static PlayerController? GetFrom(Node caller)
+    {
+        return caller.GetTree().GetFirstNodeInGroup(GroupName) as PlayerController;
+    }
+
     public void ChangeOrientation(GameOrientation newOrientation)
     {
         var flippedOrientation = newOrientation.GetOpposite();
@@ -78,6 +93,6 @@ public partial class PlayerController : ShipController
     {
         _actionsLocked = false;
         GameManager.CurrentOrientation = newOrientation.GetOpposite();
-        GameCore.Instance.PlayerEventBus.InvokePlayerOrientationChanged();
+        EventHub.Instance.PlayerEventBus.InvokePlayerOrientationChanged();
     }
 }

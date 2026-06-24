@@ -3,9 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices.Marshalling;
 
-public class EnemySpawningManager
+[GlobalClass]
+public partial class EnemySpawningManager : Node
 {
+    public SpawnGridModule SpawnGridModule { get; set; }
+
     // --- ACTIONS ---
     public event Action OnAllEnemiesDefeated = null!;
     public event Action OnEnemyDefeated = null!;
@@ -13,18 +17,14 @@ public class EnemySpawningManager
     // --- PROPERTIES ---
     public int EnemyAmount => _activeGrid.Count;
 
-    // --- DEPENDENCIES ---
-    private SceneTree _tree = null!;
-    private SpawnGridModule _spawnGridModule;
-
     // --- FIELDS ---
     private List<EnemyActiveGridSlot> _activeGrid = [];
     private Node? _enemyContainerNode;
 
-    public EnemySpawningManager(SceneTree godotTree, Viewport viewport)
+    public override void _Ready()
     {
-        _tree = godotTree;
-        _spawnGridModule = new(viewport.GetVisibleRect().Size);
+        SpawnGridModule = new(GetViewport().GetVisibleRect().Size);
+        _enemyContainerNode = GetParent().GetParent().GetNode("EnemyContainer");
     }
 
     public bool IsSlotFree(int column, int row)
@@ -60,7 +60,7 @@ public class EnemySpawningManager
         {
             if (slot.SpawnDelay > 0f)
             {
-                await _tree.Root.ToSignal(_tree.CreateTimer(slot.SpawnDelay), SceneTreeTimer.SignalName.Timeout);
+                await GetTree().Root.ToSignal(GetTree().CreateTimer(slot.SpawnDelay), SceneTreeTimer.SignalName.Timeout);
             }
 
             SpawnEnemy(slot.Enemy, slot.Column, slot.Row);
@@ -74,18 +74,22 @@ public class EnemySpawningManager
 
     public void SpawnEnemy(PackedScene enemyScene, int column, int row)
     {
+        if (_enemyContainerNode is null)
+        {
+            throw new NullReferenceException($"{nameof(_enemyContainerNode)} in {nameof(EnemySpawningManager)}");
+        }
+
         var currentOrientation = GameManager.CurrentOrientation;
-        var targetPosition = _spawnGridModule.GetWorldPosition(column, row, currentOrientation);
+        var targetPosition = SpawnGridModule.GetWorldPosition(column, row, currentOrientation);
 
         var spawnDirection = currentOrientation.GetOpposite().GetDirectionVector();
         var spawnPosition = targetPosition + (spawnDirection * 500f);
 
-        GD.Print(enemyScene);
         var enemy = enemyScene.Instantiate<EnemyShipController>();
         _activeGrid.Add(new(column, row, enemy));
         
         enemy.GlobalPosition = spawnPosition;
-        _tree.Root.AddChild(enemy);
+        _enemyContainerNode.AddChild(enemy);
 
         enemy.FlyToPosition(targetPosition);
         enemy.OnDestroy += () => OnEnemyDestroyed(enemy);
@@ -126,7 +130,7 @@ public class EnemySpawningManager
             var slot = newSlots[i];
             _activeGrid.Add(new EnemyActiveGridSlot(slot.Column, slot.Row, enemies[i]));
 
-            var targetPos = _spawnGridModule.GetWorldPosition(slot.Column, slot.Row, currentOrientation);
+            var targetPos = SpawnGridModule.GetWorldPosition(slot.Column, slot.Row, currentOrientation);
             enemies[i].FlyToPosition(targetPos);
         }
     }

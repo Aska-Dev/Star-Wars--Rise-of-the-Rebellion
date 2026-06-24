@@ -80,6 +80,8 @@ public partial class RollComponent : Component
 
     private void SpawnGhostTrail()
     {
+        var player = PlayerController.GetFrom(this)!;
+
         // Greift dynamisch auf das "Sprite"-Node der aktuell aktiven Orientierung zu!
         var currentSprite = _shipModel.ActiveOrientation?.GetNodeOrNull<Sprite2D>("Sprite");
         if (currentSprite == null) return;
@@ -93,7 +95,7 @@ public partial class RollComponent : Component
         ghost.GlobalScale = currentSprite.GlobalScale;
         ghost.Modulate = new Color(1, 1, 1, 0.4f);
 
-        GetTree().Root.AddChild(ghost);
+        player.GetParent().AddChild(ghost);
 
         Tween fadeTween = CreateTween();
         fadeTween.TweenProperty(ghost, "modulate:a", 0.0f, 0.25f);

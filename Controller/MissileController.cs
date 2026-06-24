@@ -23,7 +23,7 @@ public partial class MissileController : ProjectileController
 
     public override void _PhysicsProcess(double delta)
     {
-        var player = GameCore.Instance.Player;
+        var player = PlayerController.GetFrom(this);
 
         if (player != null && IsInstanceValid(player))
         {

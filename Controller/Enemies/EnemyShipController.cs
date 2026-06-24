@@ -49,7 +49,7 @@ public abstract partial class EnemyShipController : ShipController
             return;
         }
 
-        GameCore.Instance.EndlessModeManager.IncreaseScore(Score);
+        GameCore.GetFrom(this).EndlessModeManager.IncreaseScore(Score);
         base.Destroy();
     }
 

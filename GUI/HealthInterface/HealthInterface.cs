@@ -13,14 +13,19 @@ public partial class HealthInterface : Control
 	{
 		_grid = GetNode<GridContainer>("GridContainer");
 
-		GameCore.Instance.UiEventBus.OnPlayerHealthChanged += UpdateIndicators;
+        EventHub.Instance.UiEventBus.OnPlayerHealthChanged += UpdateIndicators;
 
 		Callable.From(SetupIndicators).CallDeferred();
 	}
 
-	private void SetupIndicators()
+    public override void _ExitTree()
+    {
+       EventHub.Instance.UiEventBus.OnPlayerHealthChanged -= UpdateIndicators;
+    }
+
+    private void SetupIndicators()
 	{
-		var maxHealth = GameCore.Instance.Player.Components.GetComponent<HealthComponent>().MaxHealth;
+		var maxHealth = PlayerController.GetFrom(this).Components.GetComponent<HealthComponent>().MaxHealth;
 
 		foreach(var child in _grid.GetChildren())
 		{

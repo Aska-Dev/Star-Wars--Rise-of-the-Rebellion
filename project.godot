@@ -18,7 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 AudioEngine="*uid://baf8hlbbswx6j"
-GameCore="*uid://bnc1xejucd8"
+EventHub="*uid://k1wrnqd0f6v0"
 
 [display]
 
@@ -28,6 +28,10 @@ window/size/viewport_height=1080
 [dotnet]
 
 project/assembly_name="Star Wars- Starfighters"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/copy_all_errors/plugin.cfg")
 
 [input]
 

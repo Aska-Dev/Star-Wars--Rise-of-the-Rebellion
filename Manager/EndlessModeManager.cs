@@ -6,26 +6,30 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Metadata;
 
-public class EndlessModeManager
+[GlobalClass]
+public partial class EndlessModeManager : Node
 {
+    // --- SIGNALS ---
     public event Action<int> ScoreIncreased = null!;
 
+    // --- EXPORTS ---
+    [Export] public WaveManager WaveManager { get; set; } = null!;
+
+    // --- PROPERTIES ---
     public int Score { get; set; } = 0;
     public int BeatenWaves { get; private set;  } = 0;
 
-    private WaveManager _waveManager = null!;
-
+    // --- FIELDS ---
     private List<Wave> _history = [];
     private const int maxHistory = 10;
 
     private List<IWaveRule> _waveRules = [];
 
-    public EndlessModeManager(WaveManager waveManager)
+    public override void _Ready()
     {
-        _waveManager = waveManager;
-        _waveManager.WaveCompleted += OnWaveComplete;
-
         InitializeRules();
+
+        WaveManager.WaveCompleted += OnWaveComplete;
     }
 
     public void NextWave()
@@ -45,7 +49,7 @@ public class EndlessModeManager
 
         RecordWave(nextWave);
 
-        _waveManager.PlayWave(nextWave);
+        WaveManager.PlayWave(nextWave);
     }
 
     public void IncreaseScore(int score)

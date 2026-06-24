@@ -3,14 +3,15 @@ using Godot;
 using System;
 using System.Net.Http.Headers;
 
-public class GameManager(LevelManager levelManager, EndlessModeManager endlessModeManager)
+[GlobalClass]
+public partial class GameManager : Node
 {
+    [Export] public LevelManager LevelManager { get; set; } = null!;
+    [Export] public EndlessModeManager EndlessModeManager { get; set; } = null!;
+    
     public static GameOrientation CurrentOrientation { get; set; } = GameOrientation.Left;
-    
-    public LevelManager LevelManager = levelManager;
-    public EndlessModeManager EndlessModeManager = endlessModeManager;
-    
-    public void Test()
+        
+    public void StartEndlessMode()
     {
         AudioEngine.Instance.PlayTheme(MusicThemes.SpaceBattle);
         EndlessModeManager.NextWave();
