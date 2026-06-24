@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://dxtwdksqscip3"]
+
+[ext_resource type="Script" uid="uid://dxvvos6s1rww1" path="res://MasterScene.cs" id="1_xe15x"]
+[ext_resource type="PackedScene" uid="uid://dypgskmss6i1e" path="res://Menues/Startmenu/Startmenu.tscn" id="2_63bby"]
+[ext_resource type="PackedScene" uid="uid://n15fbqbv53m4" path="res://Maps/base_level.tscn" id="3_stkn3"]
+
+[sub_resource type="Animation" id="Animation_63bby"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1930, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xe15x"]
+resource_name = "fadeIn"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-1930, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_stkn3"]
+resource_name = "fadeOut"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1930, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_63bby"]
+_data = {
+&"RESET": SubResource("Animation_63bby"),
+&"fadeIn": SubResource("Animation_xe15x"),
+&"fadeOut": SubResource("Animation_stkn3")
+}
+
+[node name="MasterScene" type="Node" unique_id=1510398728]
+script = ExtResource("1_xe15x")
+RegisteredScenes = Dictionary[String, PackedScene]({
+"Home": ExtResource("2_63bby"),
+"Level": ExtResource("3_stkn3")
+})
+
+[node name="SceneContainer" type="Node" parent="." unique_id=1202489653]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1916356913]
+libraries/ = SubResource("AnimationLibrary_63bby")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=178827645]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1930.0
+offset_right = -1930.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)

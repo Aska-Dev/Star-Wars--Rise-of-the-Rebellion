@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-public class EnemySpawningManager(SceneTree godotTree, Viewport viewport)
+public class EnemySpawningManager
 {
     // --- ACTIONS ---
     public event Action OnAllEnemiesDefeated = null!;
@@ -14,11 +14,18 @@ public class EnemySpawningManager(SceneTree godotTree, Viewport viewport)
     public int EnemyAmount => _activeGrid.Count;
 
     // --- DEPENDENCIES ---
-    private SceneTree _tree = godotTree;
-    private SpawnGridModule _spawnGridModule = new(viewport.GetVisibleRect().Size);
+    private SceneTree _tree = null!;
+    private SpawnGridModule _spawnGridModule;
 
     // --- FIELDS ---
     private List<EnemyActiveGridSlot> _activeGrid = [];
+    private Node? _enemyContainerNode;
+
+    public EnemySpawningManager(SceneTree godotTree, Viewport viewport)
+    {
+        _tree = godotTree;
+        _spawnGridModule = new(viewport.GetVisibleRect().Size);
+    }
 
     public bool IsSlotFree(int column, int row)
     {

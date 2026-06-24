@@ -31,7 +31,5 @@ public partial class GameCore : Node
 		LevelManager = new(WaveManager);
 		EndlessModeManager = new(WaveManager);
 		GameManager = new(LevelManager, EndlessModeManager);
-
-		GetTree().CreateTimer(2).Timeout += GameManager.Test;
     }
 }
