@@ -16,12 +16,12 @@ public partial class ActionsInterface : Control
 
         Callable.From(SetupSlots).CallDeferred();
 
-        GameCore.Instance.Player.Components.GetComponent<ActionComponent>().ActionExecuted += StartSlotCooldown;
+        PlayerController.GetFrom(this).Components.GetComponent<ActionComponent>().ActionExecuted += StartSlotCooldown;
     }
 
     private void SetupSlots()
     {
-        var actions = GameCore.Instance.Player.Components.GetComponent<ActionComponent>().EquippedActions;
+        var actions = PlayerController.GetFrom(this).Components.GetComponent<ActionComponent>().EquippedActions;
         
         for(var i = 0; i < actions.Count; i++)
         {

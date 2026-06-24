@@ -1,35 +1,40 @@
 using Godot;
 using System;
 
+[GlobalClass]
 public partial class GameCore : Node
 {
-	public static GameCore Instance { get; private set; } = null!;
+    // --- MANAGERS ---
+    [Export] public GameManager GameManager { get; private set; } = null!;
+    [Export] public EnemySpawningManager EnemySpawningManager { get; private set; } = null!;
+    [Export] public LevelManager LevelManager { get; private set; } = null!;
+    [Export] public WaveManager WaveManager { get; private set; } = null!;
+    [Export] public EndlessModeManager EndlessModeManager { get; private set; } = null!;
 
-	// --- MANAGERS ---
-	public GameManager GameManager { get; private set; } = null!;
-	public EnemySpawningManager EnemySpawningManager { get; private set; } = null!;
-	public LevelManager LevelManager { get; private set; } = null!;
-	public WaveManager WaveManager { get; private set; } = null!;
-	public EndlessModeManager EndlessModeManager { get; private set; } = null!;
-
-	// --- EVENT BUSSES ---
-	public UiEventBus UiEventBus { get; private set; } = null!;
-	public PlayerEventBus PlayerEventBus { get; private set; } = null!;
-
-	// --- GLOBAL REFERENCES ---
-	public PlayerController Player { get; set; } = null!;
+	// -- FIELDS ---
+	private const string GroupName = nameof(GameCore);
 
 	public override void _Ready()
 	{
-		Instance = this;
+        AddToGroup(GroupName);
+    }
 
-		UiEventBus = new();
-        PlayerEventBus = new();
+    public override void _ExitTree()
+    {
+        if (IsInGroup(GroupName))
+        {
+            RemoveFromGroup(GroupName);
+        }
+    }
 
-		EnemySpawningManager = new(GetTree(), GetViewport());
-		WaveManager = new(EnemySpawningManager, PlayerEventBus, GetTree());
-		LevelManager = new(WaveManager);
-		EndlessModeManager = new(WaveManager);
-		GameManager = new(LevelManager, EndlessModeManager);
+    public static GameCore GetFrom(Node caller)
+    {
+        var core = caller.GetTree().GetFirstNodeInGroup(GroupName) as GameCore;
+		if(core is null)
+		{
+			throw new NullReferenceException(nameof(core));
+		}
+
+		return core;
     }
 }

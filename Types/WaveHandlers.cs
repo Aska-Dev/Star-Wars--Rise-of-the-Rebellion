@@ -16,10 +16,9 @@ public abstract class WaveHandler : IWaveHandler
     public event Action WaveCompleted = null!;
     public abstract void Handle(Wave wave);
 
-    protected void CompleteWave()
+    protected virtual void CompleteWave()
     {
         WaveCompleted?.Invoke();
-        GD.Print("Wave completed");
     }
 }
 
@@ -29,31 +28,41 @@ public class CombatFormationWaveHandler : WaveHandler
 
     private int _formationSize;
     private int _shufflesLeft;
+    private float _baseShuffleChance;
     private float _shuffleChance;
-    
+
     public CombatFormationWaveHandler(EnemySpawningManager _enemySpawningManager)
     {
         enemySpawningManager = _enemySpawningManager;
-
-        enemySpawningManager.OnEnemyDefeated += CheckForShuffle;
-        enemySpawningManager.OnAllEnemiesDefeated += CompleteWave;
     }
 
     public override void Handle(Wave wave)
     {
-        if(wave is not CombatFormationWave combat)
+        if (wave is not CombatFormationWave combat)
         {
             Log.Error(nameof(CombatFormationWaveHandler), nameof(Handle), "Provided wave resource is not of type CombatWave");
             return;
         }
 
+        enemySpawningManager.OnEnemyDefeated += CheckForShuffle;
+        enemySpawningManager.OnAllEnemiesDefeated += CompleteWave;
+
         var builtFormation = combat.Formation.Build();
 
         _formationSize = builtFormation.Count;
         _shufflesLeft = combat.Shuffles;
+        _baseShuffleChance = combat.ShuffleChance;
         _shuffleChance = combat.ShuffleChance;
 
         enemySpawningManager.SpawnFormation(builtFormation);
+    }
+
+    protected override void CompleteWave()
+    {
+        enemySpawningManager.OnEnemyDefeated -= CheckForShuffle;
+        enemySpawningManager.OnAllEnemiesDefeated -= CompleteWave;
+
+        base.CompleteWave();
     }
 
     private void CheckForShuffle()
@@ -65,21 +74,31 @@ public class CombatFormationWaveHandler : WaveHandler
 
         var enemiesCount = enemySpawningManager.EnemyAmount;
         float alivePercentage = (float)enemiesCount / (float)_formationSize;
-        GD.Print(alivePercentage);
 
-        if(alivePercentage <= 0.7f && GD.Randf() <= _shuffleChance)
+        if(alivePercentage <= 0.8f)
         {
-            _shufflesLeft--;
-            enemySpawningManager.ShuffleGrid();
+            if(GD.Randf() <= _shuffleChance)
+            {
+                _shufflesLeft--;
+                enemySpawningManager.ShuffleGrid();
+                _shuffleChance = _baseShuffleChance;
+            }
+            else
+            {
+                _shuffleChance += 0.2f;
+            }
         }
     }
 }
 
 public class OrientationChangeWaveHandler : WaveHandler
 {
-    public OrientationChangeWaveHandler(PlayerEventBus playerEventBus)
+    private PlayerController _player;
+
+    public OrientationChangeWaveHandler(PlayerEventBus playerEventBus, PlayerController player)
     {
         playerEventBus.OnPlayerOrientationChanged += CompleteWave;
+        _player = player;
     }
 
     public override void Handle(Wave wave)
@@ -90,7 +109,7 @@ public class OrientationChangeWaveHandler : WaveHandler
             return;
         }
 
-        GameCore.Instance.Player.ChangeOrientation(orientationChangeWave.EnemyOrientation);
+        _player.ChangeOrientation(orientationChangeWave.EnemyOrientation);
     }
 }
 
@@ -107,8 +126,6 @@ public class CombatSpawnerWaveHandler : WaveHandler
     {
         enemySpawningManager = _enemySpawningManager;
         tree = _tree;
-
-        _enemySpawningManager.OnAllEnemiesDefeated += OnGridEmpty;
     }
 
     public override void Handle(Wave wave)
@@ -119,25 +136,44 @@ public class CombatSpawnerWaveHandler : WaveHandler
             return;
         }
 
+        enemySpawningManager.OnAllEnemiesDefeated += OnGridEmpty;
+
         _enemiesAmount = spawnerWave.EnemyAmount;
         _wave = spawnerWave;
 
         HandleSpawner();
     }
 
+    protected override void CompleteWave()
+    {
+        base.CompleteWave();
+        
+        enemySpawningManager.OnAllEnemiesDefeated -= OnGridEmpty;
+    }
+
     private void OnGridEmpty()
     {
-        if(_enemiesAmount <= 0)
+        if (_enemiesAmount <= 0)
         {
+            ClearTimer();
             CompleteWave();
+            return;
         }
-        else
+
+        if (GodotObject.IsInstanceValid(_timer))
         {
-            SpawnBatch(_wave.MaximumBatchSize, _wave.MaximumBatchSize);
-            
-            _timer = tree.CreateTimer(_wave.SpawnInterval);
-            _timer.Timeout += HandleSpawner;
+            if (_timer.TimeLeft < 0.5)
+            {
+                return;
+            }
+
+            ClearTimer();
         }
+
+        SpawnBatch(_wave.MaximumBatchSize, _wave.MaximumBatchSize);
+
+        _timer = tree.CreateTimer(_wave.SpawnInterval);
+        _timer.Timeout += HandleSpawner;
     }
 
     private void HandleSpawner()
@@ -165,6 +201,8 @@ public class CombatSpawnerWaveHandler : WaveHandler
     private void SpawnBatch(int minAmount, int maxAmount)
     {
         var amount = GD.RandRange(minAmount, maxAmount);
+        GD.Print(amount);
+
         _enemiesAmount -= amount;
         for(var i = 0; i < amount; i++)
         {
@@ -198,5 +236,14 @@ public class CombatSpawnerWaveHandler : WaveHandler
         }
 
         return _wave.EnemyPool.First().EnemyScene;
+    }
+
+    private void ClearTimer()
+    {
+        if (GodotObject.IsInstanceValid(_timer))
+        {
+            _timer.Timeout -= HandleSpawner;
+        }
+        _timer = null;
     }
 }

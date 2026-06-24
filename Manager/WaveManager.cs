@@ -3,20 +3,27 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-public class WaveManager
+[GlobalClass]
+public partial class WaveManager : Node
 {
+    // --- EVENT ---
     public event Action WaveCompleted = null!;
 
+    // --- EXPORTS
+    [Export] public EnemySpawningManager EnemySpawningManager { get; set; } = null!;
+    [Export] public PlayerController PlayerController { get; set; } = null!;
+
+    // -- FIELDS ---
     private Dictionary<Type, IWaveHandler> _handlers = [];
 
-    public WaveManager(EnemySpawningManager spawningManager, PlayerEventBus playerEventBus, SceneTree tree)
+    public override void _Ready()
     {
         // Register wave handlers
-        _handlers[typeof(CombatFormationWave)] = new CombatFormationWaveHandler(spawningManager);
-        _handlers[typeof(OrientationChangeWave)] = new OrientationChangeWaveHandler(playerEventBus);
-        _handlers[typeof(CombatSpawnerWave)] = new CombatSpawnerWaveHandler(spawningManager, tree);
+        _handlers[typeof(CombatFormationWave)] = new CombatFormationWaveHandler(EnemySpawningManager);
+        _handlers[typeof(OrientationChangeWave)] = new OrientationChangeWaveHandler(EventHub.Instance.PlayerEventBus, PlayerController);
+        _handlers[typeof(CombatSpawnerWave)] = new CombatSpawnerWaveHandler(EnemySpawningManager, GetTree());
     }
-
+     
     public void PlayWave(Wave wave)
     {
         var waveType = wave.GetType();

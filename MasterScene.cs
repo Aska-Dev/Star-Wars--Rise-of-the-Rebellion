@@ -27,7 +27,6 @@ public partial class MasterScene : Node
         SceneContainer = GetNode<Node>("SceneContainer");
         AnimationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 
-        GD.Print($"MasterScene initialisiert. Anzahl registrierter Szenen: {RegisteredScenes?.Count ?? 0}");
         Callable.From(() => ChangeScene("Home", false)).CallDeferred();
     }
 
@@ -51,7 +50,6 @@ public partial class MasterScene : Node
         if(transition)
         {
             AnimationPlayer.Play("fadeIn");
-            AnimationPlayer.AnimationFinished -= LoadNewScene;
             AnimationPlayer.AnimationFinished += LoadNewScene;
         }
         else

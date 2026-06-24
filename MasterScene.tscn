@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dxvvos6s1rww1" path="res://MasterScene.cs" id="1_xe15x"]
 [ext_resource type="PackedScene" uid="uid://dypgskmss6i1e" path="res://Menues/Startmenu/Startmenu.tscn" id="2_63bby"]
-[ext_resource type="PackedScene" uid="uid://n15fbqbv53m4" path="res://Maps/base_level.tscn" id="3_stkn3"]
+[ext_resource type="PackedScene" uid="uid://n15fbqbv53m4" path="res://Maps/CombatLevel.tscn" id="3_stkn3"]
 
 [sub_resource type="Animation" id="Animation_63bby"]
 length = 0.001
