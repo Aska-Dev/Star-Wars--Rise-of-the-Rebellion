@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://dypgskmss6i1e"]
+
+[ext_resource type="Script" uid="uid://clp1gvfsalf6x" path="res://Menues/Startmenu/Startmenu.cs" id="1_g17kv"]
+[ext_resource type="Texture2D" uid="uid://7o60tt5b2pja" path="res://Resources/backgrounds/planet1.jpg" id="1_osceo"]
+[ext_resource type="FontFile" uid="uid://op84vkhe0x8" path="res://Resources/fonts/title.ttf" id="2_7grjt"]
+[ext_resource type="Texture2D" uid="uid://ccv5g3oa8xdws" path="res://Resources/ui/button.png" id="3_00i37"]
+[ext_resource type="FontFile" uid="uid://f84lp6g4myj0" path="res://Resources/fonts/xWingFont.otf" id="3_wtsa1"]
+[ext_resource type="Texture2D" uid="uid://cbbxvexe02j8t" path="res://Resources/ui/button_pressed.png" id="4_00i37"]
+[ext_resource type="Texture2D" uid="uid://c8fy2glljpql0" path="res://Resources/ui/button_hover.png" id="5_wtsa1"]
+
+[sub_resource type="FontVariation" id="FontVariation_7grjt"]
+base_font = ExtResource("2_7grjt")
+
+[sub_resource type="FontVariation" id="FontVariation_7ah1s"]
+base_font = ExtResource("2_7grjt")
+
+[sub_resource type="Theme" id="Theme_g17kv"]
+default_font = ExtResource("3_wtsa1")
+default_font_size = 50
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7ox2g"]
+texture = ExtResource("3_00i37")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_l44as"]
+texture = ExtResource("4_00i37")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dh4ri"]
+texture = ExtResource("5_wtsa1")
+
+[node name="Startmenu" type="Control" unique_id=5483629]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g17kv")
+
+[node name="Planet1" type="TextureRect" parent="." unique_id=298707013]
+layout_mode = 0
+scale = Vector2(1.06, 1.06)
+texture = ExtResource("1_osceo")
+
+[node name="StarWarsTitle" type="Label" parent="." unique_id=1787480358]
+layout_mode = 0
+offset_left = 152.0
+offset_top = -85.0
+offset_right = 788.0
+offset_bottom = 558.0
+theme_override_colors/font_color = Color(1, 0.9098039, 0.12156863, 1)
+theme_override_fonts/font = SubResource("FontVariation_7grjt")
+theme_override_font_sizes/font_size = 140
+text = "STAR
+WARS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameTitle" type="Label" parent="." unique_id=355880145]
+layout_mode = 0
+offset_left = 39.0
+offset_top = -77.0
+offset_right = 953.0
+offset_bottom = 566.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = SubResource("FontVariation_7ah1s")
+theme_override_font_sizes/font_size = 70
+text = "Rise of the Rebellion"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="." unique_id=206376066]
+layout_mode = 0
+offset_left = 216.0
+offset_top = 502.0
+offset_right = 703.0
+offset_bottom = 664.0
+theme = SubResource("Theme_g17kv")
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxTexture_7ox2g")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_l44as")
+theme_override_styles/hover = SubResource("StyleBoxTexture_dh4ri")
+text = "Start Game"
+
+[node name="ExitButton" type="Button" parent="." unique_id=1111932150]
+layout_mode = 0
+offset_left = 216.0
+offset_top = 688.0
+offset_right = 703.0
+offset_bottom = 850.0
+theme = SubResource("Theme_g17kv")
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxTexture_7ox2g")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_l44as")
+theme_override_styles/hover = SubResource("StyleBoxTexture_dh4ri")
+text = "Exit"
+
+[connection signal="pressed" from="Button" to="." method="StartGame"]
+[connection signal="pressed" from="ExitButton" to="." method="ExitGame"]
