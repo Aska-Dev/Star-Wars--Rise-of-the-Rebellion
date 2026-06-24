@@ -18,9 +18,9 @@ public class OrientationChangeRule : IWaveRule
             .TakeWhile(w => w is CombatFormationWave || w is CombatSpawnerWave)
             .Count();
 
-        if (consecutiveCombats < 3) return null;
+        if (consecutiveCombats < 2) return null;
 
-        float chance = (consecutiveCombats - 2) * 0.20f;
+        float chance = (consecutiveCombats - 1) * 0.20f;
 
         if (GD.Randf() <= chance)
         {
