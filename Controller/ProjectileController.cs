@@ -17,9 +17,9 @@ public abstract partial class ProjectileController : CharacterBody2D, IControlle
     public override void _Ready()
     {
         _hitAnimation = GetNode<AnimatedSprite2D>("HitAnimation");
-        _hitAnimation.AnimationFinished += QueueFree;
+        _hitAnimation.AnimationFinished += KillInstance;
 
-        MasterScene.Instance.SceneChanged += QueueFree;
+        MasterScene.Instance.SceneChanged += KillInstance   ;
     }
 
     public void Launch(Vector2 direction, uint collisionMask)
@@ -35,10 +35,7 @@ public abstract partial class ProjectileController : CharacterBody2D, IControlle
         var rect = GetViewport().GetVisibleRect();
         if (GlobalPosition.X > rect.Size.X || GlobalPosition.Y >= rect.Size.Y)
         {
-            if(!IsQueuedForDeletion())
-            {
-                QueueFree();
-            }
+            KillInstance();
         }
     }
 
@@ -68,5 +65,13 @@ public abstract partial class ProjectileController : CharacterBody2D, IControlle
         _hitAnimation.Play();
         Velocity = Vector2.Zero;
         GetNode<Node2D>("Sprite2D").Visible = false;
+    }
+
+    private void KillInstance()
+    {
+        if (!IsQueuedForDeletion())
+        {
+            QueueFree();
+        }
     }
 }

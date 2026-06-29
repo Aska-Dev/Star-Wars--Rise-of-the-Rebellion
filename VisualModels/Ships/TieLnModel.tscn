@@ -296,6 +296,7 @@ libraries/ = SubResource("AnimationLibrary_k5ij2")
 libraries/ = SubResource("AnimationLibrary_acpmm")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=1276600023]
+active = false
 tree_root = SubResource("AnimationNodeBlendSpace2D_s7wcd")
 anim_player = NodePath("../AnimationPlayer")
 parameters/blend_position = Vector2(-0.57678354, -0.235955)

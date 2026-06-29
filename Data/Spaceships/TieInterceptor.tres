@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ShipData" format=3 uid="uid://do108f4753g62"]
+
+[ext_resource type="Script" uid="uid://c22qwjskxa2ah" path="res://Data/DataModels/ShipData.cs" id="1_j4cye"]
+[ext_resource type="PackedScene" uid="uid://b4i4bbsiqdfg0" path="res://Controller/Projectiles/Projectile_GreenLaser.tscn" id="1_kx82t"]
+
+[resource]
+script = ExtResource("1_j4cye")
+Name = "TIE-Interceptor"
+XSpeed = 700
+YSpeed = 700
+Health = 6
+ShootSound = 1
+ProjectileScene = ExtResource("1_kx82t")
+metadata/_custom_type_script = "uid://c22qwjskxa2ah"

@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="Level" format=3 uid="uid://cnhkdygmd2sc0"]
 
 [ext_resource type="PackedScene" uid="uid://de67weiw878bd" path="res://Controller/Enemies/TieLn/TieLnController.tscn" id="1_0v1ip"]
-[ext_resource type="Script" uid="uid://dbkrj46oqammv" path="res://Data/Models/Formations/SmallSpearFormation.cs" id="1_623ei"]
-[ext_resource type="Script" uid="uid://cp7yrle1x0pcd" path="res://Data/Models/Level/Level.cs" id="1_jkutm"]
+[ext_resource type="Script" uid="uid://dbkrj46oqammv" path="res://Data/DataModels/Formations/SmallSpearFormation.cs" id="1_623ei"]
+[ext_resource type="Script" uid="uid://cp7yrle1x0pcd" path="res://Data/DataModels/Level.cs" id="1_jkutm"]
 [ext_resource type="Script" uid="uid://dfyfkl1afdq08" path="res://Types/EnemyPoolEntry.cs" id="1_wm75e"]
 [ext_resource type="PackedScene" uid="uid://cupqobydx74al" path="res://Controller/Enemies/TieBomber/TieBomberController.tscn" id="2_1x8b0"]
-[ext_resource type="Script" uid="uid://britwo2meij1h" path="res://Data/Models/Level/CombatSpawnerWave.cs" id="4_1x8b0"]
-[ext_resource type="Script" uid="uid://bbk80gqfn53y0" path="res://Data/Models/Level/OrientationChangeWave.cs" id="5_1x8b0"]
-[ext_resource type="Script" uid="uid://dwoeelfhpda34" path="res://Data/Models/Level/CombatFormationWave.cs" id="6_623ei"]
+[ext_resource type="Script" uid="uid://britwo2meij1h" path="res://Data/Waves/CombatSpawnerWave.cs" id="4_1x8b0"]
+[ext_resource type="Script" uid="uid://bbk80gqfn53y0" path="res://Data/Waves/OrientationChangeWave.cs" id="5_1x8b0"]
+[ext_resource type="Script" uid="uid://dwoeelfhpda34" path="res://Data/Waves/CombatFormationWave.cs" id="6_623ei"]
 
 [sub_resource type="Resource" id="Resource_xp0bs"]
 script = ExtResource("1_623ei")

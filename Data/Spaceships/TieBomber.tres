@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ShipData" format=3 uid="uid://bctmy4l1n1ed3"]
 
 [ext_resource type="PackedScene" uid="uid://bnlfx5a3qggya" path="res://Controller/Projectiles/Projectile_Missile.tscn" id="1_3im6v"]
-[ext_resource type="Script" uid="uid://c22qwjskxa2ah" path="res://Data/Models/ShipData.cs" id="1_w0bbt"]
+[ext_resource type="Script" uid="uid://c22qwjskxa2ah" path="res://Data/DataModels/ShipData.cs" id="1_w0bbt"]
 
 [resource]
 script = ExtResource("1_w0bbt")

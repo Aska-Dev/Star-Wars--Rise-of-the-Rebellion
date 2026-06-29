@@ -95,9 +95,54 @@ public partial class EnemySpawningManager : Node
         enemy.OnDestroy += () => OnEnemyDestroyed(enemy);
     }
 
+    public void ShuffleEnemy(EnemyShipController enemy)
+    {
+        var gridSlot = _activeGrid.FirstOrDefault(g => g.Enemy == enemy);
+        if(gridSlot is null)
+        {
+            Log.Error(nameof(EnemySpawningManager), nameof(ShuffleEnemy), "Enemy not on grid");
+            return;
+        }
+
+        var freeSlots = GetFreeSlots();
+        EnemyGridSlot freeSlot;
+
+        do {
+            freeSlot = freeSlots[GD.RandRange(0, freeSlots.Count - 1)];
+        } while (freeSlot.Row == gridSlot.Row);
+
+        _activeGrid.Remove(gridSlot);
+        _activeGrid.Add(new EnemyActiveGridSlot(freeSlot.Column, freeSlot.Row, gridSlot.Enemy));
+
+        var targetPos = SpawnGridModule.GetWorldPosition(freeSlot.Column, freeSlot.Row, GameManager.CurrentOrientation);
+        enemy.FlyToPosition(targetPos);
+    }
+
+    public void ShuffleGrid()
+    {
+        var enemies = _activeGrid.Select(g => g.Enemy).ToList();
+        var freeSlots = GetFreeSlots();
+
+        var newSlots = freeSlots.OrderBy(x => GD.Randf()).Take(enemies.Count).ToList();
+
+        _activeGrid.Clear();
+
+        var currentOrientation = GameManager.CurrentOrientation;
+
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            var slot = newSlots[i];
+            _activeGrid.Add(new EnemyActiveGridSlot(slot.Column, slot.Row, enemies[i]));
+
+            var targetPos = SpawnGridModule.GetWorldPosition(slot.Column, slot.Row, currentOrientation);
+            enemies[i].FlyToPosition(targetPos);
+        }
+    }
+
     private void OnEnemyDestroyed(EnemyShipController enemy)
     {
         var slot = _activeGrid.FirstOrDefault(s => s.Enemy == enemy);
+        GD.Print("Enemy killed", enemy.GetType().Name, "\nSlot:", slot?.Column, "/", slot?.Row);
         if (slot is not null)
         {
             _activeGrid.Remove(slot);
@@ -110,28 +155,6 @@ public partial class EnemySpawningManager : Node
         else
         {
             OnEnemyDefeated?.Invoke();
-        }
-    }
-
-    public void ShuffleGrid()
-    {
-        var enemies = _activeGrid.Select(g => g.Enemy).ToList();
-        var freeSlots = GetFreeSlots();
-
-        var newSlots = freeSlots.OrderBy(x => GD.Randf()).Take(enemies.Count).ToList();
-
-        // 3. Jetzt erst das Grid leeren und mit den neuen Positionen befüllen
-        _activeGrid.Clear();
-
-        var currentOrientation = GameManager.CurrentOrientation;
-
-        for (int i = 0; i < enemies.Count; i++)
-        {
-            var slot = newSlots[i];
-            _activeGrid.Add(new EnemyActiveGridSlot(slot.Column, slot.Row, enemies[i]));
-
-            var targetPos = SpawnGridModule.GetWorldPosition(slot.Column, slot.Row, currentOrientation);
-            enemies[i].FlyToPosition(targetPos);
         }
     }
 }

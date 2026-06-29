@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cxxip0eco0w7p"]
+
+[ext_resource type="Script" uid="uid://b24qx6e4hvfrp" path="res://VisualModels/HazardModel.cs" id="1_vtuke"]
+[ext_resource type="Texture2D" uid="uid://cjkkc83yo2icj" path="res://Resources/hazards/asteroid1.png" id="2_vtuke"]
+[ext_resource type="Texture2D" uid="uid://idgnpyq0fxpg" path="res://Resources/hazards/asteroid3.png" id="4_furds"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vtuke"]
+radius = 98.045906
+
+[node name="LargeAsteroidModel" type="Node2D" unique_id=1610909852]
+script = ExtResource("1_vtuke")
+HazardTextures = Array[Texture2D]([ExtResource("2_vtuke"), ExtResource("4_furds")])
+metadata/_custom_type_script = "uid://b24qx6e4hvfrp"
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1649673102]
+scale = Vector2(3, 3)
+texture = ExtResource("4_furds")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="." unique_id=196713543]
+position = Vector2(1, 0)
+shape = SubResource("CircleShape2D_vtuke")

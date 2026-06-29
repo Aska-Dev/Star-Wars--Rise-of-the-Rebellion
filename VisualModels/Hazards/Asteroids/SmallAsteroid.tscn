@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bynsi3st4evyx"]
+
+[ext_resource type="Script" uid="uid://b24qx6e4hvfrp" path="res://VisualModels/HazardModel.cs" id="1_ryj66"]
+[ext_resource type="Texture2D" uid="uid://dy1v8841lfkr5" path="res://Resources/hazards/asteroid2.png" id="3_3abnj"]
+[ext_resource type="Texture2D" uid="uid://bnrlchcayx18" path="res://Resources/hazards/asteroid6.png" id="4_0f785"]
+[ext_resource type="Texture2D" uid="uid://coi7nvtdse3fs" path="res://Resources/ships/x-wing/upward_top.png" id="4_3abnj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vtuke"]
+radius = 47.042534
+
+[node name="SmallAsteroidModel" type="Node2D" unique_id=1610909852]
+script = ExtResource("1_ryj66")
+HazardTextures = Array[Texture2D]([ExtResource("4_0f785"), ExtResource("3_3abnj")])
+metadata/_custom_type_script = "uid://b24qx6e4hvfrp"
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1649673102]
+scale = Vector2(2.2, 2.2)
+
+[node name="CollisionShape" type="CollisionShape2D" parent="." unique_id=196713543]
+position = Vector2(1, 0)
+shape = SubResource("CircleShape2D_vtuke")
+
+[node name="Sprite2" type="Sprite2D" parent="." unique_id=42453122]
+texture = ExtResource("4_3abnj")

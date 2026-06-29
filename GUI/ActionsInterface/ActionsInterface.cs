@@ -15,13 +15,19 @@ public partial class ActionsInterface : Control
         Grid = GetNode<GridContainer>("GridContainer");
 
         Callable.From(SetupSlots).CallDeferred();
-
-        PlayerController.GetFrom(this).Components.GetComponent<ActionComponent>().ActionExecuted += StartSlotCooldown;
     }
 
     private void SetupSlots()
     {
-        var actions = PlayerController.GetFrom(this).Components.GetComponent<ActionComponent>().EquippedActions;
+        var player = PlayerController.GetFrom(this);
+        if(player is null)
+        {
+            Log.Error(nameof(ActionsInterface), nameof(SetupSlots), "PlayerController Instance is null");
+            return;
+        }
+
+        player.Components.GetComponent<ActionComponent>().ActionExecuted += StartSlotCooldown;
+        var actions = player.Components.GetComponent<ActionComponent>().EquippedActions;
         
         for(var i = 0; i < actions.Count; i++)
         {
