@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 
 public interface IWaveHandler
 {
@@ -113,6 +114,45 @@ public class OrientationChangeWaveHandler : WaveHandler
     }
 }
 
+public class AsteroidStormWaveHandler : WaveHandler
+{
+    private int _remainingStormWaves;
+    private SceneTreeTimer? _timer;
+
+    public override void Handle(Wave wave)
+    {
+        if (wave is not AsteroidStormWave asteroidWave)
+        {
+            Log.Error(nameof(AsteroidStormWaveHandler), nameof(Handle), "Provided wave resource is not of type AsteroidStormWave");
+            return;
+        }
+
+        _remainingStormWaves = asteroidWave.AstroidWaves;
+    }
+
+    private void SpawnStormWave()
+    {
+        ClearTimer();
+
+        if(_remainingStormWaves <= 0)
+        {
+            CompleteWave();
+            return;
+        }
+
+        _remainingStormWaves--;
+    }
+
+    private void ClearTimer()
+    {
+        if (GodotObject.IsInstanceValid(_timer))
+        {
+            _timer.Timeout -= SpawnStormWave;
+        }
+        _timer = null;
+    }
+}
+
 public class CombatSpawnerWaveHandler : WaveHandler
 {
     private EnemySpawningManager enemySpawningManager;
@@ -201,8 +241,7 @@ public class CombatSpawnerWaveHandler : WaveHandler
     private void SpawnBatch(int minAmount, int maxAmount)
     {
         var amount = GD.RandRange(minAmount, maxAmount);
-        GD.Print(amount);
-
+;
         _enemiesAmount -= amount;
         for(var i = 0; i < amount; i++)
         {

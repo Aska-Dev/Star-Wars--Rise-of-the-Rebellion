@@ -8,6 +8,8 @@ public partial class EnemyWeaponComponent : Component
     [Export] public int SalveAmount { get; set; } = 3;
     [Export] public double SalveInterval { get; set; } = 0.2;
 
+    private const float AsyncInterval = 0.02f;
+
     private PackedScene _projectilScene = null!;
     private readonly List<ModelGun> _guns = [];
 
@@ -18,11 +20,20 @@ public partial class EnemyWeaponComponent : Component
         var interval = 0.0;
         for (var i = 0; i < SalveAmount; i++)
         {
-            GetTree().CreateTimer(interval).Timeout += () =>
-            {
-                Shoot();
-            };
+            GetTree().CreateTimer(interval).Timeout += Shoot;
             interval += SalveInterval;
+        }
+    }
+
+    public void ShootAsyncSalve()
+    {
+        float durationOfOneSalve = _guns.Count * AsyncInterval;
+
+        var interval = durationOfOneSalve + SalveInterval;
+        for (var i = 0; i < SalveAmount; i++)
+        {
+            GetTree().CreateTimer(interval).Timeout += ShootAllGunsAsync;
+            interval *= i;
         }
     }
 
@@ -32,12 +43,21 @@ public partial class EnemyWeaponComponent : Component
 
         foreach (var gun in _guns)
         {
-            var projectile = _projectilScene.Instantiate<ProjectileController>();
+            ShootGun(gun, fireDirection);
+        }
 
-            GetTree().Root.AddChild(projectile);
+        AudioEngine.Instance.PlaySound(_shootSound, true);
+    }
 
-            projectile.GlobalPosition = gun.GlobalPosition;
-            projectile.Launch(fireDirection, 1);
+    public void ShootAllGunsAsync()
+    {
+        var fireDirection = GameManager.CurrentOrientation.GetDirectionVector();
+
+        for(var i = 0; i < _guns.Count; i++)
+        {
+            var index = i;
+            var interval = AsyncInterval * index;
+            GetTree().CreateTimer(interval).Timeout += () => ShootGun(_guns[index], fireDirection);
         }
 
         AudioEngine.Instance.PlaySound(_shootSound, true);
@@ -51,5 +71,17 @@ public partial class EnemyWeaponComponent : Component
         _guns.AddRange(shipModel.ActiveOrientation.Guns);
 
         _shootSound = shipData.ShootSound;
+    }
+
+    private void ShootGun(ModelGun gun, Vector2 fireDirection)
+    {
+        if (!GodotObject.IsInstanceValid(gun)) return;
+
+        var projectile = _projectilScene.Instantiate<ProjectileController>();
+
+        GetTree().Root.AddChild(projectile);
+
+        projectile.GlobalPosition = gun.GlobalPosition;
+        projectile.Launch(fireDirection, 1);
     }
 }

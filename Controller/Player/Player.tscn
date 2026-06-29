@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://cdty6vion1kvg" path="res://Components/HealthComponent.cs" id="7_3f1wm"]
 [ext_resource type="Script" uid="uid://jnjhwdktgqbj" path="res://Components/RollComponent.cs" id="8_nq0y6"]
 [ext_resource type="Script" uid="uid://0g6vyolf2kqn" path="res://Components/ActionComponent.cs" id="9_hhrnp"]
-[ext_resource type="Script" uid="uid://blkohrotphgr5" path="res://Data/Models/PlayerAction.cs" id="10_6pdt1"]
+[ext_resource type="Script" uid="uid://blkohrotphgr5" path="res://Data/DataModels/PlayerAction.cs" id="10_6pdt1"]
 [ext_resource type="Resource" uid="uid://cf5frw37u4e5a" path="res://Data/Actions/AstromechRepairAction/AstromechRepairAction.tres" id="11_6pdt1"]
 
 [node name="Player" type="CharacterBody2D" unique_id=1514296273]

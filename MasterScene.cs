@@ -32,7 +32,6 @@ public partial class MasterScene : Node
 
     public void ChangeScene(string sceneName, bool doTransition = true)
     {
-        GD.Print("Scene change");
         if (RegisteredScenes.TryGetValue(sceneName, out PackedScene? nextScene))
         {
             SwitchScene(nextScene, doTransition);

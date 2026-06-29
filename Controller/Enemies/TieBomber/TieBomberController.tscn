@@ -30,7 +30,6 @@ metadata/_custom_type_script = "uid://cay45cqsdn2"
 
 [node name="ActionTimer" type="Timer" parent="." unique_id=1883677008]
 wait_time = 5.0
-autostart = true
 
 [node name="HealthComponent" type="Node" parent="." unique_id=168297489]
 script = ExtResource("6_srpy7")

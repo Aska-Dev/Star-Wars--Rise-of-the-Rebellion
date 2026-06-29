@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Runtime.Intrinsics;
 
+[GlobalClass]
 public abstract partial class EnemyShipController : ShipController
 {
     [Export] public SoundEffects FlyInSound { get; set; }
@@ -12,11 +13,14 @@ public abstract partial class EnemyShipController : ShipController
 
     private Vector2 _targetPosition;
     private bool _isFlying = false;
+    private bool _isFlyingIn = false;
     private Timer _actionTimer = null!;
 
     public override void _Ready()
     {
         base._Ready();
+
+        _isFlyingIn = true;
 
         _actionTimer = GetNode<Timer>("ActionTimer");
         _actionTimer.Timeout += PerformAction;
@@ -24,7 +28,10 @@ public abstract partial class EnemyShipController : ShipController
 
     public void FlyToPosition(Vector2 position)
     {
-        _actionTimer.Stop();
+        if(_isFlyingIn)
+        {
+            _actionTimer.Stop();
+        }
 
         _targetPosition = position;
         _isFlying = true;
@@ -65,11 +72,15 @@ public abstract partial class EnemyShipController : ShipController
 
             _isFlying = false;
 
-            GetTree().CreateTimer(flyInActionDelay).Timeout += () =>
+            if(_isFlyingIn)
             {
-                PerformAction();
-                _actionTimer.Start();
-            };
+                _isFlyingIn = false;
+                GetTree().CreateTimer(flyInActionDelay).Timeout += () =>
+                {
+                    PerformAction();
+                    _actionTimer.Start();
+                };
+            }
         }
         else
         {

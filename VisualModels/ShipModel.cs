@@ -1,7 +1,6 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-using static Godot.TextServer;
 
 [GlobalClass]
 public partial class ShipModel : Model
@@ -19,6 +18,7 @@ public partial class ShipModel : Model
     public override void _Ready()
     {
         _animationTree = GetNode<AnimationTree>("AnimationTree");
+        _animationTree.Active = true;
 
         SetOrientation(GameManager.CurrentOrientation);
     }

@@ -16,6 +16,7 @@ public static class EnemyRegistry
     {
         { typeof(TieLnController), (EnemyTier.Tier1, "res://Controller/Enemies/TieLn/TieLnController.tscn") }, 
         { typeof(TieBomberController), (EnemyTier.Tier2, "res://Controller/Enemies/TieBomber/TieBomberController.tscn") }, 
+        { typeof(TieInterceptorController), (EnemyTier.Tier2, "res://Controller/Enemies/TieInterceptor/TieInterceptorController.tscn") }, 
     };
 
     private static readonly Dictionary<Type, PackedScene> _cache = new();
@@ -48,7 +49,9 @@ public static class EnemyRegistry
             return GetRandomOfTier(EnemyTier.Tier1);
         }
 
-        Type randomType = matchingTypes[GD.RandRange(0, matchingTypes.Count - 1)];
+        var randomIndex = GD.RandRange(0, matchingTypes.Count - 1);
+        Type randomType = matchingTypes[randomIndex];
+
         return GetOrLoadScene(randomType);
     }
 }

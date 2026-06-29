@@ -47,10 +47,36 @@ _data = {
 &"moving": SubResource("Animation_d5m2v")
 }
 
+[sub_resource type="Animation" id="Animation_y5yjx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_26bps"]
 resource_name = "idle"
-length = 0.25
 loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -2), Vector2(0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_82j1x"]
 resource_name = "moving"
@@ -58,6 +84,7 @@ length = 0.25
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_u580k"]
 _data = {
+&"RESET": SubResource("Animation_y5yjx"),
 &"idle": SubResource("Animation_26bps"),
 &"moving": SubResource("Animation_82j1x")
 }
@@ -220,9 +247,10 @@ polygon = PackedVector2Array(-41.249996, 1.2499999, -41.249996, 13.749999, -38.7
 libraries/ = SubResource("AnimationLibrary_u580k")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=893951004]
+active = false
 tree_root = SubResource("AnimationNodeBlendSpace2D_4oq8q")
 anim_player = NodePath("../AnimationPlayer")
-parameters/blend_position = Vector2(-0.18379688, -0.35280895)
+parameters/blend_position = Vector2(-0.048397243, -0.5325843)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1778101549]
 libraries/ = SubResource("AnimationLibrary_k3kxx")
