@@ -116,31 +116,54 @@ public class OrientationChangeWaveHandler : WaveHandler
 
 public class AsteroidStormWaveHandler : WaveHandler
 {
+    private readonly SceneTree _tree;
+    private readonly HazardSpawningManager _hazardManager;
     private int _remainingStormWaves;
-    private SceneTreeTimer? _timer;
+    private SceneTreeTimer _timer = null!;
+
+    public AsteroidStormWaveHandler(SceneTree tree, HazardSpawningManager hazardManager)
+    {
+        _tree = tree;
+        _hazardManager = hazardManager;
+        _hazardManager.OnAllHazardsCleared += OnHazardsCleared;
+    }
 
     public override void Handle(Wave wave)
     {
-        if (wave is not AsteroidStormWave asteroidWave)
-        {
-            Log.Error(nameof(AsteroidStormWaveHandler), nameof(Handle), "Provided wave resource is not of type AsteroidStormWave");
-            return;
-        }
-
+        if (wave is not AsteroidStormWave asteroidWave) return;
         _remainingStormWaves = asteroidWave.AstroidWaves;
+        SpawnStormWave();
     }
 
     private void SpawnStormWave()
     {
         ClearTimer();
 
-        if(_remainingStormWaves <= 0)
+        if (_remainingStormWaves-- <= 0) { CompleteWave(); return; }
+
+        var hazardScene = HazardRegistry.GetOrLoadScene(typeof(Asteroid));
+        int count = GD.RandRange(AsteroidStormWave.MinAmountPerWave, AsteroidStormWave.MaxAmountPerWave);
+
+        for (int i = 0; i < count; i++)
         {
-            CompleteWave();
-            return;
+            _hazardManager.SpawnRandomHazard(hazardScene);
         }
 
-        _remainingStormWaves--;
+        _timer = _tree.CreateTimer((float)GD.RandRange(AsteroidStormWave.MinTimePerWave, AsteroidStormWave.MaxTimePerWave));
+        _timer.Timeout += SpawnStormWave;
+    }
+
+    private void OnHazardsCleared()
+    {
+        if (_remainingStormWaves > 0)
+        {
+            SpawnStormWave();
+        }
+        else
+        {
+            ClearTimer();
+            CompleteWave();
+        }
     }
 
     private void ClearTimer()
@@ -148,8 +171,8 @@ public class AsteroidStormWaveHandler : WaveHandler
         if (GodotObject.IsInstanceValid(_timer))
         {
             _timer.Timeout -= SpawnStormWave;
+            _timer = null!;
         }
-        _timer = null;
     }
 }
 

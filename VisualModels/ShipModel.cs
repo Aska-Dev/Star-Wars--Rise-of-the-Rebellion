@@ -65,7 +65,7 @@ public partial class ShipModel : Model
         EmitSignal(SignalName.OrientationChanged, Variant.From(target));
     }
 
-    public void SetOrientation(GameOrientation newOrientation)
+    public virtual void SetOrientation(GameOrientation newOrientation)
     {
         ActivateOrientationNode(newOrientation);
         _animationTree.Set("parameters/blend_position", _blendParameters[newOrientation]);
@@ -73,8 +73,6 @@ public partial class ShipModel : Model
 
     private static Vector2 GetNextStep(Vector2 current, Vector2 target)
     {
-        // SICHERHEITS-REGEL: Wenn wir gerade um das Zentrum herum ausweichen, dürfen wir
-        // nicht frühzeitig auf die 0-Achse zurückkehren, da wir sonst im Zentrum crashen.
         bool blockYToZero = (target.Y == 0 && current.X != target.X);
         bool blockXToZero = (target.X == 0 && current.Y != target.Y);
 

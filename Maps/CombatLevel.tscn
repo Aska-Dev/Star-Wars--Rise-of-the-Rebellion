@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://bnc1xejucd8" path="res://GameCore.cs" id="5_lxepk"]
 [ext_resource type="Script" uid="uid://d3qpuop0ehunl" path="res://Manager/WaveManager.cs" id="6_p62r8"]
 [ext_resource type="Script" uid="uid://burrlusjinkos" path="res://Manager/EndlessModeManager.cs" id="7_hk7k8"]
+[ext_resource type="Script" uid="uid://c3ts4uq4ffi1g" path="res://Manager/HazardSpawningManager.cs" id="9_8c7iq"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_qxawe"]
 a = Vector2(44.75, -554)
@@ -34,13 +35,14 @@ offset_top = 982.0
 offset_right = -1920.0
 offset_bottom = -98.0
 
-[node name="GameCore" type="Node" parent="." unique_id=1545783789 node_paths=PackedStringArray("GameManager", "EnemySpawningManager", "LevelManager", "WaveManager", "EndlessModeManager")]
+[node name="GameCore" type="Node" parent="." unique_id=1545783789 node_paths=PackedStringArray("GameManager", "EnemySpawningManager", "LevelManager", "WaveManager", "EndlessModeManager", "HazardSpawningManager")]
 script = ExtResource("5_lxepk")
 GameManager = NodePath("GameManager")
 EnemySpawningManager = NodePath("EnemySpawningManager")
 LevelManager = NodePath("LevelManager")
 WaveManager = NodePath("WaveManager")
 EndlessModeManager = NodePath("EndlessModeManager")
+HazardSpawningManager = NodePath("HazardSpawningManager")
 metadata/_custom_type_script = "uid://bnc1xejucd8"
 
 [node name="GameManager" type="Node" parent="GameCore" unique_id=2070003503 node_paths=PackedStringArray("LevelManager", "EndlessModeManager")]
@@ -58,9 +60,10 @@ script = ExtResource("5_7n5mk")
 WaveManager = NodePath("../WaveManager")
 metadata/_custom_type_script = "uid://duwfs6ow0jpgc"
 
-[node name="WaveManager" type="Node" parent="GameCore" unique_id=501614923 node_paths=PackedStringArray("EnemySpawningManager", "PlayerController")]
+[node name="WaveManager" type="Node" parent="GameCore" unique_id=501614923 node_paths=PackedStringArray("EnemySpawningManager", "HazardSpawningManager", "PlayerController")]
 script = ExtResource("6_p62r8")
 EnemySpawningManager = NodePath("../EnemySpawningManager")
+HazardSpawningManager = NodePath("../HazardSpawningManager")
 PlayerController = NodePath("../../Player")
 metadata/_custom_type_script = "uid://d3qpuop0ehunl"
 
@@ -68,6 +71,10 @@ metadata/_custom_type_script = "uid://d3qpuop0ehunl"
 script = ExtResource("7_hk7k8")
 WaveManager = NodePath("../WaveManager")
 metadata/_custom_type_script = "uid://burrlusjinkos"
+
+[node name="HazardSpawningManager" type="Node" parent="GameCore" unique_id=2008971328]
+script = ExtResource("9_8c7iq")
+metadata/_custom_type_script = "uid://c3ts4uq4ffi1g"
 
 [node name="Background" type="TextureRect" parent="." unique_id=1708988731]
 scale = Vector2(1.06, 1.06)

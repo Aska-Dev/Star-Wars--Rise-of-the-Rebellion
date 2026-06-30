@@ -14,17 +14,41 @@ public class OrientationChangeRule : IWaveRule
 
     public Wave? Evaluate(IReadOnlyList<Wave> history, int beatenWaves)
     {
-        int consecutiveCombats = history.Reverse()
-            .TakeWhile(w => w is CombatFormationWave || w is CombatSpawnerWave)
+        int wavesSinceLastOrientationChange = history.Reverse()
+            .TakeWhile(w => w is not OrientationChangeWave)
             .Count();
 
-        if (consecutiveCombats < 2) return null;
+        GD.Print(wavesSinceLastOrientationChange);
 
-        float chance = (consecutiveCombats - 1) * 0.20f;
+        if (wavesSinceLastOrientationChange < 2) return null;
+
+        float chance = (wavesSinceLastOrientationChange - 1) * 0.20f;
 
         if (GD.Randf() <= chance)
         {
             var factory = new OrientationChangeWaveFactory();
+            return factory.Build();
+        }
+
+        return null;
+    }
+}
+
+public class AsteroidStormWaveRule : IWaveRule
+{
+    public int Priority => 10;
+
+    public Wave? Evaluate(IReadOnlyList<Wave> history, int beatenWaves)
+    {
+        var lastWave = history.Reverse().FirstOrDefault();
+
+        if (lastWave is AsteroidStormWave) return null;
+
+        float chance = 0.3f;
+
+        if (GD.Randf() <= chance)
+        {
+            var factory = new AsteroidStormWaveFactory();
             return factory.Build();
         }
 

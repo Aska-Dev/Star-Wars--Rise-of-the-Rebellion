@@ -10,6 +10,7 @@ public partial class GameCore : Node
     [Export] public LevelManager LevelManager { get; private set; } = null!;
     [Export] public WaveManager WaveManager { get; private set; } = null!;
     [Export] public EndlessModeManager EndlessModeManager { get; private set; } = null!;
+    [Export] public HazardSpawningManager HazardSpawningManager { get; private set; } = null!;
 
 	// -- FIELDS ---
 	private const string GroupName = nameof(GameCore);

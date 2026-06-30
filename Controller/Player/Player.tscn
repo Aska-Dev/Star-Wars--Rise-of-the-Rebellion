@@ -13,12 +13,13 @@
 [ext_resource type="Resource" uid="uid://cf5frw37u4e5a" path="res://Data/Actions/AstromechRepairAction/AstromechRepairAction.tres" id="11_6pdt1"]
 
 [node name="Player" type="CharacterBody2D" unique_id=1514296273]
-collision_mask = 8
+collision_mask = 24
 script = ExtResource("1_ww0jn")
 InitShipData = ExtResource("2_vweq0")
 InitShipModelScene = ExtResource("3_yfxbq")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=2000657609]
+scale = Vector2(0.8, 0.8)
 
 [node name="PlayerMovementComponent" type="Node" parent="." unique_id=249721029]
 script = ExtResource("4_vhydf")

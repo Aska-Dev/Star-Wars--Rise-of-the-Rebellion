@@ -1,9 +1,10 @@
 using Godot;
+using Godot.NativeInterop;
 using System;
 
 public partial class MasterScene : Node
 {
-	public static MasterScene Instance { get; private set; }
+    public static MasterScene Instance { get; private set; } = null!;
 
     [Signal] public delegate void SceneChangedEventHandler();
     [Export] public Godot.Collections.Dictionary<string, PackedScene> RegisteredScenes { get; set; } = new();
@@ -39,6 +40,18 @@ public partial class MasterScene : Node
         else
         {
             GD.PrintErr($"MasterScene: Scene '{sceneName}' is not registered");
+        }
+    }
+
+    public void AddToScene(Node? child)
+    {
+        if(_currentSceneNode is not null)
+        {
+            _currentSceneNode.AddChild(child);
+        }
+        else
+        {
+            throw new InvalidOperationException("Master Scene: Cannot add child to scene, current scene is null");
         }
     }
 

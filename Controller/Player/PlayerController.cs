@@ -24,8 +24,6 @@ public partial class PlayerController : ShipController
         shipModel.OrientationChanged += OnShipModelOrienationChanged;
 
         shipModel.SetOrientation(GameManager.CurrentOrientation.GetOpposite());
-
-        GD.Print(CollisionMask);
     }
 
     public override void _Process(double delta)
@@ -96,5 +94,7 @@ public partial class PlayerController : ShipController
         _actionsLocked = false;
         GameManager.CurrentOrientation = newOrientation.GetOpposite();
         EventHub.Instance.PlayerEventBus.InvokePlayerOrientationChanged();
+
+        UpdateCollisionShape();
     }
 }

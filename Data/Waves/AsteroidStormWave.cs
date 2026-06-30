@@ -7,9 +7,9 @@ public partial class AsteroidStormWave : Wave
 {
     [Export] public int AstroidWaves = 3;
 
-    private const int minAmountPerWave = 2;
-    private const int maxAmountPerWave = 5;
+    public const int MinAmountPerWave = 2;
+    public const int MaxAmountPerWave = 6;
 
-    private const float minTimePerWave = 6f;
-    private const float maxTimePerWave = 10f;
+    public const float MinTimePerWave = 1.6f;
+    public const float MaxTimePerWave = 2.5f;
 }

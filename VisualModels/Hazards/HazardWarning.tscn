@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cxmnpsmxdr5fo"]
 
 [ext_resource type="Texture2D" uid="uid://cs3sdghtcns8m" path="res://Resources/ui/hazardWarningPanel.png" id="1_2uslx"]
+[ext_resource type="Script" uid="uid://kutt35lr2ftc" path="res://VisualModels/Hazards/HazardWarning.cs" id="1_huvgc"]
 [ext_resource type="Texture2D" uid="uid://dyf6xclg8rd6f" path="res://Resources/ui/hazardIcon.png" id="2_frgse"]
 
 [sub_resource type="Animation" id="Animation_huvgc"]
@@ -41,13 +42,15 @@ _data = {
 &"iconBlinking": SubResource("Animation_vuofx")
 }
 
-[node name="HazardWarning" type="Control" unique_id=1528199995]
+[node name="HazardWarning" type="Control" unique_id=1528199995 node_paths=PackedStringArray("AnimationPlayer")]
 custom_minimum_size = Vector2(1920, 100)
 layout_mode = 3
-anchors_preset = 10
-anchor_right = 1.0
+anchors_preset = 0
+offset_right = 1920.0
 offset_bottom = 100.0
-grow_horizontal = 2
+size_flags_horizontal = 3
+script = ExtResource("1_huvgc")
+AnimationPlayer = NodePath("AnimationPlayer")
 
 [node name="Panel" type="NinePatchRect" parent="." unique_id=1962938460]
 layout_mode = 1
