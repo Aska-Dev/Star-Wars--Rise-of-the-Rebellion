@@ -11,6 +11,8 @@
 [ext_resource type="Script" uid="uid://d3qpuop0ehunl" path="res://Manager/WaveManager.cs" id="6_p62r8"]
 [ext_resource type="Script" uid="uid://burrlusjinkos" path="res://Manager/EndlessModeManager.cs" id="7_hk7k8"]
 [ext_resource type="Script" uid="uid://c3ts4uq4ffi1g" path="res://Manager/HazardSpawningManager.cs" id="9_8c7iq"]
+[ext_resource type="Texture2D" uid="uid://d3mib1mv38tpn" path="res://Resources/hazards/asteorid_spritesheet.png" id="12_7n5mk"]
+[ext_resource type="Script" uid="uid://peeptc0mc2qh" path="res://Maps/AsteroidStormParticleEmitter.cs" id="13_p62r8"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_qxawe"]
 a = Vector2(44.75, -554)
@@ -25,6 +27,38 @@ size = Vector2(1915, 20)
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_1pd5j"]
 a = Vector2(2502.5, -818)
 b = Vector2(2511.5, 316)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_p62r8"]
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_hk7k8"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_41u3p"]
+curve = SubResource("Curve_hk7k8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hwcaq"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 0.0
+emission_ring_radius = 393.7
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 0.0
+angle_min = -720.0
+angle_max = 720.0
+angle_curve = SubResource("CurveTexture_41u3p")
+spread = 0.0
+initial_velocity_min = -600.0
+initial_velocity_max = -300.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.19999999
+scale_max = 0.79999995
+anim_offset_max = 1.0
 
 [node name="LevelRoot" type="Node2D" unique_id=621395053]
 script = ExtResource("1_6ni13")
@@ -106,3 +140,13 @@ shape = SubResource("RectangleShape2D_8c7iq")
 [node name="Right" type="CollisionShape2D" parent="LevelBorders" unique_id=598205403]
 position = Vector2(-1153.5, 494)
 shape = SubResource("SegmentShape2D_1pd5j")
+
+[node name="AsteroidStormParticleEmitter" type="GPUParticles2D" parent="." unique_id=57420461]
+material = SubResource("CanvasItemMaterial_p62r8")
+position = Vector2(2016, 477)
+emitting = false
+amount = 64
+texture = ExtResource("12_7n5mk")
+lifetime = 7.5
+process_material = SubResource("ParticleProcessMaterial_hwcaq")
+script = ExtResource("13_p62r8")

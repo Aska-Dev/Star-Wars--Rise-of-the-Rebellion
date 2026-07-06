@@ -44,7 +44,7 @@ public class AsteroidStormWaveRule : IWaveRule
 
         if (lastWave is AsteroidStormWave) return null;
 
-        float chance = 0.3f;
+        float chance = 0.25f;
 
         if (GD.Randf() <= chance)
         {

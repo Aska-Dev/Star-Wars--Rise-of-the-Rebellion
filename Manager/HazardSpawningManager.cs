@@ -94,8 +94,8 @@ public partial class HazardSpawningManager : Node
 
     private Vector2? GetVerticalSpawnPos(Hazard hazard, GameOrientation orient, float halfSize, float dirY)
     {
-        float minX = _spawnGrid.GetWorldPosition(0, 0, orient).X;
-        float maxX = _spawnGrid.GetWorldPosition(0, Helpers.GridData[orient].MaxRows - 1, orient).X;
+        float minX = 0f; //_spawnGrid.GetWorldPosition(0, 0, orient).X;
+        float maxX = GetViewport().GetVisibleRect().Size.X;
 
         float x = FindRandomCoord(minX + halfSize, maxX - halfSize, halfSize, false);
 
