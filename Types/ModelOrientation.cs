@@ -22,7 +22,7 @@ public partial class ModelOrientation : Node2D
     {
         var explosion = ExplosionScene.Instantiate<ShipExplosion>();
         explosion.GlobalPosition = GlobalPosition;
-        GetTree().Root.AddChild(explosion);
+        MasterScene.Instance.AddToScene(explosion);
     }
 
     private void InitGuns()

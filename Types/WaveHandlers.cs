@@ -133,7 +133,7 @@ public class AsteroidStormWaveHandler : WaveHandler
         if (wave is not AsteroidStormWave asteroidWave) return;
         _remainingStormWaves = asteroidWave.AstroidWaves;
 
-        AudioEngine.Instance.StartAmbience(AmbienceThemes.AsteroidStorm);
+        AudioEngine.Instance.StartAmbience(AmbienceThemes.AsteroidStorm, 0);
         EventHub.Instance.InvokeParticleEmitterStateChanged(ParticleEmitter.AsteroidStorm, true);
         _tree.CreateTimer(0.5f).Timeout += SpawnStormWave;
     }

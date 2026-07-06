@@ -79,7 +79,7 @@ public partial class EnemyWeaponComponent : Component
 
         var projectile = _projectilScene.Instantiate<ProjectileController>();
 
-        GetTree().Root.AddChild(projectile);
+        MasterScene.Instance.AddToScene(projectile);
 
         projectile.GlobalPosition = gun.GlobalPosition;
         projectile.Launch(fireDirection, 1);

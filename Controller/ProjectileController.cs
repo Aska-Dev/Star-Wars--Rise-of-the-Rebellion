@@ -69,7 +69,7 @@ public abstract partial class ProjectileController : CharacterBody2D, IControlle
 
     private void KillInstance()
     {
-        if (!IsQueuedForDeletion())
+        if (!IsQueuedForDeletion() && IsInstanceValid(this))
         {
             QueueFree();
         }

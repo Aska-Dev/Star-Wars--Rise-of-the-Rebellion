@@ -49,6 +49,8 @@ _data = {
 }
 
 [node name="AsteroidController" type="CharacterBody2D" unique_id=285079849 node_paths=PackedStringArray("SpriteNode", "Hitbox", "AnimationPlayer")]
+collision_layer = 16
+collision_mask = 32
 script = ExtResource("1_g364y")
 AsteroidTexures = Array[Texture2D]([ExtResource("2_76mh4"), ExtResource("3_pqgch"), ExtResource("4_oqwi0"), ExtResource("5_pl7rx"), ExtResource("6_ndfwk"), ExtResource("7_2dh15")])
 SpriteNode = NodePath("Sprite")
@@ -61,6 +63,7 @@ texture = ExtResource("4_oqwi0")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1199928429]
 collision_layer = 16
+collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=703873197]
 shape = SubResource("CircleShape2D_xja32")

@@ -14,9 +14,11 @@ public partial class Asteroid : Hazard
 
     public const float Speed = 1500;
 
+
     private double minHeight = 100;
     private double maxHeight = 200;
     private float _flightTime = 0f;
+    private Vector2 _direction = GameManager.CurrentOrientation.GetDirectionVector();
 
     public override void _Ready()
     {
@@ -45,7 +47,7 @@ public partial class Asteroid : Hazard
             }
         }
 
-        Velocity = GameManager.CurrentOrientation.GetDirectionVector() * Speed;
+        Velocity = _direction * Speed;
         MoveAndSlide();
     }
 
