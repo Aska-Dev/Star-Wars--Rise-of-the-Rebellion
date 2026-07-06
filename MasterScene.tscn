@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://dxtwdksqscip3"]
 
 [ext_resource type="Script" uid="uid://dxvvos6s1rww1" path="res://MasterScene.cs" id="1_xe15x"]
-[ext_resource type="PackedScene" uid="uid://dypgskmss6i1e" path="res://Menues/Startmenu/Startmenu.tscn" id="2_63bby"]
-[ext_resource type="PackedScene" uid="uid://n15fbqbv53m4" path="res://Maps/CombatLevel.tscn" id="3_stkn3"]
+[ext_resource type="PackedScene" uid="uid://dypgskmss6i1e" path="res://Scenes/Startmenu/Startmenu.tscn" id="2_63bby"]
+[ext_resource type="PackedScene" uid="uid://n15fbqbv53m4" path="res://Scenes/Level/CombatLevel.tscn" id="3_stkn3"]
+[ext_resource type="PackedScene" uid="uid://ca8w1lh77fg4e" path="res://GUI/PauseMenu/PauseMenu.tscn" id="4_plm20"]
 
 [sub_resource type="Animation" id="Animation_63bby"]
 length = 0.001
@@ -64,6 +65,7 @@ RegisteredScenes = Dictionary[String, PackedScene]({
 "Home": ExtResource("2_63bby"),
 "Level": ExtResource("3_stkn3")
 })
+PauseMenu = ExtResource("4_plm20")
 
 [node name="SceneContainer" type="Node" parent="." unique_id=1202489653]
 

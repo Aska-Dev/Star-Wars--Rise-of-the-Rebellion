@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dypgskmss6i1e"]
 
-[ext_resource type="Script" uid="uid://clp1gvfsalf6x" path="res://Menues/Startmenu/Startmenu.cs" id="1_g17kv"]
+[ext_resource type="Script" uid="uid://clp1gvfsalf6x" path="res://Scenes/Startmenu/Startmenu.cs" id="1_g17kv"]
 [ext_resource type="Texture2D" uid="uid://7o60tt5b2pja" path="res://Resources/backgrounds/planet1.jpg" id="1_osceo"]
 [ext_resource type="FontFile" uid="uid://op84vkhe0x8" path="res://Resources/fonts/title.ttf" id="2_7grjt"]
 [ext_resource type="Texture2D" uid="uid://ccv5g3oa8xdws" path="res://Resources/ui/button.png" id="3_00i37"]

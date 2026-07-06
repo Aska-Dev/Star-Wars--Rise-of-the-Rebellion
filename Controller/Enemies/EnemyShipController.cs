@@ -75,7 +75,7 @@ public abstract partial class EnemyShipController : ShipController
             if(_isFlyingIn)
             {
                 _isFlyingIn = false;
-                GetTree().CreateTimer(flyInActionDelay).Timeout += () =>
+                GetTree().CreateTimer(flyInActionDelay, false).Timeout += () =>
                 {
                     PerformAction();
                     _actionTimer.Start();

@@ -1,0 +1,130 @@
+[gd_scene format=3 uid="uid://ca8w1lh77fg4e"]
+
+[ext_resource type="Script" uid="uid://c45tj3bvlhnww" path="res://GUI/PauseMenu/PauseMenu.cs" id="1_p5snf"]
+[ext_resource type="FontFile" uid="uid://op84vkhe0x8" path="res://Resources/fonts/title.ttf" id="2_bqkqi"]
+[ext_resource type="FontFile" uid="uid://f84lp6g4myj0" path="res://Resources/fonts/xWingFont.otf" id="3_pv0b3"]
+[ext_resource type="Texture2D" uid="uid://ccv5g3oa8xdws" path="res://Resources/ui/button.png" id="4_17pbj"]
+[ext_resource type="Texture2D" uid="uid://cbbxvexe02j8t" path="res://Resources/ui/button_pressed.png" id="5_d16ch"]
+[ext_resource type="Texture2D" uid="uid://c8fy2glljpql0" path="res://Resources/ui/button_hover.png" id="6_28r7d"]
+
+[sub_resource type="FontVariation" id="FontVariation_38l0w"]
+base_font = ExtResource("2_bqkqi")
+
+[sub_resource type="FontVariation" id="FontVariation_0h0yj"]
+base_font = ExtResource("2_bqkqi")
+
+[sub_resource type="Theme" id="Theme_3qs17"]
+default_font = ExtResource("3_pv0b3")
+default_font_size = 50
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c75hv"]
+texture = ExtResource("4_17pbj")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_88irb"]
+texture = ExtResource("5_d16ch")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_884dw"]
+texture = ExtResource("6_28r7d")
+
+[node name="PauseMenu" type="Control" unique_id=1588359862]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_p5snf")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=789549170]
+top_level = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.16470589)
+
+[node name="StarWarsTitle" type="Label" parent="." unique_id=46642820]
+top_level = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -205.0
+offset_right = 205.0
+offset_bottom = 451.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0.9098039, 0.12156863, 1)
+theme_override_fonts/font = SubResource("FontVariation_38l0w")
+theme_override_font_sizes/font_size = 140
+text = "STAR
+WARS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameTitle" type="Label" parent="." unique_id=1917566417]
+top_level = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -457.0
+offset_top = 175.0
+offset_right = 457.0
+offset_bottom = 288.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = SubResource("FontVariation_0h0yj")
+theme_override_font_sizes/font_size = 70
+text = "Rise of the Rebellion"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="." unique_id=1261646249]
+top_level = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -243.5
+offset_top = 7.0
+offset_right = 243.5
+offset_bottom = 169.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_3qs17")
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxTexture_c75hv")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_88irb")
+theme_override_styles/hover = SubResource("StyleBoxTexture_884dw")
+text = "Continue"
+
+[node name="Button2" type="Button" parent="." unique_id=54291728]
+top_level = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -243.5
+offset_top = 188.0
+offset_right = 243.5
+offset_bottom = 350.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_3qs17")
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxTexture_c75hv")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_88irb")
+theme_override_styles/hover = SubResource("StyleBoxTexture_884dw")
+text = "exit"
+
+[connection signal="pressed" from="Button" to="." method="ContinueGame"]
+[connection signal="pressed" from="Button2" to="." method="ExitGame"]

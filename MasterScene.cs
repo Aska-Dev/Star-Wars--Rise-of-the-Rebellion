@@ -7,10 +7,13 @@ public partial class MasterScene : Node
     public static MasterScene Instance { get; private set; } = null!;
 
     [Signal] public delegate void SceneChangedEventHandler();
+    
     [Export] public Godot.Collections.Dictionary<string, PackedScene> RegisteredScenes { get; set; } = new();
+    [Export] public PackedScene PauseMenu { get; set; } = null!;
 
     public AnimationPlayer AnimationPlayer { get; set; } = null!;
     public Node SceneContainer { get; set;  } = null!;
+
 
     private Node? _currentSceneNode;
     private Node? _nextSceneNode;
@@ -29,6 +32,24 @@ public partial class MasterScene : Node
         AnimationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 
         Callable.From(() => ChangeScene("Home", false)).CallDeferred();
+    }
+
+    public override void _Process(double delta)
+    {
+        // HANDLE ESCAPE KEY FOR PAUSE MENU
+        if (Input.IsActionJustPressed("ui_cancel") && _currentSceneNode is not Startmenu)
+        {
+            if (_currentSceneNode is not null && HasNode("PauseMenu"))
+            {
+                var pauseMenu = GetNode<PauseMenu>("PauseMenu");
+                pauseMenu.ContinueGame();
+            }
+            else
+            {
+                var pauseMenu = PauseMenu.Instantiate<PauseMenu>();
+                AddChild(pauseMenu);
+            }
+        }
     }
 
     public void ChangeScene(string sceneName, bool doTransition = true)

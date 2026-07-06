@@ -20,7 +20,7 @@ public partial class EnemyWeaponComponent : Component
         var interval = 0.0;
         for (var i = 0; i < SalveAmount; i++)
         {
-            GetTree().CreateTimer(interval).Timeout += Shoot;
+            GetTree().CreateTimer(interval, false).Timeout += Shoot;
             interval += SalveInterval;
         }
     }
@@ -32,7 +32,7 @@ public partial class EnemyWeaponComponent : Component
         var interval = durationOfOneSalve + SalveInterval;
         for (var i = 0; i < SalveAmount; i++)
         {
-            GetTree().CreateTimer(interval).Timeout += ShootAllGunsAsync;
+            GetTree().CreateTimer(interval, false).Timeout += ShootAllGunsAsync;
             interval *= i;
         }
     }
@@ -57,7 +57,7 @@ public partial class EnemyWeaponComponent : Component
         {
             var index = i;
             var interval = AsyncInterval * index;
-            GetTree().CreateTimer(interval).Timeout += () => ShootGun(_guns[index], fireDirection);
+            GetTree().CreateTimer(interval, false).Timeout += () => ShootGun(_guns[index], fireDirection);
         }
 
         AudioEngine.Instance.PlaySound(_shootSound, true);
