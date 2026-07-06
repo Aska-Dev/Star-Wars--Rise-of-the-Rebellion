@@ -11,6 +11,7 @@ public partial class WaveManager : Node
 
     // --- EXPORTS
     [Export] public EnemySpawningManager EnemySpawningManager { get; set; } = null!;
+    [Export] public HazardSpawningManager HazardSpawningManager { get; set; } = null!;
     [Export] public PlayerController PlayerController { get; set; } = null!;
 
     // -- FIELDS ---
@@ -22,6 +23,7 @@ public partial class WaveManager : Node
         _handlers[typeof(CombatFormationWave)] = new CombatFormationWaveHandler(EnemySpawningManager);
         _handlers[typeof(OrientationChangeWave)] = new OrientationChangeWaveHandler(EventHub.Instance.PlayerEventBus, PlayerController);
         _handlers[typeof(CombatSpawnerWave)] = new CombatSpawnerWaveHandler(EnemySpawningManager, GetTree());
+        _handlers[typeof(AsteroidStormWave)] = new AsteroidStormWaveHandler(GetTree(), HazardSpawningManager);
     }
      
     public void PlayWave(Wave wave)

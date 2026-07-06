@@ -1,6 +1,11 @@
 using Godot;
 using System;
 
+public enum ParticleEmitter
+{
+    AsteroidStorm
+}
+
 public partial class EventHub : Node
 {
     public static EventHub Instance { get; private set; }
@@ -16,4 +21,7 @@ public partial class EventHub : Node
         PlayerEventBus = new();
         UiEventBus = new();
     }
+
+    public event Action<(ParticleEmitter, bool)> OnParticleEmitterStateChanged = null!;
+    public void InvokeParticleEmitterStateChanged(ParticleEmitter emitter, bool isActive) => OnParticleEmitterStateChanged?.Invoke((emitter, isActive));
 }

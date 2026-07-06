@@ -1123,7 +1123,6 @@ script = ExtResource("5_pvger")
 metadata/_custom_type_script = "uid://fpfpugeio6k5"
 
 [node name="Collision" type="CollisionPolygon2D" parent="Sideways" unique_id=1575011034]
-visible = false
 position = Vector2(-5.9604645e-08, 0.99999994)
 scale = Vector2(0.8, 0.8)
 polygon = PackedVector2Array(-64.99999, 1.1920929e-07, -57.499996, -3.7499995, -34.999996, -4.999999, 18.749998, -8.749999, 18, -16, 22, -16, 23.749998, -34.999996, 18.749998, -37.499996, -18.749998, -37.499996, -17.499998, -41.249996, 42.499996, -41.249996, 39.999996, -33.749996, 44.999996, -18.749998, 61.249992, -17.499998, 61.249992, -9.999999, 45, -10, 46.249996, -8.749999, 56.249996, -4.999999, 61.249992, -3.7499995, 61.249992, 6.249999, 54.999996, 8.749999, 54.999996, 11.249999, 61.249992, 13.749998, 61.249992, 18.749998, 45, 20, 39.999996, 37.499996, 43.749996, 38.749996, 43.749996, 41.249996, 42.499996, 42.499996, 18, 44, 18, 42, -18, 43, -26.249998, 41.249996, -14, 39, 22, 39, 22, 20, 18, 19, 17, 12, 11, 10, -24, 10, -23, 7, -47, 7, -63.749992, 2.4999998)
@@ -1135,7 +1134,6 @@ libraries/ = SubResource("AnimationLibrary_6tqcb")
 libraries/ = SubResource("AnimationLibrary_k05n8")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=580811035]
-active = false
 tree_root = SubResource("AnimationNodeBlendSpace2D_so440")
 anim_player = NodePath("../AnimationPlayer")
-parameters/blend_position = Vector2(-0.0036275983, 0.0067415237)
+parameters/blend_position = Vector2(0.96354496, -0.1280899)

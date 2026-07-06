@@ -20,15 +20,22 @@ public enum MusicThemes
     Menu
 }
 
+public enum AmbienceThemes
+{
+    AsteroidStorm,
+}
+
 public partial class AudioEngine : Node
 {
     public static AudioEngine Instance { get; private set; } = null!;
 
     public float SoundEffectsVolume { get; set; } = 0.4f;
-    public float MusicVolume { get; set; } = 0.5f;
+    public float MusicVolume { get; set; } = 0.45f;
+    public float AmbienceVolume { get; set; } = 0.8f;
 
     private const string ConfigFolderPath = "res://Data/Sounds/";
     private const string MusicFolderPath = "res://Data/Music/";
+    private const string AmbienceFolderPath = "res://Data/Ambience/";
     private const int MinDelayMsec = 100;
 
     // --- SFX ---
@@ -42,6 +49,11 @@ public partial class AudioEngine : Node
     private MusicTheme? _currentTheme;
     private AudioStream? _lastPlayedTrack;
 
+    // --- AMBIENCE ---
+    private AudioStreamPlayer _ambiencePlayer = null!;
+    private readonly Dictionary<AmbienceThemes, AmbienceSound> _ambienceThemes = [];
+    private Tween _ambienceTween;
+
     public override void _Ready()
     {
         Instance = this;
@@ -49,6 +61,7 @@ public partial class AudioEngine : Node
         // Load Resources
         LoadConfigsFromFolder();
         LoadMusicConfigsFromFolder();
+        LoadAmbienceConfigsFromFolder();
 
         // Setup SFX-Players
         for (int i = 0; i < 10; i++)
@@ -60,6 +73,10 @@ public partial class AudioEngine : Node
         _musicPlayer = new AudioStreamPlayer();
         AddChild(_musicPlayer);
         _musicPlayer.Finished += OnMusicTrackFinished;
+
+        // Setup Ambience Player
+        _ambiencePlayer = new AudioStreamPlayer();
+        AddChild(_ambiencePlayer);
     }
 
     public void PlaySound(SoundEffects effect, bool randomizePitch = false)
@@ -102,6 +119,34 @@ public partial class AudioEngine : Node
 
         _currentTheme = theme;
         PlayNextRandomTrack();
+    }
+
+    public void StartAmbience(AmbienceThemes ambienceType, float fadeDuration = 1.0f)
+    {
+        if (!_ambienceThemes.TryGetValue(ambienceType, out AmbienceSound? ambienceSound))
+        {
+            GD.PrintErr($"AudioEngine: Ambience '{ambienceType}' nicht gefunden!");
+            return;
+        }
+
+        _ambienceTween?.Kill();
+
+        _ambiencePlayer.Stream = ambienceSound.Stream;
+        _ambiencePlayer.VolumeLinear = 0f;
+        _ambiencePlayer.Play();
+
+        _ambienceTween = CreateTween();
+        _ambienceTween.TweenProperty(_ambiencePlayer, "volume_linear", AmbienceVolume, fadeDuration);
+    }
+
+    public void StopAmbience(float fadeDuration = 1.0f)
+    {
+        _ambienceTween?.Kill();
+
+        _ambienceTween = CreateTween();
+        _ambienceTween.TweenProperty(_ambiencePlayer, "volume_linear", 0f, fadeDuration);
+
+        _ambienceTween.TweenCallback(Callable.From(_ambiencePlayer.Stop));
     }
 
     private void OnMusicTrackFinished()
@@ -220,6 +265,30 @@ public partial class AudioEngine : Node
                 if (config != null)
                 {
                     _musicThemes[config.Theme] = config;
+                }
+            }
+            fileName = dir.GetNext();
+        }
+    }
+
+    private void LoadAmbienceConfigsFromFolder()
+    {
+        using var dir = DirAccess.Open(AmbienceFolderPath);
+        if (dir == null) return;
+
+        dir.ListDirBegin();
+        string fileName = dir.GetNext();
+
+        while (fileName != "")
+        {
+            if (!dir.CurrentIsDir() && fileName.EndsWith(".tres"))
+            {
+                string cleanPath = AmbienceFolderPath + fileName.Replace(".remap", "");
+                var config = GD.Load<AmbienceSound>(cleanPath);
+
+                if (config != null)
+                {
+                    _ambienceThemes[config.Theme] = config;
                 }
             }
             fileName = dir.GetNext();

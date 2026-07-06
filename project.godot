@@ -96,11 +96,13 @@ action3={
 
 [layer_names]
 
-2d_physics/layer_1="Player"
-2d_physics/layer_2="Enemy"
+2d_physics/layer_1="HittableByEnemy"
+2d_physics/layer_2="HittableByPlayer"
 2d_physics/layer_3="Projectiles"
 2d_physics/layer_4="Border"
 2d_physics/layer_5="Hazards"
+2d_physics/layer_6="CollidingWithHazards"
+2d_physics/layer_9="Enemy"
 
 [physics]
 

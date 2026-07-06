@@ -73,3 +73,19 @@ public class OrientationChangeWaveFactory : IWaveFactory
         return wave;
     }
 }
+
+public class AsteroidStormWaveFactory : IWaveFactory
+{
+    private const int MinWaveAmount = 4;
+    private const int MaxWaveAmount = 8;
+
+    public Wave Build()
+    {
+        var wave = new AsteroidStormWave
+        {
+            AstroidWaves = GD.RandRange(MinWaveAmount, MaxWaveAmount)
+        };
+
+        return wave;
+    }
+}

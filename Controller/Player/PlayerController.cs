@@ -14,18 +14,17 @@ public partial class PlayerController : ShipController
 
     public override void _Ready()
     {
+        GD.Print(CollisionLayer);
         GameManager.CurrentOrientation = GameOrientation.Left;
 
         base._Ready();
         AddToGroup(GroupName);
 
         Components.GetComponent<HealthComponent>().OnHealthChanged += EventHub.Instance.UiEventBus.InvokePlayerHealthChanged;
-        Components.GetComponent<RollComponent>().OnRollFinished += () => { _actionsLocked = false; CollisionLayer = 1; };
+        Components.GetComponent<RollComponent>().OnRollFinished += () => { _actionsLocked = false; CollisionLayer = 33; };
         shipModel.OrientationChanged += OnShipModelOrienationChanged;
 
         shipModel.SetOrientation(GameManager.CurrentOrientation.GetOpposite());
-
-        GD.Print(CollisionMask);
     }
 
     public override void _Process(double delta)
@@ -53,7 +52,7 @@ public partial class PlayerController : ShipController
         {
             if(Components.GetComponent<RollComponent>().TryRoll(Velocity))
             {
-                CollisionLayer = 0;
+                CollisionLayer = 32;
                 _actionsLocked = true;
             }
         }
@@ -96,5 +95,7 @@ public partial class PlayerController : ShipController
         _actionsLocked = false;
         GameManager.CurrentOrientation = newOrientation.GetOpposite();
         EventHub.Instance.PlayerEventBus.InvokePlayerOrientationChanged();
+
+        UpdateCollisionShape();
     }
 }
