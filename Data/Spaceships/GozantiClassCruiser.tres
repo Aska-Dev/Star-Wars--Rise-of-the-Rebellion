@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ShipData" format=3 uid="uid://ts2btffek5xv"]
+
+[ext_resource type="PackedScene" uid="uid://b4i4bbsiqdfg0" path="res://Controller/Projectiles/Projectile_GreenLaser.tscn" id="1_ogyas"]
+[ext_resource type="Script" uid="uid://c22qwjskxa2ah" path="res://Data/DataModels/ShipData.cs" id="1_xhqs0"]
+
+[resource]
+script = ExtResource("1_xhqs0")
+Name = "Gozanti"
+XSpeed = 200
+YSpeed = 200
+Health = 15
+ShootSound = 1
+ProjectileScene = ExtResource("1_ogyas")
+metadata/_custom_type_script = "uid://c22qwjskxa2ah"

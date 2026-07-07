@@ -16,7 +16,8 @@ public static class EnemyRegistry
     {
         { typeof(TieLnController), (EnemyTier.Tier1, "res://Controller/Enemies/TieLn/TieLnController.tscn") }, 
         { typeof(TieBomberController), (EnemyTier.Tier2, "res://Controller/Enemies/TieBomber/TieBomberController.tscn") }, 
-        { typeof(TieInterceptorController), (EnemyTier.Tier2, "res://Controller/Enemies/TieInterceptor/TieInterceptorController.tscn") }, 
+        { typeof(TieInterceptorController), (EnemyTier.Tier2, "res://Controller/Enemies/TieInterceptor/TieInterceptorController.tscn") },
+        { typeof(GozantiController), (EnemyTier.Tier2, "res://Controller/Enemies/GozantiClassCruiser/GozantiController.tscn") }
     };
 
     private static readonly Dictionary<Type, PackedScene> _cache = new();

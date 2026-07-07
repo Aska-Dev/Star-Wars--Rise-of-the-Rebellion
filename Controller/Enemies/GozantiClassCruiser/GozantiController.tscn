@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://cahobydk6nugf"]
+
+[ext_resource type="Script" uid="uid://crs8vr20wfl4d" path="res://Controller/Enemies/GozantiClassCruiser/GozantiController.cs" id="1_chonc"]
+[ext_resource type="Resource" uid="uid://ts2btffek5xv" path="res://Data/Spaceships/GozantiClassCruiser.tres" id="2_chonc"]
+[ext_resource type="PackedScene" uid="uid://bs8fc4v35ja3a" path="res://VisualModels/Ships/GozantiCruiserModel.tscn" id="3_chonc"]
+[ext_resource type="Script" uid="uid://kfhu85y4kovo" path="res://Components/AnimationComponent.cs" id="4_gdk5a"]
+[ext_resource type="Script" uid="uid://cay45cqsdn2" path="res://Components/EnemyWeaponComponent.cs" id="5_sxsi6"]
+[ext_resource type="Script" uid="uid://cdty6vion1kvg" path="res://Components/HealthComponent.cs" id="6_l7lqg"]
+
+[node name="GozantiController" type="CharacterBody2D" unique_id=947340568]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_chonc")
+FlyInSound = 2
+InitShipData = ExtResource("2_chonc")
+InitShipModelScene = ExtResource("3_chonc")
+metadata/_custom_type_script = "uid://crs8vr20wfl4d"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=111837995]
+
+[node name="AnimationComponent" type="Node" parent="." unique_id=705080465]
+script = ExtResource("4_gdk5a")
+metadata/_custom_type_script = "uid://kfhu85y4kovo"
+
+[node name="EnemyWeaponComponent" type="Node" parent="." unique_id=1899760085]
+script = ExtResource("5_sxsi6")
+SalveAmount = 1
+metadata/_custom_type_script = "uid://cay45cqsdn2"
+
+[node name="ActionTimer" type="Timer" parent="." unique_id=1883677008]
+wait_time = 2.0
+
+[node name="HealthComponent" type="Node" parent="." unique_id=168297489]
+script = ExtResource("6_l7lqg")
+metadata/_custom_type_script = "uid://cdty6vion1kvg"
+
+[connection signal="OnDeath" from="HealthComponent" to="." method="Destroy"]
