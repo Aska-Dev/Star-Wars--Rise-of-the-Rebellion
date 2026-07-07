@@ -7,6 +7,8 @@ public abstract partial class EnemyShipController : ShipController
 {
     [Export] public SoundEffects FlyInSound { get; set; }
     [Export] public int Score { get; set; } = 10;
+    [Export(PropertyHint.Range, "1,10,1")] public int GridWidth { get; set; } = 1;
+    [Export(PropertyHint.Range, "1,10,1")] public int GridHeight { get; set; } = 1;
 
     private const float flyInSpeed = 600f;
     private const float flyInActionDelay = 1f;

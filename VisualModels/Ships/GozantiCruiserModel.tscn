@@ -399,7 +399,6 @@ snap = Vector2(1, 1)
 blend_mode = 2
 
 [node name="GozantiCruiser" type="Node2D" unique_id=282496841]
-scale = Vector2(0.8, 0.8)
 script = ExtResource("1_vmawg")
 metadata/_custom_type_script = "uid://bd4s1hflwc8mv"
 
