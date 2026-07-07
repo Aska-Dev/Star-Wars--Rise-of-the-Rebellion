@@ -5,11 +5,11 @@ public partial class CombatLevel : Node2D
 {
 	public override void _Ready()
 	{
-		GameCore.GetFrom(this).GameManager.StartEndlessMode();
+		this.GetGameCore().GameManager.StartEndlessMode();
 
-		GetTree().CreateTimer(1).Timeout += () =>
+		this.CreateTimer(1).Timeout += () =>
 		{
-			PlayerController.GetFrom(this)!.Components.GetComponent<HealthComponent>().OnDeath += OnPlayerDestroyed;
+            this.GetPlayer()!.Components.GetComponent<HealthComponent>().OnDeath += OnPlayerDestroyed;
 		};
 	}
 

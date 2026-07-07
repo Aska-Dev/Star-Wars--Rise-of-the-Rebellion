@@ -34,6 +34,26 @@ public class OrientationChangeRule : IWaveRule
     }
 }
 
+public class GozantiCruiserWaveRule : IWaveRule
+{
+    public int Priority => 30;
+
+    public Wave? Evaluate(IReadOnlyList<Wave> history, int beatenWaves)
+    {
+        int wavesSinceLastBossWave = history.Reverse()
+            .TakeWhile(w => w is not GozantiCruiserWave)
+            .Count();
+
+        if (wavesSinceLastBossWave >= 1 && GameManager.CurrentOrientation == GameOrientation.Left)
+        {
+            var factory = new GozantiCruiserWaveFactory();
+            return factory.Build();
+        }
+
+        return null;
+    }
+}
+
 public class AsteroidStormWaveRule : IWaveRule
 {
     public int Priority => 10;

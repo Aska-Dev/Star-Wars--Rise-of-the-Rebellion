@@ -7,7 +7,8 @@ public enum EnemyTier
 {
     Tier1,
     Tier2,
-    Tier3
+    Tier3,
+    Special
 }
 
 public static class EnemyRegistry
@@ -16,7 +17,8 @@ public static class EnemyRegistry
     {
         { typeof(TieLnController), (EnemyTier.Tier1, "res://Controller/Enemies/TieLn/TieLnController.tscn") }, 
         { typeof(TieBomberController), (EnemyTier.Tier2, "res://Controller/Enemies/TieBomber/TieBomberController.tscn") }, 
-        { typeof(TieInterceptorController), (EnemyTier.Tier2, "res://Controller/Enemies/TieInterceptor/TieInterceptorController.tscn") }, 
+        { typeof(TieInterceptorController), (EnemyTier.Tier2, "res://Controller/Enemies/TieInterceptor/TieInterceptorController.tscn") },
+        { typeof(GozantiController), (EnemyTier.Special, "res://Controller/Enemies/GozantiClassCruiser/GozantiController.tscn") }
     };
 
     private static readonly Dictionary<Type, PackedScene> _cache = new();

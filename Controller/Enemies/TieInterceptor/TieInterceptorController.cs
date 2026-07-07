@@ -11,13 +11,13 @@ public partial class TieInterceptorController : EnemyShipController
     {
         base._Ready();
 
-        var core = GameCore.GetFrom(this);
+        var core = this.GetGameCore();
         EnemySpawningManager = core.EnemySpawningManager;
     }
 
     public override void _Process(double delta)
     {
-        Components.GetComponent<AnimationComponent>().PlayAnimation("idle");
+        Components.GetComponent<AnimationComponent>().PlayAnimationSecure("idle");
     }
 
     public override void PerformAction()

@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 
 [GlobalClass]
 public abstract partial class ShipController : CharacterBody2D, IController
@@ -70,7 +71,17 @@ public abstract partial class ShipController : CharacterBody2D, IController
     {
         var modelCollisionShape = shipModel.ActiveOrientation.GetNode<CollisionPolygon2D>("Collision");
         var collisionShape = GetNode<CollisionPolygon2D>("CollisionPolygon2D");
-        collisionShape.Polygon = modelCollisionShape.Polygon;
+
+        modelCollisionShape.Visible = false;
+
+        var transformedPolygon = modelCollisionShape.Polygon
+            .Select(point => ToLocal(modelCollisionShape.ToGlobal(point)))
+            .ToArray();
+
+        collisionShape.Position = Vector2.Zero;
+        collisionShape.Rotation = 0f;
+        collisionShape.Scale = Vector2.One;
+        collisionShape.Polygon = transformedPolygon;
     }
 
 }

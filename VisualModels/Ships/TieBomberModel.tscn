@@ -204,7 +204,6 @@ script = ExtResource("1_re7c0")
 metadata/_custom_type_script = "uid://bd4s1hflwc8mv"
 
 [node name="Sideways" type="Node2D" parent="." unique_id=501502118]
-visible = false
 script = ExtResource("2_re7c0")
 ExplosionScene = ExtResource("3_xuvrh")
 metadata/_custom_type_script = "uid://drdwp5ca4dwn0"
@@ -218,6 +217,7 @@ script = ExtResource("5_qqh6w")
 metadata/_custom_type_script = "uid://fpfpugeio6k5"
 
 [node name="Collision" type="CollisionPolygon2D" parent="Sideways" unique_id=275624798]
+visible = false
 scale = Vector2(0.8, 0.8)
 polygon = PackedVector2Array(-39.999996, -26.249998, -39.999996, -8.749999, -34.999996, 0, -39.999996, 9.999999, -39.999996, 28.749998, -29.999996, 38.749996, 29.999996, 38.749996, 39.999996, 28.749998, 39.999996, 11.249999, 34.999996, 1.2499999, 34.999996, -2.4999998, 39.999996, -9.999999, 39.999996, -26.249998, 28.749998, -37.499996, -29.999996, -37.499996)
 

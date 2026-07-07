@@ -10,7 +10,7 @@ public partial class EndlessModeScoreLabel : Label
 
 	private void Setup()
 	{
-        GameCore.GetFrom(this).EndlessModeManager.ScoreIncreased += (int score) =>
+        this.GetGameCore().EndlessModeManager.ScoreIncreased += (int score) =>
         {
             Text = score.ToString("D5");
         };

@@ -80,7 +80,7 @@ public partial class RollComponent : Component
 
     private void SpawnGhostTrail()
     {
-        var player = PlayerController.GetFrom(this)!;
+        var player = this.GetPlayer();
 
         // Greift dynamisch auf das "Sprite"-Node der aktuell aktiven Orientierung zu!
         var currentSprite = _shipModel.ActiveOrientation?.GetNodeOrNull<Sprite2D>("Sprite");

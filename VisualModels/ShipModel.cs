@@ -58,7 +58,7 @@ public partial class ShipModel : Model
 
             _animationTree.Set("parameters/blend_position", currentPos);
 
-            await ToSignal(GetTree().CreateTimer(AnimationStepTime, false), SceneTreeTimer.SignalName.Timeout);
+            await ToSignal(this.CreateTimer(AnimationStepTime), SceneTreeTimer.SignalName.Timeout);
         }
 
         ActivateOrientationNode(target);

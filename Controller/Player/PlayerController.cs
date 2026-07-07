@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 public partial class PlayerController : ShipController
 {
     public AnimationComponent AnimationComponent => Components.GetComponent<AnimationComponent>();
+    public const string GroupName = nameof(PlayerController);
 
     private bool _actionsLocked = false;
-    private const string GroupName = nameof(PlayerController);
 
     public override void _Ready()
     {
@@ -25,6 +25,7 @@ public partial class PlayerController : ShipController
         shipModel.OrientationChanged += OnShipModelOrienationChanged;
 
         shipModel.SetOrientation(GameManager.CurrentOrientation.GetOpposite());
+        SyncCollisionShapeDeferred();
     }
 
     public override void _Process(double delta)
@@ -59,11 +60,11 @@ public partial class PlayerController : ShipController
 
         if (Velocity.X != 0 || Velocity.Y != 0 )
         {
-            AnimationComponent.PlayAnimation("moving");
+            AnimationComponent.PlayAnimationSecure("moving");
         }
         else
         {
-            AnimationComponent.PlayAnimation("idle");
+            AnimationComponent.PlayAnimationSecure("idle");
         }
 
         MoveAndSlide();
@@ -75,11 +76,6 @@ public partial class PlayerController : ShipController
         {
             RemoveFromGroup(GroupName);
         }
-    }
-
-    public static PlayerController? GetFrom(Node caller)
-    {
-        return caller.GetTree().GetFirstNodeInGroup(GroupName) as PlayerController;
     }
 
     public void ChangeOrientation(GameOrientation newOrientation)
@@ -96,6 +92,13 @@ public partial class PlayerController : ShipController
         GameManager.CurrentOrientation = newOrientation.GetOpposite();
         EventHub.Instance.PlayerEventBus.InvokePlayerOrientationChanged();
 
+        SyncCollisionShapeDeferred();
+    }
+
+    private async void SyncCollisionShapeDeferred()
+    {
+        await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+        await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
         UpdateCollisionShape();
     }
 }

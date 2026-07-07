@@ -11,7 +11,8 @@ public enum SoundEffects
     MissileLaunch,
     ShipExplosion,
     AstromechActivation,
-    AstromechReady
+    AstromechReady,
+    GozantiFlyIn
 }
 
 public enum MusicThemes

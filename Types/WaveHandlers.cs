@@ -23,6 +23,36 @@ public abstract class WaveHandler : IWaveHandler
     }
 }
 
+public class GozantiCruiserWaveHandler : WaveHandler
+{
+    private EnemySpawningManager enemySpawningManager;
+
+    public GozantiCruiserWaveHandler(EnemySpawningManager _enemySpawningManager)
+    {
+        enemySpawningManager = _enemySpawningManager;
+    }
+
+    public override void Handle(Wave wave)
+    {
+        if (wave is not GozantiCruiserWave)
+        {
+            Log.Error(nameof(GozantiCruiserWaveHandler), nameof(Handle), "Provided wave resource is not of type GozantiCruiserWave");
+            return;
+        }
+
+        var gozantiScene = EnemyRegistry.GetOrLoadScene(typeof(GozantiController));
+        enemySpawningManager.SpawnEnemy(gozantiScene, 0, Helpers.GridData[GameManager.CurrentOrientation].MaxRows / 2);
+
+        enemySpawningManager.OnAllEnemiesDefeated += CompleteWave;
+    }
+
+    protected override void CompleteWave()
+    {
+        enemySpawningManager.OnAllEnemiesDefeated -= CompleteWave;
+        base.CompleteWave();
+    }
+}
+
 public class CombatFormationWaveHandler : WaveHandler
 {
     private EnemySpawningManager enemySpawningManager;
@@ -149,7 +179,7 @@ public class AsteroidStormWaveHandler : WaveHandler
 
         for (int i = 0; i < count; i++)
         {
-            _hazardManager.SpawnRandomHazard(hazardScene);
+            _hazardManager.SpawnHazardRandom(hazardScene);
         }
 
         _timer = _tree.CreateTimer((float)GD.RandRange(AsteroidStormWave.MinTimePerWave, AsteroidStormWave.MaxTimePerWave), false);

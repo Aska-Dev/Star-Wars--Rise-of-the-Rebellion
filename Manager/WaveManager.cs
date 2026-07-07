@@ -24,6 +24,7 @@ public partial class WaveManager : Node
         _handlers[typeof(OrientationChangeWave)] = new OrientationChangeWaveHandler(EventHub.Instance.PlayerEventBus, PlayerController);
         _handlers[typeof(CombatSpawnerWave)] = new CombatSpawnerWaveHandler(EnemySpawningManager, GetTree());
         _handlers[typeof(AsteroidStormWave)] = new AsteroidStormWaveHandler(GetTree(), HazardSpawningManager);
+        _handlers[typeof(GozantiCruiserWave)] = new GozantiCruiserWaveHandler(EnemySpawningManager);
     }
      
     public void PlayWave(Wave wave)

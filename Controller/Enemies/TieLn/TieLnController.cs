@@ -6,7 +6,7 @@ public partial class TieLnController : EnemyShipController
 {
     public override void _Process(double delta)
     {
-        Components.GetComponent<AnimationComponent>().PlayAnimation("idle");
+        Components.GetComponent<AnimationComponent>().PlayAnimationSecure("idle");
     }
 
     public override void PerformAction()

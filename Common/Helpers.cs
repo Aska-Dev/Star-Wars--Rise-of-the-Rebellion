@@ -13,21 +13,21 @@ public static class Helpers
 
 public static class Extensions
 {
-	public static T GetComponent<T>(this List<Component> components, string? name = null) where T : Component
-	{
+    public static T GetComponent<T>(this List<Component> components, string? name = null) where T : Component
+    {
         foreach (var component in components)
-		{
+        {
             if (component is T Tcomponent && (name == null || component.Name == name))
-			{
-				return Tcomponent;
-			}
-		}
+            {
+                return Tcomponent;
+            }
+        }
 
-		throw new Exception($"Component of type {typeof(T)} with name '{name}' not found.");
+        throw new Exception($"Component of type {typeof(T)} with name '{name}' not found.");
     }
 
-	public static void Initialize(this List<Component> components, Node node)
-	{
+    public static void Initialize(this List<Component> components, Node node)
+    {
         var children = node.GetChildren();
 
         foreach (var child in children)
@@ -52,6 +52,33 @@ public static class Extensions
         return null;
     }
 
+    public static SceneTreeTimer CreateTimer(this Node caller, double time)
+    {
+        return caller.GetTree().CreateTimer(time, false);
+    }
+
+    public static GameCore GetGameCore(this Node caller)
+    {
+        var core = caller.GetTree().GetFirstNodeInGroup(GameCore.GroupName) as GameCore;
+        if (core is null)
+        {
+            throw new NullReferenceException(nameof(core));
+        }
+
+        return core;
+    }
+
+    public static PlayerController GetPlayer(this Node caller)
+    {
+        var player = caller.GetTree().GetFirstNodeInGroup(PlayerController.GroupName) as PlayerController;
+        if (player is null)
+        {
+            throw new NullReferenceException(nameof(player));
+        }
+
+        return player;
+    }
+
     public static GameOrientation GetOpposite(this GameOrientation orientation)
     {
         return orientation switch
@@ -72,7 +99,23 @@ public static class Extensions
         };
     }
 
-    public static Vector2 GetDirectionVector(this GameOrientation orientation)
+    public static GameOrientation GetPerpendicular(this GameOrientation orientation)
+    {
+        return orientation switch
+        {
+            GameOrientation.Top => GameOrientation.Right,
+            GameOrientation.Bottom => GameOrientation.Right,
+            GameOrientation.Left => GameOrientation.Top,
+            GameOrientation.Right => GameOrientation.Top,
+            GameOrientation.TopLeft => GameOrientation.BottomRight,
+            GameOrientation.TopRight => GameOrientation.BottomLeft,
+            GameOrientation.BottomLeft => GameOrientation.TopRight,
+            GameOrientation.BottomRight => GameOrientation.TopLeft,
+            _ => orientation
+        };
+    }
+
+public static Vector2 GetDirectionVector(this GameOrientation orientation)
     {
         return orientation switch
         {
