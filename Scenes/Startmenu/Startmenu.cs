@@ -13,7 +13,12 @@ public partial class Startmenu : Control
 		MasterScene.Instance.ChangeScene("Level");
 	}
 
-	public void ExitGame()
+	public void GoToSettings()
+    {
+        MasterScene.Instance.ChangeScene("Settings");
+    }
+
+    public void ExitGame()
 	{
 		GetTree().Quit();
 	}

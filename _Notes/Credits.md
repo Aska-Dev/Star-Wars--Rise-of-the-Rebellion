@@ -12,3 +12,4 @@ https://niiiemand.itch.io/niiiemands-explosion-sfx
 Licensed under CC-BY-4.0 - https://solobytegames.itch.io"
 https://aurekfonts.github.io/src/showcase/XWing/XWing.html
 www.ogsoundfx.com - Meteor Shower
+https://www.fontspace.com/eightgon-font-f129321

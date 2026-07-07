@@ -8,7 +8,7 @@ public enum ParticleEmitter
 
 public partial class EventHub : Node
 {
-    public static EventHub Instance { get; private set; }
+    public static EventHub Instance { get; private set; } = null!;
 
     // --- EVENT BUSSES ---
     public UiEventBus UiEventBus { get; private set; } = null!;

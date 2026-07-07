@@ -52,7 +52,7 @@ public partial class AudioEngine : Node
     // --- AMBIENCE ---
     private AudioStreamPlayer _ambiencePlayer = null!;
     private readonly Dictionary<AmbienceThemes, AmbienceSound> _ambienceThemes = [];
-    private Tween _ambienceTween;
+    private Tween? _ambienceTween;
 
     public override void _Ready()
     {
@@ -186,6 +186,27 @@ public partial class AudioEngine : Node
         _currentTheme = null;
         _lastPlayedTrack = null;
         _musicPlayer.Stop();
+    }
+
+    public void SetMusicVolume(float volume)
+    {
+        MusicVolume = volume;
+        _musicPlayer.VolumeLinear = MusicVolume;
+    }
+
+    public void SetAmbienceVolume(float volume)
+    {
+        AmbienceVolume = volume;
+        _ambiencePlayer.VolumeLinear = AmbienceVolume;
+    }
+
+    public void SetSoundEffectsVolume(float volume)
+    {
+        SoundEffectsVolume = volume;
+        foreach (var player in _players)
+        {
+            player.VolumeLinear = SoundEffectsVolume;
+        }
     }
 
     private void PlayInternal(AudioStream stream, bool randomizePitch)

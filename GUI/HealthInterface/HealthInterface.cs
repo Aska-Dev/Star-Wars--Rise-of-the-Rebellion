@@ -25,7 +25,7 @@ public partial class HealthInterface : Control
 
     private void SetupIndicators()
 	{
-		var maxHealth = PlayerController.GetFrom(this).Components.GetComponent<HealthComponent>().MaxHealth;
+		var maxHealth = PlayerController.GetFrom(this)!.Components.GetComponent<HealthComponent>().MaxHealth;
 
 		foreach(var child in _grid.GetChildren())
 		{

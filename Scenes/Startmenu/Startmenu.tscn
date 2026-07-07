@@ -70,10 +70,11 @@ vertical_alignment = 1
 
 [node name="Button" type="Button" parent="." unique_id=206376066]
 layout_mode = 0
-offset_left = 216.0
-offset_top = 502.0
-offset_right = 703.0
-offset_bottom = 664.0
+offset_left = 258.0
+offset_top = 475.00003
+offset_right = 745.0
+offset_bottom = 637.0
+scale = Vector2(0.9, 0.9)
 theme = SubResource("Theme_g17kv")
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
@@ -82,12 +83,29 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_l44as")
 theme_override_styles/hover = SubResource("StyleBoxTexture_dh4ri")
 text = "Start Game"
 
+[node name="SettingsButton" type="Button" parent="." unique_id=1848179830]
+layout_mode = 0
+offset_left = 255.99998
+offset_top = 648.0
+offset_right = 743.0
+offset_bottom = 810.0
+scale = Vector2(0.9, 0.9)
+theme = SubResource("Theme_g17kv")
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxTexture_7ox2g")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_l44as")
+theme_override_styles/hover = SubResource("StyleBoxTexture_dh4ri")
+text = "Settings
+"
+
 [node name="ExitButton" type="Button" parent="." unique_id=1111932150]
 layout_mode = 0
-offset_left = 216.0
-offset_top = 688.0
-offset_right = 703.0
-offset_bottom = 850.0
+offset_left = 255.99998
+offset_top = 823.00006
+offset_right = 743.0
+offset_bottom = 985.00006
+scale = Vector2(0.9, 0.9)
 theme = SubResource("Theme_g17kv")
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
@@ -97,4 +115,5 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_dh4ri")
 text = "Exit"
 
 [connection signal="pressed" from="Button" to="." method="StartGame"]
+[connection signal="pressed" from="SettingsButton" to="." method="GoToSettings"]
 [connection signal="pressed" from="ExitButton" to="." method="ExitGame"]
