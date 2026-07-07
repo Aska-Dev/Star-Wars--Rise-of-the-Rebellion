@@ -25,6 +25,7 @@ public partial class PlayerController : ShipController
         shipModel.OrientationChanged += OnShipModelOrienationChanged;
 
         shipModel.SetOrientation(GameManager.CurrentOrientation.GetOpposite());
+        SyncCollisionShapeDeferred();
     }
 
     public override void _Process(double delta)
@@ -96,6 +97,13 @@ public partial class PlayerController : ShipController
         GameManager.CurrentOrientation = newOrientation.GetOpposite();
         EventHub.Instance.PlayerEventBus.InvokePlayerOrientationChanged();
 
+        SyncCollisionShapeDeferred();
+    }
+
+    private async void SyncCollisionShapeDeferred()
+    {
+        await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+        await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
         UpdateCollisionShape();
     }
 }
