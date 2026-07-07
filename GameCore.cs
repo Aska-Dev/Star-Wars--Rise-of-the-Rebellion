@@ -13,7 +13,7 @@ public partial class GameCore : Node
     [Export] public HazardSpawningManager HazardSpawningManager { get; private set; } = null!;
 
 	// -- FIELDS ---
-	private const string GroupName = nameof(GameCore);
+	public const string GroupName = nameof(GameCore);
 
 	public override void _Ready()
 	{
@@ -26,16 +26,5 @@ public partial class GameCore : Node
         {
             RemoveFromGroup(GroupName);
         }
-    }
-
-    public static GameCore GetFrom(Node caller)
-    {
-        var core = caller.GetTree().GetFirstNodeInGroup(GroupName) as GameCore;
-		if(core is null)
-		{
-			throw new NullReferenceException(nameof(core));
-		}
-
-		return core;
     }
 }

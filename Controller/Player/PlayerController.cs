@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 public partial class PlayerController : ShipController
 {
     public AnimationComponent AnimationComponent => Components.GetComponent<AnimationComponent>();
+    public const string GroupName = nameof(PlayerController);
 
     private bool _actionsLocked = false;
-    private const string GroupName = nameof(PlayerController);
 
     public override void _Ready()
     {
@@ -76,11 +76,6 @@ public partial class PlayerController : ShipController
         {
             RemoveFromGroup(GroupName);
         }
-    }
-
-    public static PlayerController? GetFrom(Node caller)
-    {
-        return caller.GetTree().GetFirstNodeInGroup(GroupName) as PlayerController;
     }
 
     public void ChangeOrientation(GameOrientation newOrientation)

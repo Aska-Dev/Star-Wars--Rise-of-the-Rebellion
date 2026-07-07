@@ -99,7 +99,7 @@ public partial class EnemySpawningManager : Node
         {
             if (slot.SpawnDelay > 0f)
             {
-                await GetTree().Root.ToSignal(GetTree().CreateTimer(slot.SpawnDelay, false), SceneTreeTimer.SignalName.Timeout);
+                await GetTree().Root.ToSignal(this.CreateTimer(slot.SpawnDelay, false), SceneTreeTimer.SignalName.Timeout);
             }
 
             SpawnEnemy(slot.Enemy, slot.Column, slot.Row);

@@ -11,7 +11,7 @@ public partial class TieInterceptorController : EnemyShipController
     {
         base._Ready();
 
-        var core = GameCore.GetFrom(this);
+        var core = this.GetGameCore();
         EnemySpawningManager = core.EnemySpawningManager;
     }
 

@@ -20,7 +20,7 @@ public partial class EnemyWeaponComponent : Component
         var interval = 0.0;
         for (var i = 0; i < SalveAmount; i++)
         {
-            GetTree().CreateTimer(interval, false).Timeout += Shoot;
+            this.CreateTimer(interval).Timeout += Shoot;
             interval += SalveInterval;
         }
     }
@@ -32,7 +32,7 @@ public partial class EnemyWeaponComponent : Component
         var interval = durationOfOneSalve + SalveInterval;
         for (var i = 0; i < SalveAmount; i++)
         {
-            GetTree().CreateTimer(interval, false).Timeout += ShootAllGunsAsync;
+            this.CreateTimer(interval).Timeout += ShootAllGunsAsync;
             interval *= i;
         }
     }
@@ -49,6 +49,20 @@ public partial class EnemyWeaponComponent : Component
         AudioEngine.Instance.PlaySound(_shootSound, true);
     }
 
+    public void ShootAtPlayer()
+    {
+        var player = this.GetPlayer();
+        if (player == null) return;
+
+        foreach (var gun in _guns)
+        {
+            var fireDirection = (player.GlobalPosition - gun.GlobalPosition).Normalized();
+            ShootGun(gun, fireDirection);
+        }
+
+        AudioEngine.Instance.PlaySound(_shootSound, true);
+    }
+
     public void ShootAllGunsAsync()
     {
         var fireDirection = GameManager.CurrentOrientation.GetDirectionVector();
@@ -57,7 +71,7 @@ public partial class EnemyWeaponComponent : Component
         {
             var index = i;
             var interval = AsyncInterval * index;
-            GetTree().CreateTimer(interval, false).Timeout += () => ShootGun(_guns[index], fireDirection);
+            this.CreateTimer(interval).Timeout += () => ShootGun(_guns[index], fireDirection);
         }
 
         AudioEngine.Instance.PlaySound(_shootSound, true);

@@ -19,8 +19,8 @@ public partial class ActionsInterface : Control
 
     private void SetupSlots()
     {
-        var player = PlayerController.GetFrom(this);
-        if(player is null)
+        var player = this.GetPlayer();
+        if (player is null)
         {
             Log.Error(nameof(ActionsInterface), nameof(SetupSlots), "PlayerController Instance is null");
             return;

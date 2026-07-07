@@ -19,7 +19,7 @@ public partial class HazardSpawningManager : Node
         _spawnGrid = new SpawnGridModule(GetViewport().GetVisibleRect().Size);
     }
 
-    public void SpawnRandomHazard(PackedScene hazardScene)
+    public void SpawnHazardRandom(PackedScene hazardScene)
     {
         // Instantiate hazard
         var hazard = hazardScene.Instantiate<Hazard>();
@@ -49,6 +49,49 @@ public partial class HazardSpawningManager : Node
         };
     }
 
+    public void SpawnHazardAtPlayer(PackedScene hazardScene, GameOrientation fromOrientation)
+    {
+        var hazard = hazardScene.Instantiate<Hazard>();
+
+        var player = this.GetPlayer();
+        if (player == null)
+        {
+            hazard.QueueFree();
+            return;
+        }
+
+        var playerPos = player.GlobalPosition;
+        var sourceDirection = fromOrientation.GetDirectionVector();
+        var travelDirection = -sourceDirection;
+        Vector2 spawnPos;
+
+        if (Mathf.Abs(sourceDirection.X) > Mathf.Abs(sourceDirection.Y))
+        {
+            spawnPos = new Vector2(
+                sourceDirection.X < 0 ? -500f : GetViewport().GetVisibleRect().Size.X + 500f,
+                playerPos.Y
+            );
+        }
+        else
+        {
+            spawnPos = new Vector2(
+                playerPos.X,
+                sourceDirection.Y < 0 ? -500f : GetViewport().GetVisibleRect().Size.Y + 500f
+            );
+        }
+
+        hazard.TravelDirection = travelDirection;
+        hazard.GlobalPosition = spawnPos;
+        MasterScene.Instance.AddToScene(hazard);
+        _activeHazards.Add(hazard);
+
+        hazard.TreeExited += () =>
+        {
+            _activeHazards.Remove(hazard);
+            if (_activeHazards.Count == 0) EmitSignal(SignalName.OnAllHazardsCleared);
+        };
+    }
+
     private bool HasEnoughDodgeSpace(float newHazardHeight, GameOrientation orient, Vector2 direction)
     {
         float totalSpace = Mathf.Abs(direction.X) > Mathf.Abs(direction.Y)
@@ -64,7 +107,7 @@ public partial class HazardSpawningManager : Node
     private float GetRequiredDodgeSpace(GameOrientation orient)
     {
         var playerSize = 70f;
-        var player = PlayerController.GetFrom(this);
+        var player = this.GetPlayer();
 
         if (player != null)
         {

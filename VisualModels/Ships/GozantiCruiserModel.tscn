@@ -32,14 +32,42 @@ _data = {
 &"moving": SubResource("Animation_jy8vj")
 }
 
+[sub_resource type="Animation" id="Animation_vmawg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_y1yen"]
 resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -5), Vector2(0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_63etm"]
 resource_name = "moving"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w4xgr"]
 _data = {
+&"RESET": SubResource("Animation_vmawg"),
 &"idle": SubResource("Animation_y1yen"),
 &"moving": SubResource("Animation_63etm")
 }

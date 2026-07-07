@@ -58,7 +58,7 @@ public abstract partial class EnemyShipController : ShipController
             return;
         }
 
-        GameCore.GetFrom(this).EndlessModeManager.IncreaseScore(Score);
+        this.GetGameCore().EndlessModeManager.IncreaseScore(Score);
         base.Destroy();
     }
 
@@ -77,7 +77,7 @@ public abstract partial class EnemyShipController : ShipController
             if(_isFlyingIn)
             {
                 _isFlyingIn = false;
-                GetTree().CreateTimer(flyInActionDelay, false).Timeout += () =>
+                this.CreateTimer(flyInActionDelay).Timeout += () =>
                 {
                     PerformAction();
                     _actionTimer.Start();

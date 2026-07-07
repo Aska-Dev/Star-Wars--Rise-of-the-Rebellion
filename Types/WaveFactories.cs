@@ -89,3 +89,12 @@ public class AsteroidStormWaveFactory : IWaveFactory
         return wave;
     }
 }
+
+public class GozantiCruiserWaveFactory : IWaveFactory
+{
+    public Wave Build()
+    {
+        var wave = new GozantiCruiserWave();
+        return wave;
+    }
+}
