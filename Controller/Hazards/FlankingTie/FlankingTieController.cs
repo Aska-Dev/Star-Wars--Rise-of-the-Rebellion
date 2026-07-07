@@ -49,7 +49,11 @@ public partial class FlankingTieController : Hazard
         SetPhysicsProcess(true);
 
         AudioEngine.Instance.PlaySound(SoundEffects.TieShoot);
-        this.CreateTimer(0.5f).Timeout += () =>
+        this.CreateTimer(0.3f).Timeout += () =>
+        {
+            AudioEngine.Instance.PlaySound(SoundEffects.TieShoot);
+        };
+        this.CreateTimer(0.6f).Timeout += () =>
         {
             AudioEngine.Instance.PlaySound(SoundEffects.TieFlyIn);
         };

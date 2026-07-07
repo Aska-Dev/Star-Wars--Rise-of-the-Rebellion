@@ -11,7 +11,7 @@
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_chonc")
-FlyInSound = 2
+FlyInSound = 8
 GridWidth = 3
 InitShipData = ExtResource("2_chonc")
 InitShipModelScene = ExtResource("3_chonc")
