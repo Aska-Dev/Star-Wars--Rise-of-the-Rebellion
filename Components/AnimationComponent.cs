@@ -1,5 +1,4 @@
 using Godot;
-using Godot.NativeInterop;
 using System;
 
 [GlobalClass]
@@ -7,7 +6,7 @@ public partial class AnimationComponent : Component
 {
     private ShipModel _shipModel = null!;
 
-    public void PlayAnimation(StringName animationName)
+    public void PlayAnimationSecure(StringName animationName)
     {
         var animationPlayer = _shipModel.AnimationPlayer;
 
@@ -16,8 +15,38 @@ public partial class AnimationComponent : Component
             return;
         }
 
+        if (animationPlayer.IsPlaying())
+        {
+            PlayAnimation(animationName);
+        }
+    }
+
+    public void PlayAnimation(StringName animationName, Action? onAnimationComplete = null)
+    {
+        var animationPlayer = _shipModel.AnimationPlayer;
+        if (animationPlayer == null)
+        {
+            return;
+        }
+
         if (animationPlayer.HasAnimation(animationName))
         {
+            void HandleAnimationFinished(StringName finishedAnimation)
+            {
+                if (finishedAnimation != animationName)
+                {
+                    return;
+                }
+
+                animationPlayer.AnimationFinished -= HandleAnimationFinished;
+                onAnimationComplete?.Invoke();
+            }
+
+            if (onAnimationComplete != null)
+            {
+                animationPlayer.AnimationFinished += HandleAnimationFinished;
+            }
+
             animationPlayer.Play(animationName);
         }
         else

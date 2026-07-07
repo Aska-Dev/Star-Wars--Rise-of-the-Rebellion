@@ -10,7 +10,7 @@ public abstract partial class EnemyShipController : ShipController
     [Export(PropertyHint.Range, "1,10,1")] public int GridWidth { get; set; } = 1;
     [Export(PropertyHint.Range, "1,10,1")] public int GridHeight { get; set; } = 1;
 
-    private const float flyInSpeed = 600f;
+    public float FlyInSpeed { get; set; } = 600f;
     private const float flyInActionDelay = 1f;
 
     private Vector2 _targetPosition;
@@ -65,7 +65,7 @@ public abstract partial class EnemyShipController : ShipController
     private void HandleFlying(double delta)
     {
         float distanceToTarget = GlobalPosition.DistanceTo(_targetPosition);
-        float stepDistance = flyInSpeed * (float)delta;
+        float stepDistance = FlyInSpeed * (float)delta;
 
         if (distanceToTarget <= stepDistance)
         {
@@ -87,7 +87,7 @@ public abstract partial class EnemyShipController : ShipController
         else
         {
             Vector2 direction = GlobalPosition.DirectionTo(_targetPosition);
-            Velocity = direction * flyInSpeed;
+            Velocity = direction * FlyInSpeed;
             MoveAndSlide();
         }
     }

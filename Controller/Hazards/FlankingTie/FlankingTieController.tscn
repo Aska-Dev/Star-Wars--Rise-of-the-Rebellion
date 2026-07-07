@@ -11,18 +11,10 @@ size = Vector2(336, 60.75)
 
 [node name="FlankingTieController" type="CharacterBody2D" unique_id=2081206047 node_paths=PackedStringArray("Hitbox", "HorizontalSpriteNode", "VerticalSpriteNode")]
 script = ExtResource("1_bk0pw")
-Hitbox = NodePath("Area2D")
+Hitbox = NodePath("Sprites/Area2D")
 HorizontalSpriteNode = NodePath("Sprites/HorizontalTie")
 VerticalSpriteNode = NodePath("Sprites/VerticalTie")
 HazardWarning = ExtResource("2_0kk1e")
-
-[node name="Area2D" type="Area2D" parent="." unique_id=222671966]
-collision_layer = 16
-collision_mask = 32
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=164690650]
-position = Vector2(-145, 0)
-shape = SubResource("RectangleShape2D_cal11")
 
 [node name="Sprites" type="Node2D" parent="." unique_id=841475692]
 
@@ -53,3 +45,11 @@ texture = ExtResource("5_cal11")
 position = Vector2(-292, 3)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_cal11")
+
+[node name="Area2D" type="Area2D" parent="Sprites" unique_id=222671966]
+collision_layer = 16
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprites/Area2D" unique_id=164690650]
+position = Vector2(-145, 0)
+shape = SubResource("RectangleShape2D_cal11")

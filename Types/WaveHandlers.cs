@@ -26,12 +26,10 @@ public abstract class WaveHandler : IWaveHandler
 public class GozantiCruiserWaveHandler : WaveHandler
 {
     private EnemySpawningManager enemySpawningManager;
-    private HazardSpawningManager hazardSpawningManager;
 
-    public GozantiCruiserWaveHandler(EnemySpawningManager _enemySpawningManager, HazardSpawningManager _hazardSpawningManager)
+    public GozantiCruiserWaveHandler(EnemySpawningManager _enemySpawningManager)
     {
         enemySpawningManager = _enemySpawningManager;
-        hazardSpawningManager = _hazardSpawningManager;
     }
 
     public override void Handle(Wave wave)
@@ -42,9 +40,12 @@ public class GozantiCruiserWaveHandler : WaveHandler
             return;
         }
 
-        var flankingTieScene = HazardRegistry.GetOrLoadScene(typeof(FlankingTieController));
-        hazardSpawningManager.SpawnHazardAtPlayer(flankingTieScene, GameManager.CurrentOrientation.GetPerpendicular());
+        var gozantiScene = EnemyRegistry.GetOrLoadScene(typeof(GozantiController));
+        enemySpawningManager.SpawnEnemy(gozantiScene, 0, Helpers.GridData[GameManager.CurrentOrientation].MaxRows / 2);
+
+        enemySpawningManager.OnAllEnemiesDefeated += CompleteWave;
     }
+
     protected override void CompleteWave()
     {
         enemySpawningManager.OnAllEnemiesDefeated -= CompleteWave;

@@ -60,11 +60,11 @@ public partial class PlayerController : ShipController
 
         if (Velocity.X != 0 || Velocity.Y != 0 )
         {
-            AnimationComponent.PlayAnimation("moving");
+            AnimationComponent.PlayAnimationSecure("moving");
         }
         else
         {
-            AnimationComponent.PlayAnimation("idle");
+            AnimationComponent.PlayAnimationSecure("idle");
         }
 
         MoveAndSlide();

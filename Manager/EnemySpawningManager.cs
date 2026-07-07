@@ -99,7 +99,7 @@ public partial class EnemySpawningManager : Node
         {
             if (slot.SpawnDelay > 0f)
             {
-                await GetTree().Root.ToSignal(this.CreateTimer(slot.SpawnDelay, false), SceneTreeTimer.SignalName.Timeout);
+                await GetTree().Root.ToSignal(this.CreateTimer(slot.SpawnDelay), SceneTreeTimer.SignalName.Timeout);
             }
 
             SpawnEnemy(slot.Enemy, slot.Column, slot.Row);
@@ -109,6 +109,40 @@ public partial class EnemySpawningManager : Node
     public void SpawnEnemy(EnemyFormationSlot slot)
     {
         SpawnEnemy(slot.Enemy, slot.Column, slot.Row);
+    }
+
+    public void SpawnEnemyRandom(PackedScene enemyScene)
+    {
+        var enemy = enemyScene.Instantiate<EnemyShipController>();
+
+        var currentOrientation = GameManager.CurrentOrientation;
+        int maxCols = Helpers.GridData[currentOrientation].MaxColumns;
+        int maxRows = Helpers.GridData[currentOrientation].MaxRows;
+
+        var possibleSlots = new List<EnemyGridSlot>();
+
+        for (int c = 0; c < maxCols; c++)
+        {
+            for (int r = 0; r < maxRows; r++)
+            {
+                if (AreSlotsFree(c, r, enemy.GridWidth, enemy.GridHeight))
+                {
+                    possibleSlots.Add(new EnemyGridSlot(c, r));
+                }
+            }
+        }
+
+        if (possibleSlots.Count <= 0)
+        {
+            Log.Error(nameof(EnemySpawningManager), nameof(SpawnEnemyRandom), $"No free area for {enemy.GetType().Name} ({enemy.GridWidth}x{enemy.GridHeight})");
+            enemy.QueueFree();
+            return;
+        }
+
+        var slot = possibleSlots[GD.RandRange(0, possibleSlots.Count - 1)];
+        enemy.QueueFree();
+
+        SpawnEnemy(enemyScene, slot.Column, slot.Row);
     }
 
     public void SpawnEnemy(PackedScene enemyScene, int column, int row)
