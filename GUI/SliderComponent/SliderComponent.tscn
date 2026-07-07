@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://bea2fx1bri6qn"]
+
+[ext_resource type="Script" uid="uid://dd524lnuwrx63" path="res://GUI/SliderComponent/SliderComponent.cs" id="1_rc232"]
+[ext_resource type="FontFile" uid="uid://cgvk42o4afc3e" path="res://Resources/fonts/text.ttf" id="1_sshjj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_rc232"]
+font = ExtResource("1_sshjj")
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_0q1w2"]
+font = ExtResource("1_sshjj")
+font_size = 25
+
+[node name="SliderComponent" type="Control" unique_id=1481842138]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1540.0
+offset_bottom = -1005.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rc232")
+
+[node name="Title" type="Label" parent="." unique_id=1556981098]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Placeholder"
+label_settings = SubResource("LabelSettings_rc232")
+
+[node name="ValueLabel" type="Label" parent="." unique_id=2082254246]
+layout_mode = 0
+offset_left = 389.0
+offset_top = 34.0
+offset_right = 423.0
+offset_bottom = 69.0
+text = "100"
+label_settings = SubResource("LabelSettings_0q1w2")
+
+[node name="HSlider" type="HSlider" parent="." unique_id=233535737]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+step = 5.0
+
+[connection signal="value_changed" from="HSlider" to="." method="OnValueChanged"]

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://n15fbqbv53m4"]
 
-[ext_resource type="Script" uid="uid://5l0moxuk73lu" path="res://Maps/CombatLevel.cs" id="1_6ni13"]
+[ext_resource type="Script" uid="uid://5l0moxuk73lu" path="res://Scenes/Level/CombatLevel.cs" id="1_6ni13"]
 [ext_resource type="Texture2D" uid="uid://7o60tt5b2pja" path="res://Resources/backgrounds/planet1.jpg" id="1_f2frt"]
 [ext_resource type="PackedScene" uid="uid://ca861xsj2qjw7" path="res://Controller/Player/Player.tscn" id="2_yce1c"]
 [ext_resource type="Script" uid="uid://b1pciagvtdbtb" path="res://Manager/GameManager.cs" id="3_3yngg"]
@@ -12,7 +12,7 @@
 [ext_resource type="Script" uid="uid://burrlusjinkos" path="res://Manager/EndlessModeManager.cs" id="7_hk7k8"]
 [ext_resource type="Script" uid="uid://c3ts4uq4ffi1g" path="res://Manager/HazardSpawningManager.cs" id="9_8c7iq"]
 [ext_resource type="Texture2D" uid="uid://d3mib1mv38tpn" path="res://Resources/hazards/asteorid_spritesheet.png" id="12_7n5mk"]
-[ext_resource type="Script" uid="uid://peeptc0mc2qh" path="res://Maps/AsteroidStormParticleEmitter.cs" id="13_p62r8"]
+[ext_resource type="Script" uid="uid://peeptc0mc2qh" path="res://Scenes/Level/AsteroidStormParticleEmitter.cs" id="13_p62r8"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_qxawe"]
 a = Vector2(44.75, -554)

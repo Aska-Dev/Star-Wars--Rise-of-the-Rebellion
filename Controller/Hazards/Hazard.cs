@@ -22,7 +22,7 @@ public abstract partial class Hazard : CharacterBody2D
 
         Visible = false;
 
-        GetTree().CreateTimer(WarningTime).Timeout += () =>
+        GetTree().CreateTimer(WarningTime, false).Timeout += () =>
         {
             if (GodotObject.IsInstanceValid(_warning))
             {

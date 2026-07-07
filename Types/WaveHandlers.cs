@@ -135,7 +135,7 @@ public class AsteroidStormWaveHandler : WaveHandler
 
         AudioEngine.Instance.StartAmbience(AmbienceThemes.AsteroidStorm, 0);
         EventHub.Instance.InvokeParticleEmitterStateChanged(ParticleEmitter.AsteroidStorm, true);
-        _tree.CreateTimer(0.5f).Timeout += SpawnStormWave;
+        _tree.CreateTimer(0.5f, false).Timeout += SpawnStormWave;
     }
 
     private void SpawnStormWave()
@@ -152,7 +152,7 @@ public class AsteroidStormWaveHandler : WaveHandler
             _hazardManager.SpawnRandomHazard(hazardScene);
         }
 
-        _timer = _tree.CreateTimer((float)GD.RandRange(AsteroidStormWave.MinTimePerWave, AsteroidStormWave.MaxTimePerWave));
+        _timer = _tree.CreateTimer((float)GD.RandRange(AsteroidStormWave.MinTimePerWave, AsteroidStormWave.MaxTimePerWave), false);
         _timer.Timeout += SpawnStormWave;
     }
 
@@ -240,7 +240,7 @@ public class CombatSpawnerWaveHandler : WaveHandler
 
         SpawnBatch(_wave.MaximumBatchSize, _wave.MaximumBatchSize);
 
-        _timer = tree.CreateTimer(_wave.SpawnInterval);
+        _timer = tree.CreateTimer(_wave.SpawnInterval, false);
         _timer.Timeout += HandleSpawner;
     }
 
@@ -262,7 +262,7 @@ public class CombatSpawnerWaveHandler : WaveHandler
         }
 
         // START TIMER
-        _timer = tree.CreateTimer(_wave.SpawnInterval);
+        _timer = tree.CreateTimer(_wave.SpawnInterval, false);
         _timer.Timeout += HandleSpawner;
     }
 

@@ -1,0 +1,132 @@
+[gd_scene format=3 uid="uid://b3cnfybbj56g5"]
+
+[ext_resource type="FontFile" uid="uid://f84lp6g4myj0" path="res://Resources/fonts/xWingFont.otf" id="1_7tw5f"]
+[ext_resource type="Script" uid="uid://bl523k0s7at8q" path="res://Scenes/SettingsMenu/SettingsMenu.cs" id="1_t4uyj"]
+[ext_resource type="Texture2D" uid="uid://ccv5g3oa8xdws" path="res://Resources/ui/button.png" id="2_twal6"]
+[ext_resource type="Texture2D" uid="uid://cbbxvexe02j8t" path="res://Resources/ui/button_pressed.png" id="3_gskd3"]
+[ext_resource type="Texture2D" uid="uid://c8fy2glljpql0" path="res://Resources/ui/button_hover.png" id="4_wm0ir"]
+[ext_resource type="FontFile" uid="uid://cgvk42o4afc3e" path="res://Resources/fonts/text.ttf" id="5_twal6"]
+[ext_resource type="PackedScene" uid="uid://bea2fx1bri6qn" path="res://GUI/SliderComponent/SliderComponent.tscn" id="6_gskd3"]
+[ext_resource type="Script" uid="uid://bs0ajvfawule7" path="res://Scenes/SettingsMenu/TabBar.cs" id="6_wm0ir"]
+
+[sub_resource type="FontVariation" id="FontVariation_7tw5f"]
+base_font = ExtResource("5_twal6")
+
+[sub_resource type="Theme" id="Theme_t4uyj"]
+default_font = ExtResource("1_7tw5f")
+default_font_size = 50
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4yclr"]
+texture = ExtResource("2_twal6")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qyqs1"]
+texture = ExtResource("3_gskd3")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dypm6"]
+texture = ExtResource("4_wm0ir")
+
+[sub_resource type="LabelSettings" id="LabelSettings_t4uyj"]
+font = ExtResource("5_twal6")
+font_size = 32
+
+[node name="SettingsMenu" type="Control" unique_id=627007914]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_t4uyj")
+
+[node name="Background" type="ColorRect" parent="." unique_id=563396538]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.38170326, 0.38170323, 0.38170323, 1)
+
+[node name="TabBar" type="TabBar" parent="." unique_id=1261996194 node_paths=PackedStringArray("SoundTabContent", "ControlsTabContent")]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 31.0
+grow_horizontal = 2
+theme_override_fonts/font = SubResource("FontVariation_7tw5f")
+theme_override_font_sizes/font_size = 40
+current_tab = 0
+close_with_middle_mouse = false
+tab_count = 2
+tab_0/title = "Sound"
+tab_1/title = "Controls"
+script = ExtResource("6_wm0ir")
+SoundTabContent = NodePath("SoundTabContent")
+ControlsTabContent = NodePath("ControlsTabContent")
+
+[node name="SoundTabContent" type="Control" parent="TabBar" unique_id=1441524658]
+anchors_preset = 0
+offset_top = 54.0
+offset_right = 1920.0
+offset_bottom = 1079.0
+
+[node name="MusicVolume" parent="TabBar/SoundTabContent" unique_id=1481842138 instance=ExtResource("6_gskd3")]
+layout_mode = 1
+offset_left = 54.0
+offset_top = 44.0
+offset_right = -1486.0
+offset_bottom = -906.0
+Title = "Music"
+
+[node name="AmbienceVolume" parent="TabBar/SoundTabContent" unique_id=1423814997 instance=ExtResource("6_gskd3")]
+layout_mode = 1
+offset_left = 54.0
+offset_top = 139.0
+offset_right = -1486.0
+offset_bottom = -811.0
+Title = "Ambience"
+
+[node name="SFXVolume" parent="TabBar/SoundTabContent" unique_id=679173103 instance=ExtResource("6_gskd3")]
+layout_mode = 1
+offset_left = 54.0
+offset_top = 243.0
+offset_right = -1486.0
+offset_bottom = -707.0
+Title = "Sound Effects"
+
+[node name="ControlsTabContent" type="Control" parent="TabBar" unique_id=1844168056]
+visible = false
+anchors_preset = 0
+offset_top = 54.0
+offset_right = 1920.0
+offset_bottom = 1079.0
+
+[node name="Button" type="Button" parent="." unique_id=1233820083]
+layout_mode = 0
+offset_left = 1519.0
+offset_top = 928.0
+offset_right = 1994.75
+offset_bottom = 1090.0
+scale = Vector2(0.8, 0.8)
+theme = SubResource("Theme_t4uyj")
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxTexture_4yclr")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_qyqs1")
+theme_override_styles/hover = SubResource("StyleBoxTexture_dypm6")
+text = "BACK TO MENU"
+
+[node name="Label" type="Label" parent="." unique_id=1303511836]
+layout_mode = 0
+offset_left = 1307.0
+offset_top = 28.0
+offset_right = 1882.0
+offset_bottom = 105.0
+text = "Settings are still under Development!
+More options will be added in the future."
+label_settings = SubResource("LabelSettings_t4uyj")
+
+[connection signal="ValueChanged" from="TabBar/SoundTabContent/MusicVolume" to="." method="SetMusicVolume"]
+[connection signal="ValueChanged" from="TabBar/SoundTabContent/AmbienceVolume" to="." method="SetAmbienceVolume"]
+[connection signal="ValueChanged" from="TabBar/SoundTabContent/SFXVolume" to="." method="SetSfxVolume"]
+[connection signal="pressed" from="Button" to="." method="GoBackToMenu"]
