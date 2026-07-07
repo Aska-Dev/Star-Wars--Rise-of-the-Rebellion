@@ -25,6 +25,10 @@ texture = ExtResource("3_gskd3")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dypm6"]
 texture = ExtResource("4_wm0ir")
 
+[sub_resource type="LabelSettings" id="LabelSettings_t4uyj"]
+font = ExtResource("5_twal6")
+font_size = 32
+
 [node name="SettingsMenu" type="Control" unique_id=627007914]
 layout_mode = 3
 anchors_preset = 15
@@ -111,6 +115,16 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_4yclr")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_qyqs1")
 theme_override_styles/hover = SubResource("StyleBoxTexture_dypm6")
 text = "BACK TO MENU"
+
+[node name="Label" type="Label" parent="." unique_id=1303511836]
+layout_mode = 0
+offset_left = 1307.0
+offset_top = 28.0
+offset_right = 1882.0
+offset_bottom = 105.0
+text = "Settings are still under Development!
+More options will be added in the future."
+label_settings = SubResource("LabelSettings_t4uyj")
 
 [connection signal="ValueChanged" from="TabBar/SoundTabContent/MusicVolume" to="." method="SetMusicVolume"]
 [connection signal="ValueChanged" from="TabBar/SoundTabContent/AmbienceVolume" to="." method="SetAmbienceVolume"]

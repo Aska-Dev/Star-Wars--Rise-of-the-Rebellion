@@ -11,8 +11,9 @@ public partial class TabBar : Godot.TabBar
     public override void _Ready()
     {
         InitVolumeSettings();
-        base._Ready();
+
         _tabContents = [SoundTabContent, ControlsTabContent];
+        TabSelected += OnTabSelected;
     }
 
     private void OnTabSelected(long tabIndex)
