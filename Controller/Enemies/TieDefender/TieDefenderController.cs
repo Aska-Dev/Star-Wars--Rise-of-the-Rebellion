@@ -31,7 +31,6 @@ public partial class TieDefenderController : EnemyShipController
 
     public override void _Process(double delta)
     {
-        GD.Print("TieDefenderController _Process");
         Components.GetComponent<AnimationComponent>().PlayAnimation("idle");
     }
 
