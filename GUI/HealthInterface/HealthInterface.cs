@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class HealthInterface : Control
+public partial class HealthInterface : Container
 {
 	[Export] public required PackedScene HealthIndicatorScene;
 
@@ -39,8 +39,8 @@ public partial class HealthInterface : Control
 		for(var i = 0; i < amount; i++)
 		{
 			var indicator = HealthIndicatorScene.Instantiate<HealthIndicator>();
-			_grid.AddChild(indicator);
-			_healthIndicators.Add(indicator);
+				_grid.AddChild(indicator);
+				_healthIndicators.Add(indicator);
 		}
 	}
 

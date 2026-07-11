@@ -22,21 +22,6 @@ offset_right = 1920.0
 offset_bottom = 98.0
 texture = ExtResource("1_wtnhl")
 
-[node name="HealthInterface" parent="." unique_id=298973331 instance=ExtResource("2_ehml2")]
-layout_mode = 1
-offset_left = 98.0
-offset_top = 16.0
-offset_right = 98.0
-offset_bottom = 16.0
-
-[node name="ActionsInterface" parent="." unique_id=1406371729 instance=ExtResource("3_meoqa")]
-layout_mode = 0
-offset_left = 641.0
-offset_top = 49.0
-offset_right = 641.0
-offset_bottom = 49.0
-scale = Vector2(1.5, 1.5)
-
 [node name="EndlessModeScoreDisplay" parent="." unique_id=152565833 instance=ExtResource("4_o72l3")]
 layout_mode = 1
 offset_left = 1638.0
@@ -51,3 +36,19 @@ offset_top = 10.0
 offset_right = 1623.0
 offset_bottom = 88.0
 texture = ExtResource("2_hx01y")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1129948465]
+layout_mode = 0
+offset_left = 99.0
+offset_top = 19.0
+offset_right = 875.0
+offset_bottom = 99.0
+theme_override_constants/separation = 64
+
+[node name="HealthInterface" parent="HBoxContainer" unique_id=298973331 instance=ExtResource("2_ehml2")]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="ActionsInterface" parent="HBoxContainer" unique_id=1406371729 instance=ExtResource("3_meoqa")]
+custom_minimum_size = Vector2(60, 32)
+layout_mode = 2
