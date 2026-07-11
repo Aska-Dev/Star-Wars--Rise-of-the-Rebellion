@@ -12,6 +12,7 @@ public partial class ModelOrientation : Node2D
     public PackedScene ExplosionScene { get; set; } = null!;
 
     public List<ModelGun> Guns { get; private set; } = [];
+    public List<ModelGun> AlternateGuns { get; private set; } = [];
 
     public override void _Ready()
     {
@@ -27,13 +28,18 @@ public partial class ModelOrientation : Node2D
 
     private void InitGuns()
     {
+        AlternateGuns.Clear();
         Guns.Clear();
         var children = GetChildren();
         foreach (var child in children)
         {
-            if(child is ModelGun gun)
+            if(child is ModelGun gun && !gun.IsAlternativeGun)
             {
                 Guns.Add(gun);
+            }
+            else if(child is ModelGun altGun && altGun.IsAlternativeGun)
+            {
+                AlternateGuns.Add(altGun);
             }
         }
     }

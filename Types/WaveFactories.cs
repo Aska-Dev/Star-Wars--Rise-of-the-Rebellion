@@ -23,11 +23,16 @@ public class CombatSpawnerWaveFactory : IWaveFactory
             new EnemyPoolEntry()
             {
                 EnemyScene = EnemyRegistry.GetRandomOfTier(EnemyTier.Tier1),
-                Weight = 5
+                Weight = 8
             },
             new EnemyPoolEntry()
             {
                 EnemyScene = EnemyRegistry.GetRandomOfTier(EnemyTier.Tier2),
+                Weight = 4
+            },
+            new EnemyPoolEntry()
+            {
+                EnemyScene = EnemyRegistry.GetRandomOfTier(EnemyTier.Tier3),
                 Weight = 2
             }
         ];

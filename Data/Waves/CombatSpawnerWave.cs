@@ -10,6 +10,6 @@ public partial class CombatSpawnerWave : Wave
 
     public int MinimumBatchSize { get; init; } = 2;    
     public int MaximumBatchSize { get; init; } = 4;
-    public float SpawnInterval { get; init; } = 5f;
+    public float SpawnInterval { get; init; } = 8f;
 }
     

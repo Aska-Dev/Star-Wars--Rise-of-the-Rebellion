@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://c83m4s8uljifx"]
+
+[ext_resource type="Script" uid="uid://c0j85g581orir" path="res://Controller/Hazards/FlankingTie/FlankingTieController.cs" id="1_afh81"]
+[ext_resource type="PackedScene" uid="uid://cxmnpsmxdr5fo" path="res://VisualModels/Hazards/HazardWarning.tscn" id="2_ujasm"]
+[ext_resource type="Texture2D" uid="uid://cunpavnsnfrsg" path="res://Resources/ships/TIE-Defender/sideways.png" id="3_afh81"]
+[ext_resource type="Texture2D" uid="uid://de5wjkph4s24o" path="res://Resources/ships/TIE-Defender/downwards.png" id="4_afh81"]
+[ext_resource type="Texture2D" uid="uid://cauvnokqd4ov2" path="res://Resources/projectiles/green-laser.png" id="5_rw5m8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cal11"]
+size = Vector2(336, 60.75)
+
+[node name="FlankingTieDefenderController" type="CharacterBody2D" unique_id=2081206047 node_paths=PackedStringArray("Hitbox", "HorizontalSpriteNode", "VerticalSpriteNode")]
+script = ExtResource("1_afh81")
+Hitbox = NodePath("Sprites/Area2D")
+HorizontalSpriteNode = NodePath("Sprites/HorizontalTie")
+VerticalSpriteNode = NodePath("Sprites/VerticalTie")
+HazardWarning = ExtResource("2_ujasm")
+
+[node name="Sprites" type="Node2D" parent="." unique_id=841475692]
+
+[node name="HorizontalTie" type="Sprite2D" parent="Sprites" unique_id=141532421]
+texture = ExtResource("3_afh81")
+
+[node name="VerticalTie" type="Sprite2D" parent="Sprites" unique_id=605591241]
+visible = false
+rotation = 1.5707964
+texture = ExtResource("4_afh81")
+
+[node name="Laser1" type="Sprite2D" parent="Sprites" unique_id=2013576882]
+position = Vector2(-173, -4)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_rw5m8")
+
+[node name="Laser2" type="Sprite2D" parent="Sprites" unique_id=654551657]
+position = Vector2(-173, 3)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_rw5m8")
+
+[node name="Laser3" type="Sprite2D" parent="Sprites" unique_id=653074634]
+position = Vector2(-292, -4)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_rw5m8")
+
+[node name="Laser4" type="Sprite2D" parent="Sprites" unique_id=1943114200]
+position = Vector2(-292, 3)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_rw5m8")
+
+[node name="Area2D" type="Area2D" parent="Sprites" unique_id=222671966]
+collision_layer = 16
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprites/Area2D" unique_id=164690650]
+position = Vector2(-145, 0)
+shape = SubResource("RectangleShape2D_cal11")

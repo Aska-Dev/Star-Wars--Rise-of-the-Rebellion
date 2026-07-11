@@ -15,7 +15,7 @@ public abstract partial class EnemyShipController : ShipController
 
     private Vector2 _targetPosition;
     private bool _isFlying = false;
-    private bool _isFlyingIn = false;
+    protected bool _isFlyingIn = false;
     private Timer _actionTimer = null!;
 
     public override void _Ready()
@@ -28,13 +28,15 @@ public abstract partial class EnemyShipController : ShipController
         _actionTimer.Timeout += PerformAction;
     }
 
+    public virtual void Init(Vector2 spawnPosition)
+    {
+        _actionTimer.Stop();
+        FlyToPosition(spawnPosition);
+    }
+
+
     public void FlyToPosition(Vector2 position)
     {
-        if(_isFlyingIn)
-        {
-            _actionTimer.Stop();
-        }
-
         _targetPosition = position;
         _isFlying = true;
 

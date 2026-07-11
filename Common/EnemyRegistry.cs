@@ -18,6 +18,7 @@ public static class EnemyRegistry
         { typeof(TieLnController), (EnemyTier.Tier1, "res://Controller/Enemies/TieLn/TieLnController.tscn") }, 
         { typeof(TieBomberController), (EnemyTier.Tier2, "res://Controller/Enemies/TieBomber/TieBomberController.tscn") }, 
         { typeof(TieInterceptorController), (EnemyTier.Tier2, "res://Controller/Enemies/TieInterceptor/TieInterceptorController.tscn") },
+        { typeof(TieDefenderController), (EnemyTier.Tier3, "res://Controller/Enemies/TieDefender/TieDefenderController.tscn") },
         { typeof(GozantiController), (EnemyTier.Special, "res://Controller/Enemies/GozantiClassCruiser/GozantiController.tscn") }
     };
 

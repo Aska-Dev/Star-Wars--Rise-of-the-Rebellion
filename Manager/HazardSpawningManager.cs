@@ -11,16 +11,21 @@ public partial class HazardSpawningManager : Node
     public delegate void OnAllHazardsClearedEventHandler();
 
     private readonly List<Hazard> _activeHazards = [];
+    private readonly Stack<(PackedScene HazardScene, GameOrientation FromOrientation, HazardSpawnToken Token)> _pendingAtPlayerSpawns = [];
+    private bool _atPlayerCooldownActive;
     private SpawnGridModule _spawnGrid;
     private const int MaxAttempts = 15;
+    private const float AtPlayerCooldown = 1f;
 
     public override void _Ready()
     {
         _spawnGrid = new SpawnGridModule(GetViewport().GetVisibleRect().Size);
     }
 
-    public void SpawnHazardRandom(PackedScene hazardScene)
+    public HazardSpawnToken SpawnHazardRandom(PackedScene hazardScene)
     {
+        var token = new HazardSpawnToken();
+
         // Instantiate hazard
         var hazard = hazardScene.Instantiate<Hazard>();
         MasterScene.Instance.AddToScene(hazard);
@@ -36,7 +41,7 @@ public partial class HazardSpawningManager : Node
         if (spawnPos == null)
         {
             hazard.QueueFree();
-            return;
+            return token;
         }
 
         hazard.GlobalPosition = spawnPos.Value;
@@ -46,10 +51,27 @@ public partial class HazardSpawningManager : Node
         {
             _activeHazards.Remove(hazard);
             if (_activeHazards.Count == 0) EmitSignal(SignalName.OnAllHazardsCleared);
+            token.TriggerCompleted();
         };
+
+        return token;
     }
 
-    public void SpawnHazardAtPlayer(PackedScene hazardScene, GameOrientation fromOrientation)
+    public HazardSpawnToken SpawnHazardAtPlayer(PackedScene hazardScene, GameOrientation fromOrientation)
+    {
+        var token = new HazardSpawnToken();
+
+        if (_atPlayerCooldownActive)
+        {
+            _pendingAtPlayerSpawns.Push((hazardScene, fromOrientation, token));
+            return token;
+        }
+
+        ExecuteAtPlayerSpawn(hazardScene, fromOrientation, token);
+        return token;
+    }
+
+    private void ExecuteAtPlayerSpawn(PackedScene hazardScene, GameOrientation fromOrientation, HazardSpawnToken token)
     {
         var hazard = hazardScene.Instantiate<Hazard>();
 
@@ -57,6 +79,8 @@ public partial class HazardSpawningManager : Node
         if (player == null)
         {
             hazard.QueueFree();
+            token.TriggerCompleted();
+            StartAtPlayerCooldown();
             return;
         }
 
@@ -89,7 +113,25 @@ public partial class HazardSpawningManager : Node
         {
             _activeHazards.Remove(hazard);
             if (_activeHazards.Count == 0) EmitSignal(SignalName.OnAllHazardsCleared);
+            token.TriggerCompleted();
         };
+
+        StartAtPlayerCooldown();
+    }
+
+    private void StartAtPlayerCooldown()
+    {
+        _atPlayerCooldownActive = true;
+        var timer = GetTree().CreateTimer(AtPlayerCooldown);
+        timer.Timeout += OnAtPlayerCooldownExpired;
+    }
+
+    private void OnAtPlayerCooldownExpired()
+    {
+        _atPlayerCooldownActive = false;
+
+        if (_pendingAtPlayerSpawns.TryPop(out var pending))
+            ExecuteAtPlayerSpawn(pending.HazardScene, pending.FromOrientation, pending.Token);
     }
 
     private bool HasEnoughDodgeSpace(float newHazardHeight, GameOrientation orient, Vector2 direction)
@@ -120,7 +162,7 @@ public partial class HazardSpawningManager : Node
             }
         }
 
-        return playerSize * 1.5f;
+        return playerSize * 2f;
     }
 
     private Vector2? GetHorizontalSpawnPos(Hazard hazard, GameOrientation orient, float halfSize, float dirX)

@@ -178,7 +178,7 @@ public partial class EnemySpawningManager : Node
         enemy.GlobalPosition = spawnPosition;
         _enemyContainerNode.AddChild(enemy);
 
-        enemy.FlyToPosition(targetPosition);
+        enemy.Init(targetPosition);
         enemy.OnDestroy += () => OnEnemyDestroyed(enemy);
     }
 
