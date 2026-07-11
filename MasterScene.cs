@@ -90,6 +90,10 @@ public partial class MasterScene : Node
             LoadNewScene();
         }
 
+        // Stop all sounds when switching scenes
+        AudioEngine.Instance.StopMusic();
+        AudioEngine.Instance.StopAmbience();
+
     }
 
     private void LoadNewScene(StringName animationName)

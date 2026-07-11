@@ -8,7 +8,8 @@ public static class HazardRegistry
     private static readonly Dictionary<Type, string> _database = new()
     {
         { typeof(Asteroid), "res://Controller/Hazards/Asteroid/AsteroidController.tscn"},
-        { typeof(FlankingTieController), "res://Controller/Hazards/FlankingTie/FlankingTieController.tscn" }
+        { typeof(FlankingTieController), "res://Controller/Hazards/FlankingTie/FlankingTieController.tscn" },
+        { typeof(FlankingTieDefenderController), "res://Controller/Hazards/FlankingTie/FlankingTieDefenderController.tscn" }
     };
 
     private static readonly Dictionary<Type, PackedScene> _cache = new();

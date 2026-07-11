@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ShipData" format=3 uid="uid://yxnye6fea4ij"]
+
+[ext_resource type="Script" uid="uid://c22qwjskxa2ah" path="res://Data/DataModels/ShipData.cs" id="1_oiq1b"]
+[ext_resource type="PackedScene" uid="uid://bnlfx5a3qggya" path="res://Controller/Projectiles/Projectile_Missile.tscn" id="1_qvhp6"]
+[ext_resource type="PackedScene" uid="uid://b4i4bbsiqdfg0" path="res://Controller/Projectiles/Projectile_GreenLaser.tscn" id="2_mgpcx"]
+
+[resource]
+script = ExtResource("1_oiq1b")
+Name = "TIE-Defender"
+XSpeed = 900
+YSpeed = 900
+Health = 12
+ShootSound = 1
+ProjectileScene = ExtResource("2_mgpcx")
+AltShootSound = 4
+AltProjectileScene = ExtResource("1_qvhp6")
+metadata/_custom_type_script = "uid://c22qwjskxa2ah"

@@ -255,7 +255,7 @@ public partial class AudioEngine : Node
 
         while (fileName != "")
         {
-            if (!dir.CurrentIsDir() && fileName.EndsWith(".tres"))
+            if (!dir.CurrentIsDir() && (fileName.EndsWith(".tres") || fileName.EndsWith(".tres.remap")))
             {
                 string cleanPath = ConfigFolderPath + fileName.Replace(".remap", "");
                 var config = GD.Load<Sound>(cleanPath);
@@ -279,7 +279,7 @@ public partial class AudioEngine : Node
 
         while (fileName != "")
         {
-            if (!dir.CurrentIsDir() && fileName.EndsWith(".tres"))
+            if (!dir.CurrentIsDir() && (fileName.EndsWith(".tres") || fileName.EndsWith(".tres.remap")))
             {
                 string cleanPath = MusicFolderPath + fileName.Replace(".remap", "");
                 var config = GD.Load<MusicTheme>(cleanPath);
@@ -303,7 +303,7 @@ public partial class AudioEngine : Node
 
         while (fileName != "")
         {
-            if (!dir.CurrentIsDir() && fileName.EndsWith(".tres"))
+            if (!dir.CurrentIsDir() && (fileName.EndsWith(".tres") || fileName.EndsWith(".tres.remap")))
             {
                 string cleanPath = AmbienceFolderPath + fileName.Replace(".remap", "");
                 var config = GD.Load<AmbienceSound>(cleanPath);

@@ -16,4 +16,7 @@ public partial class ShipData : Resource
     [Export] public required double FireRate { get; set; } = 1;
     [Export] public SoundEffects ShootSound { get; set;  }
     [Export] public required PackedScene ProjectileScene { get; set; }
+    [Export] public required double AltFireRate { get; set; } = 1;
+    [Export] public SoundEffects AltShootSound { get; set; }
+    [Export] public required PackedScene AltProjectileScene { get; set; }
 }

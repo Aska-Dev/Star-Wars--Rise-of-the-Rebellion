@@ -44,7 +44,7 @@ public class GozantiCruiserWaveRule : IWaveRule
             .TakeWhile(w => w is not GozantiCruiserWave)
             .Count();
 
-        if (wavesSinceLastBossWave >= 1 && GameManager.CurrentOrientation == GameOrientation.Left)
+        if (wavesSinceLastBossWave >= 8 && GameManager.CurrentOrientation == GameOrientation.Left)
         {
             var factory = new GozantiCruiserWaveFactory();
             return factory.Build();
