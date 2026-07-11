@@ -5,12 +5,16 @@
 
 [node name="ActionsInterface" type="Control" unique_id=1406371729]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_3kfyn")
 ActionSlotScene = ExtResource("1_8gtpi")
 
 [node name="GridContainer" type="GridContainer" parent="." unique_id=1042089322]
 layout_mode = 1
-offset_right = 120.0
+scale = Vector2(1.8, 1.8)
 theme_override_constants/h_separation = 80
 columns = 4

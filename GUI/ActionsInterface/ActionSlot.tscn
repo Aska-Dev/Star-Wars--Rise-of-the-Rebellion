@@ -4,46 +4,63 @@
 [ext_resource type="Texture2D" uid="uid://dd5n48sqpy04t" path="res://Resources/ui/input/keyboard-filled-1-16px.png" id="2_bj7ty"]
 [ext_resource type="Texture2D" uid="uid://cc61dkbbjn31s" path="res://Resources/ui/input/keyboard-filled-2-16px.png" id="3_uwsv3"]
 [ext_resource type="Texture2D" uid="uid://7e4onyk2arfv" path="res://Resources/ui/input/keyboard-filled-3-16px.png" id="4_syehr"]
+[ext_resource type="PackedScene" uid="uid://qqdifvsj2qmq" path="res://GUI/ActionsInterface/AstromechAction/AstromechActionIndicator.tscn" id="5_71f3u"]
 
 [node name="ActionSlot" type="Control" unique_id=721329877]
+custom_minimum_size = Vector2(60, 32)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -1860.0
+offset_bottom = -1048.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_71f3u")
 
 [node name="Keys" type="Control" parent="." unique_id=475340967]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -9.0
+offset_right = 18.0
+offset_bottom = 9.0
+grow_vertical = 2
 
 [node name="Key1" type="TextureRect" parent="Keys" unique_id=353541736]
 layout_mode = 0
-offset_left = -46.0
-offset_top = -9.0
-offset_right = -30.0
-offset_bottom = 7.0
-scale = Vector2(1.2, 1.2)
+offset_right = 18.0
+offset_bottom = 18.0
 texture = ExtResource("2_bj7ty")
 
 [node name="Key2" type="TextureRect" parent="Keys" unique_id=918560300]
 visible = false
 layout_mode = 0
-offset_left = -46.0
-offset_top = -9.0
-offset_right = -30.0
-offset_bottom = 7.0
-scale = Vector2(1.2, 1.2)
+offset_right = 18.0
+offset_bottom = 18.0
 texture = ExtResource("3_uwsv3")
 
 [node name="Key3" type="TextureRect" parent="Keys" unique_id=1344111569]
 visible = false
 layout_mode = 0
-offset_left = -46.0
-offset_top = -9.0
-offset_right = -30.0
-offset_bottom = 7.0
-scale = Vector2(1.2, 1.2)
+offset_right = 18.0
+offset_bottom = 18.0
 texture = ExtResource("4_syehr")
+
+[node name="ActionIconContainer" type="Control" parent="." unique_id=1655722177]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -16.0
+offset_bottom = 16.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="AstromechActionIndicator" parent="ActionIconContainer" unique_id=640751564 instance=ExtResource("5_71f3u")]
+layout_mode = 0

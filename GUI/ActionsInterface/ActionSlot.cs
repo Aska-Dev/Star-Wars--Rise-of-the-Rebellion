@@ -25,7 +25,7 @@ public partial class ActionSlot : Control
 	{
         Keys[index].Visible = true;
         _icon = iconScene.Instantiate<ActionIcon>();
-        AddChild(_icon);
+        GetNode<Control>("ActionIconContainer").AddChild(_icon);
     }
 
 	public void StartCooldown(float cooldown) => _icon.StartCooldown(cooldown);

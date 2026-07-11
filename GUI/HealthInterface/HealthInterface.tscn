@@ -3,15 +3,14 @@
 [ext_resource type="PackedScene" uid="uid://d2bnf1i3ghak" path="res://GUI/HealthInterface/HealthIndicator.tscn" id="1_bcqjw"]
 [ext_resource type="Script" uid="uid://deq140kh1b3ue" path="res://GUI/HealthInterface/HealthInterface.cs" id="1_fn1rg"]
 
-[node name="HealthInterface" type="Control" unique_id=298973331]
-layout_mode = 3
-anchors_preset = 0
+[node name="HealthInterface" type="MarginContainer" unique_id=197179052]
+offset_right = 60.0
+offset_bottom = 60.0
 script = ExtResource("1_fn1rg")
 HealthIndicatorScene = ExtResource("1_bcqjw")
 
 [node name="GridContainer" type="GridContainer" parent="." unique_id=1234547554]
-layout_mode = 0
-offset_right = 326.0
-offset_bottom = 60.0
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
 theme_override_constants/h_separation = 12
 columns = 8
